@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10116"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SmileDotView">
+            <connections>
+                <outlet property="defaultView" destination="nYt-51-OSz" id="r3r-KP-cWV"/>
+                <outlet property="selectedView" destination="TGk-wS-gYp" id="wv2-Q6-GKL"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nYt-51-OSz" customClass="RoundView" customModule="EsteeHR" customModuleProvider="target">
+                    <rect key="frame" x="7" y="7" width="6" height="6"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="6" id="7BL-Eq-9LV"/>
+                        <constraint firstAttribute="width" constant="6" id="myt-fe-QhX"/>
+                    </constraints>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TGk-wS-gYp" customClass="RoundView" customModule="EsteeHR" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                    <color key="backgroundColor" red="0.23921568627450979" green="0.55686274509803924" blue="0.87058823529411766" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="nYt-51-OSz" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="67J-WL-Uze"/>
+                <constraint firstItem="nYt-51-OSz" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Epb-zf-VvS"/>
+                <constraint firstAttribute="trailing" secondItem="TGk-wS-gYp" secondAttribute="trailing" id="Mzd-rc-3oC"/>
+                <constraint firstItem="TGk-wS-gYp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="V7I-f4-fnB"/>
+                <constraint firstAttribute="bottom" secondItem="TGk-wS-gYp" secondAttribute="bottom" id="ehl-bB-wlJ"/>
+                <constraint firstItem="TGk-wS-gYp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="qiu-Ch-Hdp"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="565" y="393"/>
+        </view>
+    </objects>
+</document>

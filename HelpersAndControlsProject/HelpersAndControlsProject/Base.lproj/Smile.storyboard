@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dQn-6u-cJN">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Smile View-->
+        <scene sceneID="EBX-YS-Bdn">
+            <objects>
+                <viewController storyboardIdentifier="SmileController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dQn-6u-cJN" customClass="SmileController" customModule="HelpersAndControlsProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pRT-1Q-AM0"/>
+                        <viewControllerLayoutGuide type="bottom" id="AXb-ty-oYE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dll-Aj-UUX">
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ad-bu-lEz" customClass="SmileRatingView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2Ad-bu-lEz" firstAttribute="leading" secondItem="dll-Aj-UUX" secondAttribute="leading" id="Gbb-cx-KNA"/>
+                            <constraint firstItem="2Ad-bu-lEz" firstAttribute="top" secondItem="pRT-1Q-AM0" secondAttribute="bottom" id="cIQ-4q-NpU"/>
+                            <constraint firstItem="AXb-ty-oYE" firstAttribute="top" secondItem="2Ad-bu-lEz" secondAttribute="bottom" id="p7M-15-BzU"/>
+                            <constraint firstAttribute="trailing" secondItem="2Ad-bu-lEz" secondAttribute="trailing" id="vTj-ZD-KBz"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" title="Smile View" id="0gC-Ji-zXm"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO">
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    </simulatedNavigationBarMetrics>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LPI-pL-IB6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="962" y="524"/>
+        </scene>
+    </scenes>
+</document>
