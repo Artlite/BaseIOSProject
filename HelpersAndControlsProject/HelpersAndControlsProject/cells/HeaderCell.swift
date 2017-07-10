@@ -18,7 +18,7 @@ class HeaderCell: BaseCollectionCell {
 	}
 
 	internal class Object: BaseCollectionObject {
-		private var text: String?;
+		public var text: String?;
 
 		init(text: String?) {
 			super.init();

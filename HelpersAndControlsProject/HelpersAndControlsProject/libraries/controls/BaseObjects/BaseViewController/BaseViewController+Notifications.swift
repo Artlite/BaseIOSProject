@@ -16,7 +16,7 @@ extension BaseViewController {
 	 - parameter selector:         selector
 	 - parameter notificationType: notification type
 	 */
-	final func registerNotification(selector selector: Selector, notificationType: String!) {
+	final func registerNotification(selector: Selector, notificationType: Notification.Name!) {
 		NotificationsHelper.registerForNotification(owner: self, selector: selector, notificationType: notificationType);
 	}
 
@@ -25,7 +25,7 @@ extension BaseViewController {
 
 	 - parameter notificationType: notification type
 	 */
-	final func sendNotification(notification notificationType: String!) {
+	final func sendNotification(notification notificationType: Notification.Name!) {
 		NotificationsHelper.sendNotification(notification: notificationType);
 	}
 
@@ -48,8 +48,8 @@ extension BaseViewController {
 	 Method which provide the registering for keyboard notification
 	 */
 	final func registerForKeyboardNotifications() {
-		self.registerNotification(selector: #selector(BaseViewController.willShowKeyboard(_:)), notificationType: UIKeyboardWillShowNotification);
-		self.registerNotification(selector: #selector(BaseViewController.onHideKeyboard), notificationType: UIKeyboardWillHideNotification);
+		self.registerNotification(selector: #selector(BaseViewController.willShowKeyboard(notification:)), notificationType: NSNotification.Name.UIKeyboardWillShow);
+		self.registerNotification(selector: #selector(BaseViewController.onHideKeyboard), notificationType: NSNotification.Name.UIKeyboardWillHide);
 	}
 
 	/**
@@ -58,11 +58,12 @@ extension BaseViewController {
 	 - parameter notification: notification
 	 */
 	final func willShowKeyboard(notification: NSNotification) {
-		let dictionary: NSDictionary? = notification.userInfo;
-		if (dictionary != nil) {
-			let keyboardSize: CGSize = dictionary!.objectForKey(UIKeyboardFrameBeginUserInfoKey)!.CGRectValue().size;
-			self.onShowKeyboard(keyboardSize: keyboardSize);
-		}
+        if let dict = notification.userInfo as NSDictionary? {
+            if let nsValue = dict.object(forKey: UIKeyboardFrameBeginUserInfoKey) as? NSValue {
+                let keyboardSize: CGSize = nsValue.cgRectValue.size;
+                self.onShowKeyboard(keyboardSize: keyboardSize);
+            }
+        }
 	}
 
 	/**

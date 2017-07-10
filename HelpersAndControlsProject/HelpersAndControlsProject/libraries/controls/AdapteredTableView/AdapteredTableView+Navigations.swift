@@ -17,9 +17,9 @@ extension AdapteredTableView {
 	 */
 	internal func scroll(toBottom animated: Bool) {
 		if (animated == true) {
-			NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(scrollToBottomAnimated), userInfo: nil, repeats: false);
+			Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(scrollToBottomAnimated), userInfo: nil, repeats: false);
 		} else {
-			NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(scrollToBottomNonAnimated), userInfo: nil, repeats: false);
+			Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(scrollToBottomNonAnimated), userInfo: nil, repeats: false);
 		}
 	}
 
@@ -29,10 +29,9 @@ extension AdapteredTableView {
 	 - parameter index: index
 	 */
 	internal func scroll(toIndex index: NSIndexPath, animated: Bool) {
-		let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC)))
-		dispatch_after(delayTime, dispatch_get_main_queue(), {
-			self.tableView.scrollToRowAtIndexPath(index, atScrollPosition: .Bottom, animated: animated);
-		});
+        DispatchQueue.global().asyncAfter(deadline: .now() + 0.1) {
+            self.tableView.scrollToRow(at: index as IndexPath, at: .bottom, animated: animated);
+        }
 	}
 
 	/**
@@ -51,14 +50,14 @@ extension AdapteredTableView {
 	 Method which provide the navigation to bottom with animation
 	 */
 	func scrollToBottomAnimated() {
-		self.navigateToBottom(true);
+		self.navigateToBottom(animated: true);
 	}
 
 	/**
 	 Method which provide the navigation to bottom without animation
 	 */
 	func scrollToBottomNonAnimated() {
-		self.navigateToBottom(false);
+		self.navigateToBottom(animated: false);
 	}
 
 	/**

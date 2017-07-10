@@ -21,17 +21,21 @@ class BaseTableCell: BaseTableViewCell {
 		self.labelTitle.text = cObject?.text;
 	}
 
-	@IBAction func onImagePressed(sender: AnyObject) {
-		self.sendEvent(event: BaseTableCell.EVENT);
-	}
-
-	override func getCellActions() -> [UITableViewRowAction] {
-		let action: UITableViewRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Some Action") { (action, indexPath) in
-
-		};
-		action.backgroundColor = UIColor.orangeColor();
-		return [action];
-	}
+    @IBAction func onImagePressed(_ sender: Any) {
+        self.sendEvent(event: BaseTableCell.EVENT);
+    }
+    
+    override func getCellActions(object: BaseTableObject?, indexPath: NSIndexPath?, delegate: AdapteredTableCellDelegate?) -> [UITableViewRowAction] {
+        let action: UITableViewRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Some Action") { (action, indexPath) in
+            
+        };
+        action.backgroundColor = UIColor.orange;
+        return [action];
+    }
+    
+    override func canEditCell(object: BaseTableObject?) -> Bool {
+        return true;
+    }
 
 	internal class Object: BaseTableObject {
 

@@ -10,7 +10,7 @@ import UIKit
 
 class PlaceholderedTextView: BaseTextView {
 
-	@IBInspectable var hintColor: UIColor = UIColor.lightGrayColor() {
+	@IBInspectable var hintColor: UIColor = UIColor.lightGray {
 		didSet {
 			self.placeholderColor = self.hintColor;
 		}
@@ -54,7 +54,7 @@ class PlaceholderedTextView: BaseTextView {
 
 	private func addSwipeDownClose() {
 		if (self.swipe == nil) {
-			self.swipe = GetsureHelper.addSwipe(target: self, view: self, direction: UISwipeGestureRecognizerDirection.Down, selector: #selector(PlaceholderedTextView.closeKeyboard));
+			self.swipe = GetsureHelper.addSwipe(target: self, view: self, direction: .down, selector: #selector(PlaceholderedTextView.closeKeyboard));
 		}
 	}
 

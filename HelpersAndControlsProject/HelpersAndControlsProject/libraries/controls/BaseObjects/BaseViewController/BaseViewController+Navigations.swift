@@ -22,10 +22,10 @@ extension BaseViewController {
 			return;
 		}
 
-		let controller: UIViewController? = StoryboardHelper.controllerFrom(storyboard!, withID: name!) as? UIViewController;
+		let controller: UIViewController? = StoryboardHelper.controller(from: storyboard!, withID: name!) as? UIViewController;
 		if (controller != nil) {
 			controller?.hidesBottomBarWhenPushed = hideBottom;
-			self.showViewController(controller!, sender: self);
+			self.show(controller!, sender: self);
 		}
 	}
 
@@ -41,9 +41,9 @@ extension BaseViewController {
 			return;
 		}
 
-		let controller: UIViewController? = StoryboardHelper.controllerFrom(storyboard!, withID: name!) as? UIViewController;
+		let controller: UIViewController? = StoryboardHelper.controller(from: storyboard!, withID: name!) as? UIViewController;
 		if (controller != nil) {
-			self.presentViewController(controller!, animated: true, completion: completion);
+			self.present(controller!, animated: true, completion: completion);
 		}
 	}
 

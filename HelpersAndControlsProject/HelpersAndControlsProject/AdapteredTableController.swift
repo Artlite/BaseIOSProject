@@ -16,7 +16,7 @@ class AdapteredTableController: UIViewController, AdapteredTableDelegate {
 		super.viewDidLoad();
 		self.adapteredTable.delegate = self;
 		self.adapteredTable.add(objects: [
-			BaseTableCell.Object(text: "Don't cry because it's over, smile because it happened."),
+			BaseTableCell.Object(text: "Don't cry because it's over, smile because it happened. Bla bla bla"),
 			BaseTableCell.Object(text: "I'm selfish, impatient and a little insecure. I make mistakes, I am out of control and at times hard to handle. But if you can't handle me at my worst, then you sure as hell don't deserve me at my best."),
 			BaseTableCell.Object(text: "Be yourself; everyone else is already taken."),
 			BaseTableCell.Object(text: "You know you're in love when you can't fall asleep because reality is finally better than your dreams."),
@@ -30,19 +30,17 @@ class AdapteredTableController: UIViewController, AdapteredTableDelegate {
 	}
 
 	// MARK: Adaptered delagates
-
-	func onEventReceived(eventType event: AdapteredTableView.Event!, object: BaseTableObject!, index: Int!, additionalObject: NSObject?) {
-
-		if (event.isEqual(BaseTableCell.EVENT) == true) {
-			(object as? BaseTableCell.Object)?.text = "Changed text for background";
-			self.adapteredTable.update(cellByIndex: index);
-		}
-
-	}
-
-	func onAlmostAtBottom(listSize size: Int!) {
-
-	}
+   
+    func onEventReceived(eventType event: AdapteredTableView.Event!, object: BaseTableObject!, index: Int32, additionalObject: NSObject?) {
+        if (event.isEqual(BaseTableCell.EVENT) == true) {
+            (object as? BaseTableCell.Object)?.text = "Changed text for background";
+            self.adapteredTable.update(cellByIndex: Int(index));
+        }
+    }
+    
+    func onAlmostAtBottom(listSize size: Int32) {
+        
+    }
 
 	func onRefreshData() {
 

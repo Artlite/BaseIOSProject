@@ -15,13 +15,13 @@ class ImageOrNameView: UIView {
 
 	private static let K_DEFAULT_NAME: String! = "Not available";
 
-	@IBInspectable var textColor: UIColor = UIColor.whiteColor() {
+	@IBInspectable var textColor: UIColor = UIColor.white {
 		didSet {
 			self.labelText.textColor = self.textColor;
 		}
 	}
 
-	@IBInspectable var textBackground: UIColor = UIColor.blueColor() {
+	@IBInspectable var textBackground: UIColor = UIColor.blue {
 		didSet {
 			self.viewRound.backgroundColor = self.textBackground;
 		}
@@ -29,7 +29,7 @@ class ImageOrNameView: UIView {
 
 	@IBInspectable var textSize: CGFloat = 15 {
 		didSet {
-			self.labelText.font = UIFont.boldSystemFontOfSize(self.textSize);
+			self.labelText.font = UIFont.boldSystemFont(ofSize: self.textSize);
 		}
 	}
 
@@ -64,7 +64,7 @@ class ImageOrNameView: UIView {
 	 Method which provide the view initializations
 	 */
 	private func onViewInitialize() {
-		let view: UIView! = NSBundle.mainBundle().loadNibNamed("ImageOrNameView",
+		let view: UIView! = Bundle.main.loadNibNamed("ImageOrNameView",
 			owner: self,
 			options: nil)![0] as! UIView;
 		view.frame = self.bounds;
@@ -86,7 +86,7 @@ class ImageOrNameView: UIView {
 	 */
 	internal func set(imageURL URL: String?, userName: String?) {
 		self.hideAllControls();
-		self.set(userName);
+        self.set(userName: userName);
 		self.set(imageURL: URL);
 	}
 
@@ -96,13 +96,13 @@ class ImageOrNameView: UIView {
 	 - parameter image:    image
 	 - parameter userName: user name
 	 */
-	internal func set(image image: UIImage?, userName: String?) {
+	internal func set(image: UIImage?, userName: String?) {
 		self.hideAllControls();
 		if (image == nil) {
-			self.set(userName);
+            self.set(userName: userName);
 		} else {
 			self.imageAvatar.image = image;
-			self.setImageVisibility(true);
+			self.setImageVisibility(visible: true);
 		}
 	}
 
@@ -110,8 +110,8 @@ class ImageOrNameView: UIView {
 	 Method which provide to hiding of the all controls
 	 */
 	internal func hideAllControls() {
-		self.setRoundVisibility(false);
-		self.setImageVisibility(false);
+		self.setRoundVisibility(visible: false);
+		self.setImageVisibility(visible: false);
 	}
 
 	/**
@@ -120,19 +120,20 @@ class ImageOrNameView: UIView {
 	 - parameter userName: user name
 	 */
 	private func set(userName: String?) {
-		let charactersToRemove: NSCharacterSet = NSCharacterSet(charactersInString: ImageOrNameView.K_STRING_TO_REMOVE);
-		var userNameCopy = (userName?.componentsSeparatedByCharactersInSet(charactersToRemove))?.joinWithSeparator("");
-		if (StringHelper.isEmptyString(userNameCopy) == true) {
+		let charactersToRemove: CharacterSet = CharacterSet(charactersIn: ImageOrNameView.K_STRING_TO_REMOVE);
+        let list:[String]? = userName?.components(separatedBy: charactersToRemove);
+		var userNameCopy = list?.joined(separator: "");
+		if (StringHelper.isEmpty(userNameCopy) == true) {
 			userNameCopy = ImageOrNameView.K_DEFAULT_NAME;
 		}
 		var result: String = "";
-		let namesArray: [String]! = userNameCopy!.componentsSeparatedByString(" ");
+		let namesArray: [String]! = userNameCopy!.components(separatedBy: " ");
 		for name in namesArray {
-			result.appendContentsOf(StringHelper.trimToIndex(name, index: 1));
+			result.append(StringHelper.trim(toIndex: name, index: 1));
 		}
-		self.labelText.text = StringHelper.trimToIndex(result.uppercaseString,
+		self.labelText.text = StringHelper.trim(toIndex: result.uppercased(),
 			index: Int32(self.maxLength));
-		self.setRoundVisibility(true);
+		self.setRoundVisibility(visible: true);
 	}
 
 	/**
@@ -143,11 +144,11 @@ class ImageOrNameView: UIView {
 	private func set(imageURL URL: String?) {
 		self.imageAvatar.setURLImage(URL) { [weak self](result) in
 			if (result == true) {
-				self?.setImageVisibility(true);
-				self?.setRoundVisibility(false);
+				self?.setImageVisibility(visible: true);
+				self?.setRoundVisibility(visible: false);
 			} else {
-				self?.setImageVisibility(false);
-				self?.setRoundVisibility(true);
+				self?.setImageVisibility(visible: false);
+				self?.setRoundVisibility(visible: true);
 			}
 		}
 	}
@@ -160,8 +161,8 @@ class ImageOrNameView: UIView {
 	 - parameter visible: is need visible
 	 */
 	private func setRoundVisibility(visible: Bool) {
-		dispatch_async(dispatch_get_main_queue(), { [weak self] in
-			self?.viewRound.hidden = !visible;
+		DispatchQueue.main.async(execute: { [weak self] in
+			self?.viewRound.isHidden = !visible;
 		});
 	}
 
@@ -173,8 +174,8 @@ class ImageOrNameView: UIView {
 	 - parameter visible: is need visible
 	 */
 	private func setImageVisibility(visible: Bool) {
-		dispatch_async(dispatch_get_main_queue(), { [weak self] in
-			self?.imageAvatar.hidden = !visible;
+		DispatchQueue.main.async(execute: { [weak self] in
+			self?.imageAvatar.isHidden = !visible;
 		});
 	}
 

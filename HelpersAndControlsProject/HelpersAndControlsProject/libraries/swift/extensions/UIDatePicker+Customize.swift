@@ -37,9 +37,9 @@ extension UIDatePicker {
 	 */
 	private func setColors(color: UIColor) {
 		// text color of today string
-		self.performSelector(Selector("setHighlightsToday:"), withObject: color);
+		self.performSelector(inBackground: Selector(("setHighlightsToday:")), with: color);
 		// text color for hoglighted color
-		self.performSelector(Selector("_setHighlightColor:"), withObject: color);
+		self.performSelector(inBackground: Selector(("_setHighlightColor:")), with: color);
 		// other text color
 		self.setValue(color, forKey: "textColor");
 	}
@@ -51,8 +51,8 @@ extension UIDatePicker {
 	 */
 	private func disableSelectionLines() {
 		// Hide lines
-		self.subviews[0].subviews[1].hidden = true;
-		self.subviews[0].subviews[2].hidden = true;
+		self.subviews[0].subviews[1].isHidden = true;
+		self.subviews[0].subviews[2].isHidden = true;
 	}
 
 }

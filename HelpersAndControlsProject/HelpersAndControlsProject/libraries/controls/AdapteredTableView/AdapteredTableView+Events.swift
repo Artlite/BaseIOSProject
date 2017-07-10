@@ -33,16 +33,16 @@ extension AdapteredTableView {
 		internal func getEventCode() -> Int! {
 			return self.eventCode;
 		}
-
-		override func isEqual(object: AnyObject?) -> Bool {
-			let eventObject: Event? = object as? Event;
-			if (eventObject != nil) {
-				if (eventObject?.getEventCode() == self.eventCode) {
-					return true;
-				}
-			}
-			return false;
-		}
+        
+        override func isEqual(_ object: Any?) -> Bool {
+            let eventObject: Event? = object as? Event;
+            if (eventObject != nil) {
+                if (eventObject?.getEventCode() == self.eventCode) {
+                    return true;
+                }
+            }
+            return false;
+        }
 	}
 
 	/**
@@ -51,10 +51,10 @@ extension AdapteredTableView {
 	 - parameter event:  event object
 	 - parameter object: result object
 	 */
-	internal final func sendEventResults(event event: Event?, object: NSObject?, intdex: Int) {
+	internal final func sendEventResults(event: Event?, object: NSObject?, intdex: Int) {
 		var dict: Dictionary<String, AnyObject> = [:];
 
-		dict[AdapteredTableView.K_EVENT_INDEX_KEY] = intdex;
+		dict[AdapteredTableView.K_EVENT_INDEX_KEY] = intdex as AnyObject;
 
 		if (event != nil) {
 			dict[AdapteredTableView.K_EVENT_KEY] = event!;
@@ -63,7 +63,7 @@ extension AdapteredTableView {
 		if (object != nil) {
 			dict[AdapteredTableView.K_EVENT_OBJECT] = object!;
 		}
-
-		NSNotificationCenter.defaultCenter().postNotificationName(AdapteredTableView.K_EVENT_RESULT_NOTIFICATION, object: nil, userInfo: dict);
+        
+        NotificationCenter.default.post(name: AdapteredTableView.K_EVENT_RESULT_NOTIFICATION, object: nil, userInfo: dict);
 	}
 }

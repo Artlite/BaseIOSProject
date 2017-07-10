@@ -15,7 +15,7 @@ extension AdapteredTableView {
 
 	 - parameter object: object
 	 */
-	final func add(object object: BaseTableObject?) {
+	final func add(object: BaseTableObject?) {
 		if (object != nil) {
 			self.add(objects: [object!]);
 		}
@@ -26,9 +26,9 @@ extension AdapteredTableView {
 
 	 - parameter objects: objects
 	 */
-	final func add(objects objects: [BaseTableObject]?) {
+	final func add(objects: [BaseTableObject]?) {
 		if (objects != nil) {
-			self.objects.addObjectsFromArray(objects!);
+			self.objects.addObjects(from: objects!);
 			self.registerCellsNib();
 			self.notifyDataSetChanged();
 		}
@@ -39,7 +39,7 @@ extension AdapteredTableView {
 
 	 - parameter object: object
 	 */
-	final func set(object object: BaseTableObject?) {
+	final func set(object: BaseTableObject?) {
 		if (object != nil) {
 			self.set(objects: [object!]);
 		}
@@ -50,7 +50,7 @@ extension AdapteredTableView {
 
 	 - parameter objects: objects
 	 */
-	final func set(objects objects: [BaseTableObject]?) {
+	final func set(objects: [BaseTableObject]?) {
 		if (objects != nil) {
 			self.objects = NSMutableArray(array: objects!);
 			// CLear previous selection indexes
@@ -68,7 +68,7 @@ extension AdapteredTableView {
 
 	 - parameter object: object for remove
 	 */
-	final func remove(object object: BaseTableObject?) {
+	final func remove(object: BaseTableObject?) {
 		self.remove(object: object, needNotify: true);
 	}
 
@@ -87,13 +87,13 @@ extension AdapteredTableView {
 
 	 - parameter object: object for remove
 	 */
-	private func remove(object object: BaseTableObject?, needNotify: Bool) {
+	private func remove(object: BaseTableObject?, needNotify: Bool) {
 		if (object != nil) {
-			self.objects.removeObject(object!);
+			self.objects.remove(object!);
 
 			// Remove selection index path
-			if let index: NSIndexPath! = object?.index {
-				self.remove(index);
+			if let index = object?.index {
+                self.remove(indexPath: index);
 			}
 
 			if (needNotify == true) {
@@ -107,7 +107,7 @@ extension AdapteredTableView {
 
 	 - parameter objects: objects
 	 */
-	final func remove(objects objects: [BaseTableObject]?) {
+	final func remove(objects: [BaseTableObject]?) {
 		if (objects != nil) {
 			for object in objects! {
 				self.remove(object: object, needNotify: false);
@@ -135,7 +135,7 @@ extension AdapteredTableView {
 	 */
 	final func getObject(byIndex index: Int) -> BaseTableObject? {
 		if (index < self.objects.count) {
-			let object: BaseTableObject? = self.objects.objectAtIndex(index) as? BaseTableObject;
+			let object: BaseTableObject? = self.objects.object(at: index) as? BaseTableObject;
 			return object;
 		}
 		return nil;
@@ -150,7 +150,7 @@ extension AdapteredTableView {
 	 */
 	final func getSelectedObject() -> BaseTableObject? {
 		if (self.previousIndex != nil) {
-			if let object: BaseTableObject! = self.getObject(byIndex: self.previousIndex!.section) {
+			if let object = self.getObject(byIndex: self.previousIndex!.section) {
 				return object;
 			}
 		}
@@ -166,8 +166,8 @@ extension AdapteredTableView {
 		var objects: [BaseTableObject] = [];
 		if (self.allowMultipleSelection == true) {
 			for index in self.previousIndexes {
-				if let object: BaseTableObject! = self.getObject(byIndex: index.section) {
-					objects.append(object!);
+				if let object = self.getObject(byIndex: index.section) {
+					objects.append(object);
 				}
 			}
 		} else {
@@ -194,13 +194,13 @@ extension AdapteredTableView {
 		self.sortByPriority();
 		// Post processing functional before table update
 		if let typedObjects = self.objects as? NSArray as? [BaseTableObject] {
-			if let postProcessedObjects = self.delegate?.onPostProcessing?(typedObjects) {
+			if let postProcessedObjects = self.delegate?.onPostProcessing?(objects: typedObjects) {
 				let array: NSMutableArray = NSMutableArray(array: postProcessedObjects);
 				self.objects = array;
 			}
 		}
 		// Notify data set changed
-		dispatch_async(dispatch_get_main_queue(), { [weak self] in
+		DispatchQueue.main.async(execute: { [weak self] in
 			self?.tableView.reloadData();
 			self?.tableView.reloadInputViews();
 			self?.onRestoreSelection();
@@ -215,7 +215,7 @@ extension AdapteredTableView {
 	private func onRestoreSelection() {
 		if (self.allowMultipleSelection == false) {
 			if (self.previousIndex != nil) {
-				self.tableView.selectRowAtIndexPath(self.previousIndex!, animated: true, scrollPosition: UITableViewScrollPosition.None);
+				self.tableView.selectRow(at: self.previousIndex! as IndexPath, animated: true, scrollPosition: UITableViewScrollPosition.none);
 			}
 		}
 	}
@@ -227,8 +227,8 @@ extension AdapteredTableView {
 	private func onRestoreSelections() {
 		if (self.allowMultipleSelection == true) {
 			for index in self.previousIndexes {
-				self.tableView.selectRowAtIndexPath(index, animated: true,
-					scrollPosition: UITableViewScrollPosition.None);
+				self.tableView.selectRow(at: index as IndexPath, animated: true,
+					scrollPosition: UITableViewScrollPosition.none);
 			}
 		}
 	}
@@ -240,18 +240,17 @@ extension AdapteredTableView {
 	 - parameter object: object for remove
 	 */
 	final func remove(objectWithAnimation object: BaseTableObject?) {
-		dispatch_async(dispatch_get_main_queue(), { [weak self] in
+		DispatchQueue.main.async(execute: { [weak self] in
 			if (object != nil) {
 				if let index = object?.index {
 					self?.tableView.beginUpdates();
-					self?.tableView.deleteSections(NSIndexSet(index: index.section), withRowAnimation: UITableViewRowAnimation.Automatic);
-					self?.objects.removeObject(object!);
+					self?.tableView.deleteSections(NSIndexSet(index: index.section) as IndexSet, with: UITableViewRowAnimation.automatic);
+					self?.objects.remove(object!);
 					self?.tableView.endUpdates();
 					// Notify data set changed
-					let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.8 * Double(NSEC_PER_SEC)))
-					dispatch_after(delayTime, dispatch_get_main_queue(), {
-						self?.notifyDataSetChanged();
-					});
+                    DispatchQueue.global().asyncAfter(deadline: .now() + 0.8) {
+                        self?.notifyDataSetChanged();
+                    }
 				}
 			}
 		});

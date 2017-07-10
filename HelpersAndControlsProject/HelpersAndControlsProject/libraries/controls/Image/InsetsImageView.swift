@@ -34,7 +34,7 @@ class InsetsImageView: UIImageView {
         }
     }
     
-    @IBInspectable var tintImageColor:UIColor = UIColor.clearColor() {
+    @IBInspectable var tintImageColor:UIColor = UIColor.clear {
         didSet{
             self.setImageInsets();
         }
@@ -42,8 +42,8 @@ class InsetsImageView: UIImageView {
     
     final func setImageInsets(){
         let originalImage:UIImage? = self.image;
-        let tintedImage:UIImage? = originalImage?.imageWithRenderingMode(.AlwaysTemplate);
-        let resizedImage:UIImage? = tintedImage?.resizableImageWithCapInsets(UIEdgeInsetsMake(self.insetTop, self.insetLeft, self.insetBottom, self.insetRight));
+        let tintedImage:UIImage? = originalImage?.withRenderingMode(.alwaysTemplate);
+        let resizedImage:UIImage? = tintedImage?.resizableImage(withCapInsets: UIEdgeInsetsMake(self.insetTop, self.insetLeft, self.insetBottom, self.insetRight));
         self.image = resizedImage;
         self.tintColor = tintImageColor;
     }

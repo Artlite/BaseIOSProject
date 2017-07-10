@@ -23,7 +23,7 @@ class AppLogger: NSObject {
 	 - parameter additional:    additional description
 	 */
 	internal static func error(owner: NSObject?, messageObject: NSObject?, additional: String?) {
-		showMessage(K_ERROR_TAG, owner: owner, messageObject: messageObject, additional: additional);
+		showMessage(messageType: K_ERROR_TAG, owner: owner, messageObject: messageObject, additional: additional);
 	}
 
 	/**
@@ -34,7 +34,7 @@ class AppLogger: NSObject {
 	 - parameter additional:    additional description
 	 */
 	internal static func info(owner: NSObject?, messageObject: NSObject?, additional: String?) {
-		showMessage(K_INFO_TAG, owner: owner, messageObject: messageObject, additional: additional);
+		showMessage(messageType: K_INFO_TAG, owner: owner, messageObject: messageObject, additional: additional);
 	}
 
 	/**
@@ -53,17 +53,17 @@ class AppLogger: NSObject {
 
 		var message: String! = String.init(format: "%@[%@] ", K_MARKER, messageType);
 		if (owner != nil) {
-			let className: String? = NSStringFromClass(owner!.classForCoder).componentsSeparatedByString("").last;
+			let className: String? = NSStringFromClass(owner!.classForCoder).components(separatedBy: "").last;
 			if (className != nil) {
-				message.appendContentsOf(String.init(format: "[%@]", className!));
+				message.append(String.init(format: "[%@]", className!));
 			}
 		}
 		if (additional != nil) {
-			message.appendContentsOf(String.init(format: ":[%@]", additional!));
+			message.append(String.init(format: ":[%@]", additional!));
 		}
 
 		if (messageObject != nil) {
-			message.appendContentsOf(String.init(format: " %@", messageObject!));
+			message.append(String.init(format: " %@", messageObject!));
 		}
 
 		NSLog("%@", message);

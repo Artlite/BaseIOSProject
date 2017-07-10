@@ -91,8 +91,9 @@ class BaseTableObject: NSObject {
 	 - returns: generated view
 	 */
 	final func generate(emptyView heigh: CGFloat) -> UIView {
-		let view: UIView = UIView(frame: CGRectMake(0, 0, 6000, heigh));
-		view.backgroundColor = UIColor.clearColor();
+//		let view: UIView = UIView(frame: CGRectMake(0, 0, 6000, heigh));
+        let view: UIView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 6000, height: heigh)));
+		view.backgroundColor = UIColor.clear;
 		return view;
 	}
 
@@ -102,7 +103,7 @@ class BaseTableObject: NSObject {
 	 */
 	internal final func getReuseIdentifier() -> String! {
 		let cellClass: AnyClass! = self.getCellClass();
-		let identifier: String! = NSStringFromClass(cellClass).componentsSeparatedByString(".").last;
+		let identifier: String! = NSStringFromClass(cellClass).components(separatedBy: ".").last;
 		return identifier;
 	}
 

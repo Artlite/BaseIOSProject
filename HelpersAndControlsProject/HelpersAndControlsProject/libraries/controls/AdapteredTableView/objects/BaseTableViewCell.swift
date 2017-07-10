@@ -21,13 +21,13 @@ class BaseTableViewCell: UITableViewCell {
 		self.onCreateCell();
 	}
 
-	override func setSelected(selected: Bool, animated: Bool) {
+	override func setSelected(_ selected: Bool, animated: Bool) {
 		super.setSelected(selected, animated: animated)
 	}
 
 	deinit {
 		NSLog("Cell(deinit): %@", NSStringFromClass(self.classForCoder));
-		NSNotificationCenter.defaultCenter().removeObserver(self);
+		NotificationCenter.default.removeObserver(self);
 	}
 
 	/**
@@ -77,7 +77,7 @@ class BaseTableViewCell: UITableViewCell {
 
 	 - parameter event: event object
 	 */
-	final func sendEvent(event event: AdapteredTableView.Event!) {
+	final func sendEvent(event: AdapteredTableView.Event!) {
 		self.sendEvent(event: event, additionalObject: nil);
 	}
 
@@ -87,7 +87,7 @@ class BaseTableViewCell: UITableViewCell {
 	 - parameter event:            event
 	 - parameter additionalObject: additional object
 	 */
-	final func sendEvent(event event: AdapteredTableView.Event!, additionalObject: NSObject?) {
+	final func sendEvent(event: AdapteredTableView.Event!, additionalObject: NSObject?) {
 		self.delegate?.onEventReceived(eventType: event, index: self.index, additionalObject: additionalObject);
 	}
 
@@ -97,7 +97,7 @@ class BaseTableViewCell: UITableViewCell {
 	 - parameter event:            event
 	 - parameter additionalObject: additional object
 	 */
-	final func sendEvent(event event: AdapteredTableView.Event!, indexPath: NSIndexPath?, delegate: AdapteredTableCellDelegate?) {
+	final func sendEvent(event: AdapteredTableView.Event!, indexPath: NSIndexPath?, delegate: AdapteredTableCellDelegate?) {
 		delegate?.onEventReceived(eventType: event, index: indexPath?.section, additionalObject: nil);
 	}
 
@@ -113,7 +113,7 @@ class BaseTableViewCell: UITableViewCell {
 	 Method which provide the subscribe for notifications
 	 */
 	private func subscribeForNotification() {
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BaseTableViewCell.onRecieveNotification(_:)), name: AdapteredTableView.K_EVENT_RESULT_NOTIFICATION, object: nil);
+		NotificationCenter.default.addObserver(self, selector: #selector(BaseTableViewCell.onRecieveNotification(notification:)), name: AdapteredTableView.K_EVENT_RESULT_NOTIFICATION, object: nil);
 	}
 
 	/**
@@ -141,7 +141,7 @@ class BaseTableViewCell: UITableViewCell {
 	 - parameter event:  event
 	 - parameter object: object
 	 */
-	func onResultEvent(event event: AdapteredTableView.Event?, object: NSObject?) {
+	func onResultEvent(event: AdapteredTableView.Event?, object: NSObject?) {
 
 	}
 
@@ -171,9 +171,9 @@ class BaseTableViewCell: UITableViewCell {
 	 1. setInterface(fromObject object: BaseTableObject!);
 	 2. setInterface(firstTime object: BaseTableObject!)).
 	 */
-	@available( *, deprecated = 1.0, message = "Use method final func customize(needSelection: Bool, needUnderline: Bool) instead")
+	@available( *, deprecated : 1.0, message : "Use method final func customize(needSelection: Bool, needUnderline: Bool) instead")
 	final func disableClickVisualization() {
-		self.selectionStyle = .None;
+		self.selectionStyle = .none;
 	}
 
 	/**
@@ -184,7 +184,7 @@ class BaseTableViewCell: UITableViewCell {
 
 	 - author: Dmitriy Lernatovich
 	 */
-	@available( *, deprecated = 1.0, message = "Use method final func customize(needSelection: Bool, needUnderline: Bool) instead")
+	@available( *, deprecated : 1.0, message : "Use method final func customize(needSelection: Bool, needUnderline: Bool) instead")
 	final func disableUnderline() {
 		self.separatorInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, self.bounds.size.width);
 	}
@@ -202,7 +202,7 @@ class BaseTableViewCell: UITableViewCell {
 	 */
 	final func customize(needSelection: Bool, needUnderline: Bool) {
 		if (needSelection == false) {
-			self.selectionStyle = .None;
+			self.selectionStyle = .none;
 		}
 
 		if (needUnderline == false) {

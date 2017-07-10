@@ -38,7 +38,7 @@ class BaseCollectionObject: NSObject {
 	 */
 	internal final func getReuseIdentifier() -> String! {
 		let cellClass: AnyClass! = self.getCellClass();
-		let identifier: String! = NSStringFromClass(cellClass).componentsSeparatedByString(".").last;
+		let identifier: String! = NSStringFromClass(cellClass).components(separatedBy: (".")).last;
 		return identifier;
 	}
 

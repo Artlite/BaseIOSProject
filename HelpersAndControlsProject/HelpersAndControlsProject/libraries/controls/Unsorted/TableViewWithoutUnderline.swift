@@ -11,7 +11,7 @@ import UIKit
 class TableViewWithoutUnderline: UITableView {
 
     override func awakeFromNib() {
-        self.tableFooterView = UITableView(frame: CGRectZero);
+        self.tableFooterView = UITableView(frame: CGRect.zero);
     }
 
 }

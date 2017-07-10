@@ -12,11 +12,11 @@ class EmptyTableCell: UITableViewCell {
 
 	override func awakeFromNib() {
 		super.awakeFromNib()
-		self.selectionStyle = .None;
+		self.selectionStyle = .none;
 	}
 
-	override func setSelected(selected: Bool, animated: Bool) {
-		self.selectionStyle = .None;
+	override func setSelected(_ selected: Bool, animated: Bool) {
+		self.selectionStyle = .none;
 		super.setSelected(selected, animated: animated)
 	}
 

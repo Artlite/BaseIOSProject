@@ -14,13 +14,13 @@ class DynamicCollectionView: UICollectionView {
 	private var registeredCellNibs = Dictionary<String, UINib>()
 	private var registeredCellClasses = Dictionary<String, UICollectionViewCell.Type>()
 
-	override func registerClass(cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String) {
-		super.registerClass(cellClass, forCellWithReuseIdentifier: identifier)
+	override func register(_ cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String) {
+		super.register(cellClass, forCellWithReuseIdentifier: identifier)
 		registeredCellClasses[identifier] = cellClass as! UICollectionViewCell.Type!
 	}
 
-	override func registerNib(nib: UINib?, forCellWithReuseIdentifier identifier: String) {
-		super.registerNib(nib, forCellWithReuseIdentifier: identifier)
+	override func register(_ nib: UINib?, forCellWithReuseIdentifier identifier: String) {
+		super.register(nib, forCellWithReuseIdentifier: identifier)
 		registeredCellNibs[identifier] = nib
 	}
 
@@ -34,12 +34,12 @@ class DynamicCollectionView: UICollectionView {
 	func dequeueReusableOffScreenCellWithReuseIdentifier(identifier: String) -> UICollectionViewCell? {
 		var cell: UICollectionViewCell? = offscreenCells[identifier]
 		if cell == nil {
-			if registeredCellNibs.indexForKey(identifier) != nil {
+			if registeredCellNibs.index(forKey: identifier) != nil {
 				let cellNib: UINib = registeredCellNibs[identifier]! as UINib
-				cell = cellNib.instantiateWithOwner(nil, options: nil)[0] as? UICollectionViewCell
-			} else if registeredCellClasses.indexForKey(identifier) != nil {
+				cell = cellNib.instantiate(withOwner: nil, options: nil)[0] as? UICollectionViewCell
+			} else if registeredCellClasses.index(forKey: identifier) != nil {
 				let cellClass = registeredCellClasses[identifier] as UICollectionViewCell.Type!
-				cell = cellClass.init()
+				cell = cellClass?.init()
 			} else {
 				return nil;
 			}

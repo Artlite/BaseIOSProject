@@ -15,7 +15,7 @@ extension AdapteredTableView {
 	 - parameter text: text
 	 */
 	func setBackgroundText(text: String?) {
-		dispatch_async(dispatch_get_main_queue(), {
+		DispatchQueue.main.async(execute: {
 			self.labelBackgroundText.text = text;
 		});
 	}
@@ -24,6 +24,6 @@ extension AdapteredTableView {
 	 Method which provide the crearing of the background text
 	 */
 	func clearBackgroundText() {
-		self.setBackgroundText("");
+		self.setBackgroundText(text: "");
 	}
 }

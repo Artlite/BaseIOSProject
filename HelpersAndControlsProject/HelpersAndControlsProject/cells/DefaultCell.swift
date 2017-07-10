@@ -16,12 +16,12 @@ class DefaultCell: BaseCollectionCell {
 	override func setInterface(fromObject object: BaseCollectionObject!) {
 		let cObject: Object? = object as? Object;
 		self.labelText.text = cObject?.text;
-		self.viewBottom.hidden = !cObject!.needLine;
+		self.viewBottom.isHidden = !cObject!.needLine;
 	}
 
 	internal class Object: BaseCollectionObject {
-		private var text: String?;
-		private var needLine: Bool = true;
+		public var text: String?;
+		public var needLine: Bool = true;
 
 		init(text: String?, needLine: Bool) {
 			super.init();

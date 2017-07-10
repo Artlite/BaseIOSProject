@@ -35,7 +35,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 		self.onInitialUpdate();
 	}
 
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated);
 		if (self.isNeedUpdate == true) {
 			self.isNeedUpdate = false;
@@ -43,7 +43,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 		}
 	}
 
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated);
 		if (self.needRemoveNotifications() == true) {
 			self.removeFromNotifications();
@@ -52,7 +52,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 		}
 	}
 
-	override func viewDidDisappear(animated: Bool) {
+	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated);
 		if (self.needRemoveNotifications() == true) {
 			self.removeFromNotifications();
@@ -98,7 +98,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	 - returns: nothing to return
 	 */
 	final func navigate(sequeID: String!) {
-		self.navigate(sequeID, transfertedObject: nil);
+		self.navigate(sequeID: sequeID, transfertedObject: nil);
 	}
 
 	/**
@@ -111,9 +111,9 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	 */
 	final func navigate(sequeID: String!, transfertedObject: AnyObject?) {
 		self.toTransfert = transfertedObject;
-		dispatch_async(dispatch_get_main_queue(), {
-			AppLogger.info(self, messageObject: sequeID, additional: "func navigate(sequeID: String!)");
-			self.performSegueWithIdentifier(sequeID, sender: self);
+		DispatchQueue.main.async(execute: {
+			AppLogger.info(owner: self, messageObject: sequeID as NSObject?, additional: "func navigate(sequeID: String!)");
+			self.performSegue(withIdentifier: sequeID, sender: self);
 		})
 	}
 
@@ -125,9 +125,9 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	 - returns: nothing to return
 	 */
 	final func navigate(push sequeID: String!) {
-		dispatch_async(dispatch_get_main_queue(), {
-			AppLogger.info(self, messageObject: sequeID, additional: "func navigate(sequeID: String!)");
-			self.navigationController?.performSegueWithIdentifier(sequeID, sender: self);
+		DispatchQueue.main.async(execute: {
+			AppLogger.info(owner: self, messageObject: sequeID as NSObject?, additional: "func navigate(sequeID: String!)");
+			self.navigationController?.performSegue(withIdentifier: sequeID, sender: self);
 		})
 	}
 
@@ -139,10 +139,10 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	 - returns: nothing to return
 	 */
 	final func navigateWithClosing(sequeID: String!) {
-		self.dismissViewControllerAnimated(false) {
-			dispatch_async(dispatch_get_main_queue(), {
-				AppLogger.info(self, messageObject: sequeID, additional: "func navigate(sequeID: String!)");
-				self.performSegueWithIdentifier(sequeID, sender: self);
+		self.dismiss(animated: false) {
+			DispatchQueue.main.async(execute: {
+				AppLogger.info(owner: self, messageObject: sequeID as NSObject?, additional: "func navigate(sequeID: String!)");
+				self.performSegue(withIdentifier: sequeID, sender: self);
 			})
 		}
 	}
@@ -154,17 +154,17 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	 - parameter segue:  segue
 	 - parameter sender: sender
 	 */
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-		let destinationNavigationController: UINavigationController? = segue.destinationViewController as? UINavigationController;
-		if (destinationNavigationController != nil) {
-			let targetController: BaseViewController? = destinationNavigationController?.topViewController as? BaseViewController;
-			targetController?.transfertedObject = self.toTransfert;
-		} else {
-			let targetController: BaseViewController? = segue.destinationViewController as? BaseViewController;
-			targetController?.transfertedObject = self.toTransfert;
-		}
-		self.toTransfert = nil;
-	}
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationNavigationController: UINavigationController? = segue.destination as? UINavigationController;
+        if (destinationNavigationController != nil) {
+            let targetController: BaseViewController? = destinationNavigationController?.topViewController as? BaseViewController;
+            targetController?.transfertedObject = self.toTransfert;
+        } else {
+            let targetController: BaseViewController? = segue.destination as? BaseViewController;
+            targetController?.transfertedObject = self.toTransfert;
+        }
+        self.toTransfert = nil;
+    }
 
 	// MARK: Close controller
 
@@ -173,9 +173,9 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	 */
 	final func closeController() {
 		if ((self.navigationController) != nil) {
-			self.navigationController?.popViewControllerAnimated(true);
+			self.navigationController?.popViewController(animated: true);
 		}
-		self.dismissViewControllerAnimated(true, completion: nil);
+		self.dismiss(animated: true, completion: nil);
 	}
 
 	/**
@@ -183,7 +183,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	 */
 	final func onBackPressed() {
 		if ((self.navigationController) != nil) {
-			self.navigationController?.popViewControllerAnimated(true);
+			self.navigationController?.popViewController(animated: true);
 		}
 	}
 
@@ -191,7 +191,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	 Method which provide the closing of the pop controller
 	 */
 	final func closePopController() {
-		self.dismissViewControllerAnimated(true, completion: nil);
+		self.dismiss(animated: true, completion: nil);
 	}
 
 	// MARK: Functional with post processing
@@ -209,7 +209,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 			if (size >= 2) {
 				let baseController: BaseViewController? = controllers![size - 2] as? BaseViewController;
 				self.onBackPressed();
-				baseController?.onControllerResult(object, event: event);
+				baseController?.onControllerResult(object: object, event: event);
 				return;
 			}
 		}
@@ -293,7 +293,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	 - returns: controller visibility
 	 */
 	final func isVisibleController() -> Bool {
-		if ((self.isViewLoaded() == true) && (self.view.window != nil)) {
+		if ((self.isViewLoaded == true) && (self.view.window != nil)) {
 			return true;
 		}
 		return false;
@@ -313,7 +313,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	 */
 	func addTapHideKeyboard() {
 		GetsureHelper.addClick(target: self, view: self.view, selector: #selector(BaseViewController.hideKeyboard));
-		GetsureHelper.addSwipe(target: self, view: self.view, direction: UISwipeGestureRecognizerDirection.Down, selector: #selector(BaseViewController.hideKeyboard));
+		GetsureHelper.addSwipe(target: self, view: self.view, direction: UISwipeGestureRecognizerDirection.down, selector: #selector(BaseViewController.hideKeyboard));
 	}
 
 	// MARK: Classes
@@ -343,14 +343,14 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 
 		 - returns: compaing value
 		 */
-		internal override func isEqual(object: AnyObject?) -> Bool {
-			if let compare = object as? ControllerResultEvent {
-				if (self.code == compare.code) {
-					return true;
-				}
-			}
-			return false;
-		}
+        override func isEqual(_ object: Any?) -> Bool {
+            if let compare = object as? ControllerResultEvent {
+                if (self.code == compare.code) {
+                    return true;
+                }
+            }
+            return false;
+        }
 	}
 
 //    /**

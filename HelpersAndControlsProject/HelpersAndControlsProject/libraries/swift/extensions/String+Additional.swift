@@ -30,7 +30,7 @@ extension String {
 
 	var stringByDeletingPathExtension: String {
 		get {
-			return (self as NSString).stringByDeletingPathExtension
+			return (self as NSString).deletingPathExtension
 		}
 	}
 
@@ -48,11 +48,11 @@ extension String {
 
 	func stringByAppendingPathComponent(path: String) -> String {
 		let nsSt = self as NSString
-		return nsSt.stringByAppendingPathComponent(path)
+		return nsSt.appendingPathComponent(path)
 	}
 
 	func stringByAppendingPathExtension(ext: String) -> String? {
 		let nsSt = self as NSString
-		return nsSt.stringByAppendingPathExtension(ext)
+		return nsSt.appendingPathExtension(ext)
 	}
 }

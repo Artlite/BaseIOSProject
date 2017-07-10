@@ -19,7 +19,7 @@ class BaseCollectionCell: UICollectionViewCell {
 
 	deinit {
 		NSLog("Cell(deinit): %@", NSStringFromClass(self.classForCoder));
-		NSNotificationCenter.defaultCenter().removeObserver(self);
+		NotificationCenter.default.removeObserver(self);
 	}
 
 	/**
@@ -68,7 +68,7 @@ class BaseCollectionCell: UICollectionViewCell {
 
 	 - parameter event: event object
 	 */
-	final func sendEvent(event event: AdapteredCollectionView.AdapteredEvent!) {
+	final func sendEvent(event: AdapteredCollectionView.AdapteredEvent!) {
 		self.sendEvent(event: event, additionalObject: nil);
 	}
 
@@ -78,7 +78,7 @@ class BaseCollectionCell: UICollectionViewCell {
 	 - parameter event:            event
 	 - parameter additionalObject: additional object
 	 */
-	final func sendEvent(event event: AdapteredCollectionView.AdapteredEvent!, additionalObject: NSObject?) {
+	final func sendEvent(event: AdapteredCollectionView.AdapteredEvent!, additionalObject: NSObject?) {
 		self.delegate?.onEventReceived(eventType: event, index: self.index, additionalObject: additionalObject);
 	}
 
@@ -104,7 +104,7 @@ class BaseCollectionCell: UICollectionViewCell {
 	 Method which provide the subscribe for notifications
 	 */
 	private func subscribeForNotification() {
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BaseCollectionCell.onRecieveNotification(_:)), name: AdapteredCollectionView.K_EVENT_RESULT_NOTIFICATION, object: nil);
+		NotificationCenter.default.addObserver(self, selector: #selector(BaseCollectionCell.onRecieveNotification(notification:)), name: AdapteredCollectionView.K_EVENT_RESULT_NOTIFICATION, object: nil);
 	}
 
 	/**
@@ -151,7 +151,7 @@ class BaseCollectionCell: UICollectionViewCell {
 	 - parameter event:  event
 	 - parameter object: object
 	 */
-	func onResultEvent(event event: AdapteredCollectionView.AdapteredEvent?, object: NSObject?) {
+	func onResultEvent(event: AdapteredCollectionView.AdapteredEvent?, object: NSObject?) {
 
 	}
 }

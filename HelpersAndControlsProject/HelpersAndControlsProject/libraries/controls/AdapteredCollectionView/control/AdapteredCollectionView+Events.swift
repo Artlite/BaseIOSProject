@@ -17,7 +17,7 @@ extension AdapteredCollectionView {
 	internal final func sendEventResults(event: AdapteredCollectionView.AdapteredEvent?, object: NSObject?, intdex: Int) {
 		var dict: Dictionary<String, AnyObject> = [:];
 
-		dict[AdapteredTableView.K_EVENT_INDEX_KEY] = intdex;
+		dict[AdapteredTableView.K_EVENT_INDEX_KEY] = intdex as AnyObject;
 
 		if (event != nil) {
 			dict[AdapteredCollectionView.K_EVENT_KEY] = event!;
@@ -27,7 +27,8 @@ extension AdapteredCollectionView {
 			dict[AdapteredCollectionView.K_EVENT_OBJECT] = object!;
 		}
 
-		NSNotificationCenter.defaultCenter().postNotificationName(AdapteredCollectionView.K_EVENT_RESULT_NOTIFICATION, object: nil, userInfo: dict);
+		NotificationCenter.default.post(name: AdapteredCollectionView.K_EVENT_RESULT_NOTIFICATION, object: nil, userInfo: dict);
+        
 	}
 
 }

@@ -14,8 +14,8 @@ extension AdapteredTableView {
 	 Method which provide
 	 */
 	func registerDefaultCell() {
-		let nib = UINib.init(nibName: AdapteredTableView.K_EMPTY_CELL, bundle: NSBundle(forClass: EmptyTableCell.self));
-		self.tableView.registerNib(nib, forCellReuseIdentifier: AdapteredTableView.K_EMPTY_CELL);
+		let nib = UINib.init(nibName: AdapteredTableView.K_EMPTY_CELL, bundle: Bundle(for: EmptyTableCell.self));
+		self.tableView.register(nib, forCellReuseIdentifier: AdapteredTableView.K_EMPTY_CELL);
 	}
 
 	/**
@@ -27,7 +27,7 @@ extension AdapteredTableView {
 	 - returns: cell
 	 */
 	func get(emptyCell tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier(AdapteredTableView.K_EMPTY_CELL, forIndexPath: indexPath);
+		let cell: UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: AdapteredTableView.K_EMPTY_CELL, for: indexPath as IndexPath);
 		return cell;
 	}
 

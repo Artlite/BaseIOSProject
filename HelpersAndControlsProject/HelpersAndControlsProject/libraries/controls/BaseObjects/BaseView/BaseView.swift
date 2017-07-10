@@ -16,7 +16,7 @@ import UIKit
 
 	 - returns: current view controller
 	 */
-	optional func getCurrentController() -> UIViewController?;
+	@objc optional func getCurrentController() -> UIViewController?;
 }
 
 class BaseView: UIView {
@@ -54,7 +54,7 @@ class BaseView: UIView {
 	 Method which provide the view initializations
 	 */
 	private final func onViewInitialize() {
-		let view: UIView! = NSBundle.mainBundle().loadNibNamed(ClassHelper.get(classNameFromClass: self.classForCoder),
+		let view: UIView! = Bundle.main.loadNibNamed(ClassHelper.get(classNameFromClass: self.classForCoder),
 			owner: self,
 			options: nil)![0] as! UIView;
 		view.frame = self.bounds;
