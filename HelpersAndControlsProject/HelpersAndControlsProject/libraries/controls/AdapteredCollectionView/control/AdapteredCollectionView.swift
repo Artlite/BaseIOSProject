@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc protocol AdapteredCollectionDelegate: class {
+protocol AdapteredCollectionDelegate: class {
     /**
      Method which provide the action when cell send event to the collection view
      
@@ -16,18 +16,18 @@ import UIKit
      - parameter object: object
      - parameter index:  index
      */
-    @objc optional func onEventReceived(eventType event: AdapteredCollectionView.AdapteredEvent!, object: BaseCollectionObject!, index: Int32, additionalObject: NSObject?);
+    func onEventReceived(eventType event: AdapteredCollectionView.AdapteredEvent!, object: BaseCollectionObject!, index: Int, additionalObject: NSObject?);
     
     /**
      Method which provide the refresh data functional
      */
-    @objc optional func onRefreshData();
+    func onRefreshData();
     /**
      Method which provide the lazy load functional
      
      - parameter size: list size
      */
-    @objc optional func onAlmostAtBottom(listSize size: Int32);
+    func onAlmostAtBottom(listSize size: Int);
 }
 
 protocol AdapteredCellDelegate: class {
@@ -183,7 +183,7 @@ AdapteredCellDelegate {
      Method which provide the executing of the refresh funcional
      */
     func onRefresh() {
-        self.adapteredDelegate?.onRefreshData?();
+        self.adapteredDelegate?.onRefreshData();
     }
     
     /**
@@ -336,7 +336,7 @@ AdapteredCellDelegate {
     func onEventReceived(eventType event: AdapteredCollectionView.AdapteredEvent!, index: Int!, additionalObject: NSObject?) {
         let object: BaseCollectionObject? = self.objects[index] as? BaseCollectionObject;
         if (object != nil) {
-            self.adapteredDelegate?.onEventReceived?(eventType: event, object: object!, index: Int32(index), additionalObject: additionalObject);
+            self.adapteredDelegate?.onEventReceived(eventType: event, object: object!, index: index, additionalObject: additionalObject);
         }
     }
     
@@ -372,7 +372,7 @@ AdapteredCellDelegate {
         let listItemSize: Int! = self.objects.count;
         if ((index == listItemSize - 1)
             && (listItemSize > self.listSizeOld)) {
-            self.adapteredDelegate?.onAlmostAtBottom?(listSize: Int32(listItemSize));
+            self.adapteredDelegate?.onAlmostAtBottom(listSize: listItemSize);
             self.listSizeOld = listItemSize;
         }
     }

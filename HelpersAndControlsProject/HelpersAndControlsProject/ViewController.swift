@@ -36,45 +36,45 @@ class ViewController: UIViewController, AdapteredCollectionDelegate {
 
 	// MARK: Adaptered event
     
-    func onEventReceived(eventType event: AdapteredCollectionView.AdapteredEvent!, object: BaseCollectionObject!, index: Int32, additionalObject: NSObject?) {
-        switch index {
-        // MARK: Badge helper
-        case 1:
-            BadgeHelper.set(applicationBadge: 100);
-            break;
-        case 2:
-            BadgeHelper.clear();
-            break;
-        // MARK: Class helper
-        case 4:
-            let className: String? = ClassHelper.get(classNameFromObject: object);
-            DialogHelper.show(dialogWithTitle: "Class", message: className, style: .alert, actions: nil, controller: self);
-            break;
-        case 5:
-            let className: String? = ClassHelper.get(classNameFromClass: DefaultCell.classForCoder());
-            DialogHelper.show(dialogWithTitle: "Class", message: className, style: .alert, actions: nil, controller: self);
-            break;
-        case 7:
-            let storyboard: UIStoryboard? = UIStoryboard(name: "Smile", bundle: nil);
-            let controller: UIViewController? = storyboard?.instantiateViewController(withIdentifier: "SmileController");
-            if (controller != nil) {
-                self.navigationController?.present(controller!, animated: true, completion: nil);
+    func onEventReceived(eventType event: AdapteredCollectionView.AdapteredEvent!, object: BaseCollectionObject!, index: Int, additionalObject: NSObject?) {
+            switch index {
+            // MARK: Badge helper
+            case 1:
+                BadgeHelper.set(applicationBadge: 100);
+                break;
+            case 2:
+                BadgeHelper.clear();
+                break;
+            // MARK: Class helper
+            case 4:
+                let className: String? = ClassHelper.get(classNameFromObject: object);
+                DialogHelper.show(dialogWithTitle: "Class", message: className, style: .alert, actions: nil, controller: self);
+                break;
+            case 5:
+                let className: String? = ClassHelper.get(classNameFromClass: DefaultCell.classForCoder());
+                DialogHelper.show(dialogWithTitle: "Class", message: className, style: .alert, actions: nil, controller: self);
+                break;
+            case 7:
+                let storyboard: UIStoryboard? = UIStoryboard(name: "Smile", bundle: nil);
+                let controller: UIViewController? = storyboard?.instantiateViewController(withIdentifier: "SmileController");
+                if (controller != nil) {
+                    self.navigationController?.present(controller!, animated: true, completion: nil);
+                }
+                break;
+            case 8:
+                self.performSegue(withIdentifier: "toAdapteredTable", sender: self);
+                break;
+            default:
+                break;
             }
-            break;
-        case 8:
-            self.performSegue(withIdentifier: "toAdapteredTable", sender: self);
-            break;
-        default:
-            break;
-        }
     }
 
-    func onAlmostAtBottom(listSize size: Int32) {
+    func onAlmostAtBottom(listSize size: Int) {
         
     }
 
 	func onRefreshData() {
-
+        self.adapteredView.hideRefreshControl();
 	}
 
 }

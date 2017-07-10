@@ -17,19 +17,19 @@ import UIKit
      - parameter object: object
      - parameter index:  index
      */
-    @objc optional func onEventReceived(eventType event: AdapteredTableView.Event!, object: BaseTableObject!, index: Int32, additionalObject: NSObject?);
+    func onEventReceived(eventType event: AdapteredTableView.Event!, object: BaseTableObject!, index: Int, additionalObject: NSObject?);
     
     /**
      Method which provide the lazy load functional
      
      - parameter size: list size
      */
-    @objc optional func onAlmostAtBottom(listSize size: Int32);
+    func onAlmostAtBottom(listSize size: Int);
     
     /**
      Method which provide the refresh data functional
      */
-    @objc optional func onRefreshData();
+    func onRefreshData();
     
     /**
      Method which provide the object post processing before the displaying inside the table view
@@ -414,7 +414,7 @@ class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSource, Ad
         let object: BaseTableObject? = self.getObject(byIndex: indexPath.section);
         if (object != nil) {
             object?.isSelected = true;
-            self.delegate?.onEventReceived?(eventType: AdapteredTableView.K_CELL_PRESSED_EVENT, object: object!, index: Int32(indexPath.section), additionalObject: nil);
+            self.delegate?.onEventReceived(eventType: AdapteredTableView.K_CELL_PRESSED_EVENT, object: object!, index: indexPath.section, additionalObject: nil);
         }
         
         // Selection indexes
@@ -507,7 +507,7 @@ class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSource, Ad
         let listItemSize: Int! = self.objects.count;
         if ((index == listItemSize - 1)
             && (listItemSize > self.listSizeOld)) {
-            self.delegate?.onAlmostAtBottom?(listSize: Int32(listItemSize));
+            self.delegate?.onAlmostAtBottom(listSize: listItemSize);
             self.listSizeOld = listItemSize;
         }
     }
@@ -523,7 +523,7 @@ class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSource, Ad
     func onEventReceived(eventType event: AdapteredTableView.Event!, index: Int!, additionalObject: NSObject?) {
         let object = self.getObject(byIndex: index);
         if (object != nil) {
-            self.delegate?.onEventReceived?(eventType: event, object: object!, index: Int32(index), additionalObject: additionalObject);
+            self.delegate?.onEventReceived(eventType: event, object: object!, index: index, additionalObject: additionalObject);
         }
     }
     
@@ -581,7 +581,7 @@ class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSource, Ad
      Method which provide the executing of the refresh funcional
      */
     func onRefresh() {
-        self.delegate?.onRefreshData?();
+        self.delegate?.onRefreshData();
     }
     
     /**
