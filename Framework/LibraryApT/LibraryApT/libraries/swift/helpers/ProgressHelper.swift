@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProgressHelper: NSObject {
+public class ProgressHelper: NSObject {
 
 	/**
 	 Method which provide the show progress with message
@@ -101,7 +101,7 @@ class ProgressHelper: NSObject {
 	/**
 	 Method which provide the progress hiding
 	 */
-	internal static func hideProgress() {
+	public static func hideProgress() {
 		DispatchQueue.main.async(execute: {
 			SVProgressHUD.dismiss();
 		});
@@ -112,7 +112,7 @@ class ProgressHelper: NSObject {
 
 	 - parameter style: progress style
 	 */
-	internal static func setUpProgressHUD(style: SVProgressHUDStyle!) {
+	public static func setUpProgressHUD(style: SVProgressHUDStyle!) {
 		SVProgressHUD.setMinimumDismissTimeInterval(0.5);
 		SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.clear);
 		SVProgressHUD.setDefaultStyle(style);

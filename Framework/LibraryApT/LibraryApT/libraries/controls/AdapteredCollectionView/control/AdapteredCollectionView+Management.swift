@@ -6,14 +6,14 @@
 //  Copyright © 2016 Magnet. All rights reserved.
 //
 import UIKit
-extension AdapteredCollectionView {
+public extension AdapteredCollectionView {
 
 	/**
 	 Method which provide the object adding
 
 	 - parameter object: object for add
 	 */
-	internal func add(object: BaseCollectionObject?) {
+	public func add(object: BaseCollectionObject?) {
 		if (object != nil) {
 			self.add(objects: [object!]);
 		}
@@ -24,7 +24,7 @@ extension AdapteredCollectionView {
 
 	 - parameter objects: objects for add
 	 */
-	internal func add(objects: [BaseCollectionObject]?) {
+	public func add(objects: [BaseCollectionObject]?) {
 		if (objects != nil) {
 			self.objects.addObjects(from: objects!);
 			self.registerCellsNib();
@@ -37,7 +37,7 @@ extension AdapteredCollectionView {
 
 	 - parameter objects: objects for add
 	 */
-	internal func set(objects: [BaseCollectionObject]?) {
+	public func set(objects: [BaseCollectionObject]?) {
 		if (objects != nil) {
 			self.objects = NSMutableArray(array: objects!);
 			self.listSizeOld = self.objects.count - 1;
@@ -51,7 +51,7 @@ extension AdapteredCollectionView {
 
 	 - parameter object: cell object
 	 */
-	internal func remove(object: BaseCollectionObject?) {
+	public func remove(object: BaseCollectionObject?) {
 		if (object != nil) {
 			self.remove(objects: [object!]);
 		}
@@ -62,7 +62,7 @@ extension AdapteredCollectionView {
 
 	 - parameter objects: objects to remove
 	 */
-	internal func remove(objects: [BaseCollectionObject]?) {
+	public func remove(objects: [BaseCollectionObject]?) {
 		if ((objects != nil) && (objects?.isEmpty == false)) {
 			self.objects.removeObjects(in: objects!);
 			self.listSizeOld = self.objects.count - 1;
@@ -75,7 +75,7 @@ extension AdapteredCollectionView {
 
 	 - parameter object: object
 	 */
-	internal func update(byObject object: BaseCollectionObject?) {
+	public func update(byObject object: BaseCollectionObject?) {
 		self.update(byIndex: object?.index);
 	}
 
@@ -84,7 +84,7 @@ extension AdapteredCollectionView {
 
 	 - parameter index: index path
 	 */
-	internal func update(byIndex index: NSIndexPath?) {
+	public func update(byIndex index: NSIndexPath?) {
 		if (index != nil) {
 			DispatchQueue.main.async(execute: {
 				self.collectionView.reloadItems(at: [index! as IndexPath]);
@@ -97,7 +97,7 @@ extension AdapteredCollectionView {
 
 	 - returns: objects array
 	 */
-	internal func getObjectsArray() -> [BaseCollectionObject]? {
+	public func getObjectsArray() -> [BaseCollectionObject]? {
 		var array: [BaseCollectionObject]! = [];
 		let currentElements: [BaseCollectionObject]? = (self.objects as [AnyObject]) as? [BaseCollectionObject];
 		if (currentElements != nil) {
@@ -111,7 +111,7 @@ extension AdapteredCollectionView {
 
 	 - returns: elements count
 	 */
-	internal func getElementCount() -> Int {
+	public func getElementCount() -> Int {
 		return self.objects.count;
 	}
 
@@ -122,7 +122,7 @@ extension AdapteredCollectionView {
 
 	 - returns: getting object
 	 */
-	internal func getObject(byIndex index: Int!) -> BaseCollectionObject? {
+	public func getObject(byIndex index: Int!) -> BaseCollectionObject? {
 		return self.objects[index] as? BaseCollectionObject;
 	}
 
@@ -131,7 +131,7 @@ extension AdapteredCollectionView {
 
 	 - parameter needInterfaceUpdate: is need UI refresh
 	 */
-	internal final func removeAll() {
+	public final func removeAll() {
 		self.listSizeOld = -1;
 		self.objects.removeAllObjects();
 		self.notifyDataSetChanged();
@@ -140,7 +140,7 @@ extension AdapteredCollectionView {
 	/**
 	 Method which provide the content updating
 	 */
-	internal final func notifyDataSetChanged() {
+	public final func notifyDataSetChanged() {
 		DispatchQueue.main.async(execute: {
 			self.collectionView.reloadData();
 			self.collectionView.reloadInputViews();

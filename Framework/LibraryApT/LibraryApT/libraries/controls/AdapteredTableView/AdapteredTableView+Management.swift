@@ -8,14 +8,14 @@
 
 import UIKit
 
-extension AdapteredTableView {
+public extension AdapteredTableView {
 
 	/**
 	 Method which provide the adding of the table view object
 
 	 - parameter object: object
 	 */
-	final func add(object: BaseTableObject?) {
+	public final func add(object: BaseTableObject?) {
 		if (object != nil) {
 			self.add(objects: [object!]);
 		}
@@ -26,7 +26,7 @@ extension AdapteredTableView {
 
 	 - parameter objects: objects
 	 */
-	final func add(objects: [BaseTableObject]?) {
+	public final func add(objects: [BaseTableObject]?) {
 		if (objects != nil) {
 			self.objects.addObjects(from: objects!);
 			self.registerCellsNib();
@@ -39,7 +39,7 @@ extension AdapteredTableView {
 
 	 - parameter object: object
 	 */
-	final func set(object: BaseTableObject?) {
+	public final func set(object: BaseTableObject?) {
 		if (object != nil) {
 			self.set(objects: [object!]);
 		}
@@ -50,7 +50,7 @@ extension AdapteredTableView {
 
 	 - parameter objects: objects
 	 */
-	final func set(objects: [BaseTableObject]?) {
+	public final func set(objects: [BaseTableObject]?) {
 		if (objects != nil) {
 			self.objects = NSMutableArray(array: objects!);
 			// CLear previous selection indexes
@@ -68,7 +68,7 @@ extension AdapteredTableView {
 
 	 - parameter object: object for remove
 	 */
-	final func remove(object: BaseTableObject?) {
+	public final func remove(object: BaseTableObject?) {
 		self.remove(object: object, needNotify: true);
 	}
 
@@ -77,7 +77,7 @@ extension AdapteredTableView {
 
 	 - parameter index: index
 	 */
-	final func remove(objectByIndex index: Int) {
+	public final func remove(objectByIndex index: Int) {
 		let object = self.getObject(byIndex: index);
 		self.remove(object: object, needNotify: true);
 	}
@@ -107,7 +107,7 @@ extension AdapteredTableView {
 
 	 - parameter objects: objects
 	 */
-	final func remove(objects: [BaseTableObject]?) {
+	public final func remove(objects: [BaseTableObject]?) {
 		if (objects != nil) {
 			for object in objects! {
 				self.remove(object: object, needNotify: false);
@@ -121,7 +121,7 @@ extension AdapteredTableView {
 
 	 - author: Dmitriy Lernatovich
 	 */
-	final func removeAll() {
+	public final func removeAll() {
 		self.objects.removeAllObjects();
 		self.notifyDataSetChanged();
 	}
@@ -133,7 +133,7 @@ extension AdapteredTableView {
 
 	 - returns: object
 	 */
-	final func getObject(byIndex index: Int) -> BaseTableObject? {
+	public final func getObject(byIndex index: Int) -> BaseTableObject? {
 		if (index < self.objects.count) {
 			let object: BaseTableObject? = self.objects.object(at: index) as? BaseTableObject;
 			return object;
@@ -148,7 +148,7 @@ extension AdapteredTableView {
 
 	 - returns: selected object
 	 */
-	final func getSelectedObject() -> BaseTableObject? {
+	public final func getSelectedObject() -> BaseTableObject? {
 		if (self.previousIndex != nil) {
 			if let object = self.getObject(byIndex: self.previousIndex!.section) {
 				return object;
@@ -162,7 +162,7 @@ extension AdapteredTableView {
 
 	 - returns: selecting objects
 	 */
-	final func getSelectedObjects() -> [BaseTableObject] {
+	public final func getSelectedObjects() -> [BaseTableObject] {
 		var objects: [BaseTableObject] = [];
 		if (self.allowMultipleSelection == true) {
 			for index in self.previousIndexes {
@@ -183,14 +183,14 @@ extension AdapteredTableView {
 
 	 - returns: object count
 	 */
-	final func getObjectsCount() -> Int {
+	public final func getObjectsCount() -> Int {
 		return self.objects.count;
 	}
 
 	/**
 	 Method which provide the notifying of the data set changed
 	 */
-	final func notifyDataSetChanged() {
+	public final func notifyDataSetChanged() {
 		self.sortByPriority();
 		// Post processing functional before table update
 		if let typedObjects = self.objects as? NSArray as? [BaseTableObject] {
@@ -239,7 +239,7 @@ extension AdapteredTableView {
 
 	 - parameter object: object for remove
 	 */
-	final func remove(objectWithAnimation object: BaseTableObject?) {
+	public final func remove(objectWithAnimation object: BaseTableObject?) {
 		DispatchQueue.main.async(execute: { [weak self] in
 			if (object != nil) {
 				if let index = object?.index {
@@ -261,7 +261,7 @@ extension AdapteredTableView {
 
 	 - parameter index: index
 	 */
-	final func remove(objectByIndexWithAnimation index: Int) {
+	public final func remove(objectByIndexWithAnimation index: Int) {
 		let object = self.getObject(byIndex: index);
 		self.remove(objectWithAnimation: object);
 	}

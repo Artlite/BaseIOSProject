@@ -6,7 +6,7 @@
 //  Copyright © 2016 Magnet. All rights reserved.
 //
 import UIKit
-extension AdapteredCollectionView {
+public extension AdapteredCollectionView {
 
 	/**
 	 Method which provide the sending of the event results
@@ -14,7 +14,7 @@ extension AdapteredCollectionView {
 	 - parameter event:  event object
 	 - parameter object: result object
 	 */
-	internal final func sendEventResults(event: AdapteredCollectionView.AdapteredEvent?, object: NSObject?, intdex: Int) {
+	public final func sendEventResults(event: AdapteredCollectionView.AdapteredEvent?, object: NSObject?, intdex: Int) {
 		var dict: Dictionary<String, AnyObject> = [:];
 
 		dict[AdapteredTableView.K_EVENT_INDEX_KEY] = intdex as AnyObject;

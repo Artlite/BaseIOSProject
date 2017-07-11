@@ -8,14 +8,14 @@
 
 import UIKit
 
-extension UIView {
+public extension UIView {
     
 	/// Method  which provide the corner rounding
 	///
 	/// - Parameters:
 	///   - corners: {@link UIRectCorner} of the corners
 	///   - radius: {@link CGFloat} of the radius
-	func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+	public func roundCorners(corners: UIRectCorner, radius: CGFloat) {
 		let path = UIBezierPath(roundedRect: self.bounds,
 		                        byRoundingCorners: corners,
 		                        cornerRadii: CGSize(width: radius, height: radius))

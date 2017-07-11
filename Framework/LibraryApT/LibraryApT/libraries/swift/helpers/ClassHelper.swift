@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ClassHelper: NSObject {
+public class ClassHelper: NSObject {
 
 	/**
 	 Method which provide to getting of the class name from object
@@ -17,7 +17,7 @@ class ClassHelper: NSObject {
 
 	 - returns: class name
 	 */
-	static func get(classNameFromClass currentClass: AnyClass?) -> String {
+	public static func get(classNameFromClass currentClass: AnyClass?) -> String {
 		if (currentClass != nil) {
 			let className: String? = NSStringFromClass(currentClass!)
 				.components(separatedBy: ".").last;
@@ -35,7 +35,7 @@ class ClassHelper: NSObject {
 
 	 - returns: class name
 	 */
-	static func get(classNameFromObject object: NSObject?) -> String {
+	public static func get(classNameFromObject object: NSObject?) -> String {
 		if (object != nil) {
 			let className: String? = NSStringFromClass(object!.classForCoder)
 				.components(separatedBy: ".").last;

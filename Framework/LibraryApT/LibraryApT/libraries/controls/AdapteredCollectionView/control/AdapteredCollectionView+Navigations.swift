@@ -6,14 +6,14 @@
 //  Copyright © 2016 Magnet. All rights reserved.
 //
 import UIKit
-extension AdapteredCollectionView {
+public extension AdapteredCollectionView {
 
 	/**
 	 Method which provide the scrolling to bottom
 
 	 - parameter animated: animated
 	 */
-	internal func scroll(toBottom animated: Bool) {
+	public func scroll(toBottom animated: Bool) {
 		if (animated == true) {
 			Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(scrollToBottomAnimated), userInfo: nil, repeats: false);
 		} else {
@@ -26,7 +26,7 @@ extension AdapteredCollectionView {
 
 	 - parameter index: index
 	 */
-	internal func scroll(toIndex index: NSIndexPath, animated: Bool) {
+	public func scroll(toIndex index: NSIndexPath, animated: Bool) {
         ThreadHelper.runOnMain(afterDelay: 0.1) { 
             self.collectionView.scrollToItem(at: index as IndexPath, at: .bottom, animated: animated);
         }
@@ -41,7 +41,7 @@ extension AdapteredCollectionView {
 
 	 - parameter object: object
 	 */
-	internal func scroll(toObject object: BaseCollectionObject?, animated: Bool) {
+	public func scroll(toObject object: BaseCollectionObject?, animated: Bool) {
 		if ((object == nil) || (object?.index == nil)) {
 			return;
 		}
@@ -51,14 +51,14 @@ extension AdapteredCollectionView {
 	/**
 	 Method which provide the navigation to bottom with animation
 	 */
-	func scrollToBottomAnimated() {
+	public func scrollToBottomAnimated() {
 		self.navigateToBottom(animated: true);
 	}
 
 	/**
 	 Method which provide the navigation to bottom without animation
 	 */
-	func scrollToBottomNonAnimated() {
+	public func scrollToBottomNonAnimated() {
 		self.navigateToBottom(animated: false);
 	}
 
@@ -73,7 +73,6 @@ extension AdapteredCollectionView {
 		if (item < 0) {
 			return;
 		}
-//		let indexPath: NSIndexPath = NSIndexPath(forItem: item, inSection: section);
         let indexPath: NSIndexPath = NSIndexPath(item: item, section: section);
 		self.collectionView.scrollToItem(at: indexPath as IndexPath, at: .bottom, animated: animated);
 	}

@@ -10,10 +10,10 @@ import UIKit
 
 open class BaseTableViewCell: UITableViewCell {
 
-	var index: Int! = -1;
-	var indexPath: NSIndexPath?;
-	weak var object: BaseTableObject?;
-	weak var delegate: AdapteredTableCellDelegate?;
+	public var index: Int! = -1;
+	public var indexPath: NSIndexPath?;
+	public weak var object: BaseTableObject?;
+	public weak var delegate: AdapteredTableCellDelegate?;
 
 	override open func awakeFromNib() {
 		super.awakeFromNib();
@@ -35,7 +35,7 @@ open class BaseTableViewCell: UITableViewCell {
 
 	 - parameter object: object for setting up
 	 */
-	internal func setInterface(fromObject object: BaseTableObject!) {
+	open func setInterface(fromObject object: BaseTableObject!) {
 		// fatalError(String(format:"internal func setInterface(fromObject object:BaseCollectionObject!) -> Should be overriden in %@", NSStringFromClass(self.classForCoder)));
 	}
 
@@ -44,7 +44,7 @@ open class BaseTableViewCell: UITableViewCell {
 
 	 - parameter object: object
 	 */
-	internal func setInterface(firstTime object: BaseTableObject!) {
+	open func setInterface(firstTime object: BaseTableObject!) {
 		self.setInterface(fromObject: object);
 	}
 
@@ -67,7 +67,7 @@ open class BaseTableViewCell: UITableViewCell {
 	/**
 	 Method which provide the action when cell is created
 	 */
-	func onCreateCell() {
+	open func onCreateCell() {
 
 	}
 
@@ -77,7 +77,7 @@ open class BaseTableViewCell: UITableViewCell {
 
 	 - parameter event: event object
 	 */
-	final func sendEvent(event: AdapteredTableView.Event!) {
+	public final func sendEvent(event: AdapteredTableView.Event!) {
 		self.sendEvent(event: event, additionalObject: nil);
 	}
 
@@ -87,7 +87,7 @@ open class BaseTableViewCell: UITableViewCell {
 	 - parameter event:            event
 	 - parameter additionalObject: additional object
 	 */
-	final func sendEvent(event: AdapteredTableView.Event!, additionalObject: NSObject?) {
+	public final func sendEvent(event: AdapteredTableView.Event!, additionalObject: NSObject?) {
 		self.delegate?.onEventReceived(eventType: event, index: self.index, additionalObject: additionalObject);
 	}
 
@@ -97,14 +97,14 @@ open class BaseTableViewCell: UITableViewCell {
 	 - parameter event:            event
 	 - parameter additionalObject: additional object
 	 */
-	final func sendEvent(event: AdapteredTableView.Event!, indexPath: NSIndexPath?, delegate: AdapteredTableCellDelegate?) {
+	public final func sendEvent(event: AdapteredTableView.Event!, indexPath: NSIndexPath?, delegate: AdapteredTableCellDelegate?) {
 		delegate?.onEventReceived(eventType: event, index: indexPath?.section, additionalObject: nil);
 	}
 
 	/**
 	 Method which provide the updating of the current cell
 	 */
-	final func update() {
+	public final func update() {
 		self.delegate?.update(cellByIndexPath: self.indexPath);
 	}
 
@@ -112,7 +112,7 @@ open class BaseTableViewCell: UITableViewCell {
 	/**
 	 Method which provide the subscribe for notifications
 	 */
-	private func subscribeForNotification() {
+	public final func subscribeForNotification() {
 		NotificationCenter.default.addObserver(self, selector: #selector(BaseTableViewCell.onRecieveNotification(notification:)), name: AdapteredTableView.K_EVENT_RESULT_NOTIFICATION, object: nil);
 	}
 
@@ -121,7 +121,7 @@ open class BaseTableViewCell: UITableViewCell {
 
 	 - parameter notification: notifications
 	 */
-	final func onRecieveNotification(notification: NSNotification?) {
+	public final func onRecieveNotification(notification: NSNotification?) {
 		if (notification == nil) {
 			return;
 		}
@@ -141,7 +141,7 @@ open class BaseTableViewCell: UITableViewCell {
 	 - parameter event:  event
 	 - parameter object: object
 	 */
-	func onResultEvent(event: AdapteredTableView.Event?, object: NSObject?) {
+	open func onResultEvent(event: AdapteredTableView.Event?, object: NSObject?) {
 
 	}
 
@@ -150,7 +150,7 @@ open class BaseTableViewCell: UITableViewCell {
 
 	 - returns: cell actions
 	 */
-	internal func getCellActions(object: BaseTableObject?, indexPath: NSIndexPath?, delegate: AdapteredTableCellDelegate?) -> [UITableViewRowAction] {
+	open func getCellActions(object: BaseTableObject?, indexPath: NSIndexPath?, delegate: AdapteredTableCellDelegate?) -> [UITableViewRowAction] {
 		return [];
 	}
 
@@ -161,7 +161,7 @@ open class BaseTableViewCell: UITableViewCell {
 
 	 - returns: allowing/not allowing
 	 */
-	internal func canEditCell(object: BaseTableObject?) -> Bool {
+	open func canEditCell(object: BaseTableObject?) -> Bool {
 		return false;
 	}
 
@@ -172,7 +172,7 @@ open class BaseTableViewCell: UITableViewCell {
 	 2. setInterface(firstTime object: BaseTableObject!)).
 	 */
 	@available( *, deprecated : 1.0, message : "Use method final func customize(needSelection: Bool, needUnderline: Bool) instead")
-	final func disableClickVisualization() {
+	public final func disableClickVisualization() {
 		self.selectionStyle = .none;
 	}
 
@@ -185,7 +185,7 @@ open class BaseTableViewCell: UITableViewCell {
 	 - author: Dmitriy Lernatovich
 	 */
 	@available( *, deprecated : 1.0, message : "Use method final func customize(needSelection: Bool, needUnderline: Bool) instead")
-	final func disableUnderline() {
+    public final func disableUnderline() {
 		self.separatorInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, self.bounds.size.width);
 	}
 
@@ -200,7 +200,7 @@ open class BaseTableViewCell: UITableViewCell {
 	 - parameter needSelection: need selection visualization
 	 - parameter needUnderline: need underline for cell
 	 */
-	final func customize(needSelection: Bool, needUnderline: Bool) {
+	public final func customize(needSelection: Bool, needUnderline: Bool) {
 		if (needSelection == false) {
 			self.selectionStyle = .none;
 		}

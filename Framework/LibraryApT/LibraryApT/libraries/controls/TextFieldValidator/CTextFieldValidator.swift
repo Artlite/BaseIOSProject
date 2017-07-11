@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CTextFieldValidator: TextFieldValidator {
+public class CTextFieldValidator: TextFieldValidator {
 
 	/// Custom text field delegate
 	class CTextFieldValidatorDelegate: NSObject, UITextFieldDelegate {
@@ -22,7 +22,7 @@ class CTextFieldValidator: TextFieldValidator {
 
 		 - returns: result
 		 */
-		func textFieldShouldReturn(textField: UITextField) -> Bool {
+		func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 			if let cTextField = textField as? CTextFieldValidator {
 				if (cTextField.needHideKeyboard == true) {
 					textField.resignFirstResponder();
@@ -44,7 +44,7 @@ class CTextFieldValidator: TextFieldValidator {
 
 		 - returns: result
 		 */
-		func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+		func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 			if let cTextField = textField as? CTextFieldValidator {
 				if let textFromEdit = textField.text {
 					return textFromEdit.length + (string.length - range.length) <=
@@ -80,7 +80,7 @@ class CTextFieldValidator: TextFieldValidator {
 
 	 - returns: object
 	 */
-	required init?(coder aDecoder: NSCoder) {
+	required public init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder);
 		self.onCreate();
 	}

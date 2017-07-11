@@ -8,50 +8,50 @@
 
 import Foundation
 
-extension String {
+public extension String {
 
-	var lastPathComponent: String {
+	public var lastPathComponent: String {
 		get {
 			return (self as NSString).lastPathComponent
 		}
 	}
 
-	var pathExtension: String {
+	public var pathExtension: String {
 		get {
 			return (self as NSString).pathExtension
 		}
 	}
 
-	var stringByDeletingLastPathComponent: String {
+	public var stringByDeletingLastPathComponent: String {
 		get {
 			return (self as NSString).deletingLastPathComponent
 		}
 	}
 
-	var stringByDeletingPathExtension: String {
+	public var stringByDeletingPathExtension: String {
 		get {
 			return (self as NSString).deletingPathExtension
 		}
 	}
 
-	var pathComponents: [String] {
+	public var pathComponents: [String] {
 		get {
 			return (self as NSString).pathComponents
 		}
 	}
 
-	var length: Int {
+	public var length: Int {
 		get {
 			return self.characters.count;
 		}
 	}
 
-	func stringByAppendingPathComponent(path: String) -> String {
+	public func stringByAppendingPathComponent(path: String) -> String {
 		let nsSt = self as NSString
 		return nsSt.appendingPathComponent(path)
 	}
 
-	func stringByAppendingPathExtension(ext: String) -> String? {
+	public func stringByAppendingPathExtension(ext: String) -> String? {
 		let nsSt = self as NSString
 		return nsSt.appendingPathExtension(ext)
 	}

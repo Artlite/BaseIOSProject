@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ImagePickerComposer: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+public class ImagePickerComposer: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
 	// Image Picker callback
 	typealias OnImagePickerCallback = (_ image: UIImage?) -> Void;

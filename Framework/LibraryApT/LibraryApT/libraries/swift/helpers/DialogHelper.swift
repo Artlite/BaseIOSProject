@@ -8,14 +8,14 @@
 
 import UIKit
 
-class DialogHelper: NSObject {
+public class DialogHelper: NSObject {
 
 	/**
 	 Method which provide the dialog creating
 
 	 - returns: dialog
 	 */
-	static func create(dialogWithTitle title: String?, message: String?, style: UIAlertControllerStyle, actions: [UIAlertAction]? = nil) -> UIAlertController {
+	public static func create(dialogWithTitle title: String?, message: String?, style: UIAlertControllerStyle, actions: [UIAlertAction]? = nil) -> UIAlertController {
 		let alert = UIAlertController(title: title, message: message, preferredStyle: style);
 
 		if (actions != nil) {
@@ -67,7 +67,7 @@ class DialogHelper: NSObject {
 	 - parameter controller: controller
 	 - parameter callback:   callback
 	 */
-	static func create(dialogWithInput title: String?, message: String?, okText: String?, cancelText: String?, style: UIAlertControllerStyle, capitalizationType: UITextAutocapitalizationType = UITextAutocapitalizationType.sentences, actions: [UIAlertAction]? = nil, callback: ((_ text: String?) -> Void)?) -> UIAlertController {
+	public static func create(dialogWithInput title: String?, message: String?, okText: String?, cancelText: String?, style: UIAlertControllerStyle, capitalizationType: UITextAutocapitalizationType = UITextAutocapitalizationType.sentences, actions: [UIAlertAction]? = nil, callback: ((_ text: String?) -> Void)?) -> UIAlertController {
 		var inputText: UITextField?;
 		let dialog = self.create(dialog: title, message: message, editTextHandler: { (edit) in
 			edit.font = UIFont.systemFont(ofSize: 17);
@@ -120,7 +120,7 @@ class DialogHelper: NSObject {
 	 - parameter controller: controller
 	 - parameter callback:   callback
 	 */
-	static func show(dialogWithInput title: String?, message: String?, okText: String?, cancelText: String?, controller: UIViewController?, capitalizationType: UITextAutocapitalizationType = UITextAutocapitalizationType.sentences, actions: [UIAlertAction]? = nil, callback: ((_ text: String?) -> Void)?) {
+	public static func show(dialogWithInput title: String?, message: String?, okText: String?, cancelText: String?, controller: UIViewController?, capitalizationType: UITextAutocapitalizationType = UITextAutocapitalizationType.sentences, actions: [UIAlertAction]? = nil, callback: ((_ text: String?) -> Void)?) {
 		let dialog = self.create(dialogWithInput: title, message: message, okText: okText, cancelText: cancelText, style: .alert, capitalizationType: capitalizationType, actions: actions, callback: callback);
 		controller?.present(dialog, animated: true, completion: nil);
 	}
@@ -133,7 +133,7 @@ class DialogHelper: NSObject {
 	 - parameter style:   style
 	 - parameter actions: actions
 	 */
-	static func show(dialogWithTitle title: String?, message: String?, style: UIAlertControllerStyle, actions: [UIAlertAction]?, controller: UIViewController?) {
+	public static func show(dialogWithTitle title: String?, message: String?, style: UIAlertControllerStyle, actions: [UIAlertAction]?, controller: UIViewController?) {
 		let alert = self.create(dialogWithTitle: title, message: message, style: style, actions: actions);
 		controller?.present(alert, animated: true, completion: nil);
 	}

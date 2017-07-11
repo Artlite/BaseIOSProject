@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIColor {
+public extension UIColor {
 
 	/**
 	 Method which provide the create color from rgb example: r:255 g:255 b:255 a:50
@@ -22,7 +22,7 @@ extension UIColor {
 
 	 - returns: color
 	 */
-	static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat = 100) -> UIColor {
+	public static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat = 100) -> UIColor {
 		return UIColor(red: (red / 255), green: (green / 255), blue: (blue / 255), alpha: (alpha / 100));
 	}
 

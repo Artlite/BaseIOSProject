@@ -8,14 +8,14 @@
 
 import UIKit
 
-extension AdapteredTableView {
+public extension AdapteredTableView {
 
 	/**
 	 Method which provide the scrolling to bottom
 
 	 - parameter animated: animated
 	 */
-	internal func scroll(toBottom animated: Bool) {
+	public func scroll(toBottom animated: Bool) {
 		if (animated == true) {
 			Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(scrollToBottomAnimated), userInfo: nil, repeats: false);
 		} else {
@@ -28,7 +28,7 @@ extension AdapteredTableView {
 
 	 - parameter index: index
 	 */
-	internal func scroll(toIndex index: NSIndexPath, animated: Bool) {
+	public func scroll(toIndex index: NSIndexPath, animated: Bool) {
         DispatchQueue.global().asyncAfter(deadline: .now() + 0.1) {
             self.tableView.scrollToRow(at: index as IndexPath, at: .bottom, animated: animated);
         }
@@ -39,7 +39,7 @@ extension AdapteredTableView {
 
 	 - parameter object: object
 	 */
-	internal func scroll(toObject object: BaseTableObject?, animated: Bool) {
+	public func scroll(toObject object: BaseTableObject?, animated: Bool) {
 		if ((object == nil) || (object?.index == nil)) {
 			return;
 		}
@@ -49,14 +49,14 @@ extension AdapteredTableView {
 	/**
 	 Method which provide the navigation to bottom with animation
 	 */
-	func scrollToBottomAnimated() {
+	public func scrollToBottomAnimated() {
 		self.navigateToBottom(animated: true);
 	}
 
 	/**
 	 Method which provide the navigation to bottom without animation
 	 */
-	func scrollToBottomNonAnimated() {
+	public func scrollToBottomNonAnimated() {
 		self.navigateToBottom(animated: false);
 	}
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GetsureHelper: NSObject {
+public class GetsureHelper: NSObject {
     
     /**
      Method which provide to add of the swipe to the UIView
@@ -19,7 +19,8 @@ class GetsureHelper: NSObject {
      
      - returns: getsure direction
      */
-    internal static func addSwipe(target owner:NSObject?, view:UIView?, direction:UISwipeGestureRecognizerDirection?, selector:Selector?) -> UISwipeGestureRecognizer?{
+    @discardableResult
+    public static func addSwipe(target owner:NSObject?, view:UIView?, direction:UISwipeGestureRecognizerDirection?, selector:Selector?) -> UISwipeGestureRecognizer?{
         if((view == nil) || (direction == nil) || (selector == nil) || (owner == nil)){
             return nil;
         }
@@ -38,7 +39,8 @@ class GetsureHelper: NSObject {
      
      - returns: getsure direction
      */
-    internal static func addBorderSwipe(target owner:NSObject?, view:UIView?, direction:UIRectEdge?, selector:Selector?) -> UIScreenEdgePanGestureRecognizer?{
+    @discardableResult
+    public static func addBorderSwipe(target owner:NSObject?, view:UIView?, direction:UIRectEdge?, selector:Selector?) -> UIScreenEdgePanGestureRecognizer?{
         if((view == nil) || (direction == nil) || (selector == nil) || (owner == nil)){
             return nil;
         }
@@ -57,7 +59,8 @@ class GetsureHelper: NSObject {
      
      - returns: getsure direction
      */
-    internal static func addClick(target owner:NSObject?, view:UIView?, selector:Selector?) -> UITapGestureRecognizer?{
+    @discardableResult
+    public static func addClick(target owner:NSObject?, view:UIView?, selector:Selector?) -> UITapGestureRecognizer?{
         if((view == nil) || (selector == nil) || (owner == nil)){
             return nil;
         }

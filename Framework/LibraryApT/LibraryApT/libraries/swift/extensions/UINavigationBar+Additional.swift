@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UINavigationBar {
+public extension UINavigationBar {
 
 	/**
 	 Method which provide the customization
@@ -19,7 +19,7 @@ extension UINavigationBar {
 	 - parameter titleColor:      title color
 	 - parameter tintColor:       tint color
 	 */
-	final func customize(backgroundColor: UIColor? = nil, titleColor: UIColor? = nil, tintColor: UIColor? = nil, needClear: Bool = false) {
+	public final func customize(backgroundColor: UIColor? = nil, titleColor: UIColor? = nil, tintColor: UIColor? = nil, needClear: Bool = false) {
 		// Clear customization
 		if (needClear == true) {
 			DispatchQueue.main.async(execute: { [weak self] in
@@ -53,7 +53,7 @@ extension UINavigationBar {
 
 	 - author: Dmitriy Lernatovich
 	 */
-	final func clearCustomization() {
+	public final func clearCustomization() {
 		DispatchQueue.main.async(execute: { [weak self] in
 			self?.barTintColor = nil;
 			self?.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black];
@@ -70,7 +70,7 @@ extension UINavigationBar {
 	 - parameter titleColor:      title color
 	 - parameter tintColor:       tint color
 	 */
-	final func backup( backgroundColor: inout UIColor?, titleColor: inout UIColor?, tintColor: inout UIColor?) {
+	public final func backup( backgroundColor: inout UIColor?, titleColor: inout UIColor?, tintColor: inout UIColor?) {
 		var r: CGFloat = 0;
 		var g: CGFloat = 0;
 		var b: CGFloat = 0;

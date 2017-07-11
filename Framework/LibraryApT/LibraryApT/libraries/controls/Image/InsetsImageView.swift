@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InsetsImageView: UIImageView {
+public class InsetsImageView: UIImageView {
     
     @IBInspectable var insetTop:CGFloat = 0 {
         didSet{
@@ -40,7 +40,7 @@ class InsetsImageView: UIImageView {
         }
     }
     
-    final func setImageInsets(){
+    private final func setImageInsets(){
         let originalImage:UIImage? = self.image;
         let tintedImage:UIImage? = originalImage?.withRenderingMode(.alwaysTemplate);
         let resizedImage:UIImage? = tintedImage?.resizableImage(withCapInsets: UIEdgeInsetsMake(self.insetTop, self.insetLeft, self.insetBottom, self.insetRight));

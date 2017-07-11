@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlaceholderedTextView: BaseTextView {
+public class PlaceholderedTextView: BaseTextView {
 
 	@IBInspectable var hintColor: UIColor = UIColor.lightGray {
 		didSet {
@@ -44,7 +44,7 @@ class PlaceholderedTextView: BaseTextView {
 
 	private var swipe: UISwipeGestureRecognizer?;
 
-	override func awakeFromNib() {
+	override public func awakeFromNib() {
 		super.awakeFromNib();
 		super.isNeedNewLineToClose = self.newLineKeyboardHiding;
 		if (self.swipeDownKeyboard == true) {

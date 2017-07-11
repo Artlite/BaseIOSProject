@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc protocol AdapteredTableDelegate: class {
+@objc public protocol AdapteredTableDelegate: class {
     
     /**
      Method which provide the action when cell send event to the collection view
@@ -61,7 +61,7 @@ import UIKit
     @objc optional func onPostProcessing(objects: [BaseTableObject]) -> [BaseTableObject];
 }
 
-protocol AdapteredTableCellDelegate: class {
+public protocol AdapteredTableCellDelegate: class {
     /**
      Method which provide the action when cell send event to the collection view
      
@@ -78,7 +78,7 @@ protocol AdapteredTableCellDelegate: class {
     func update(cellByIndexPath index: NSIndexPath?);
 }
 
-open class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSource, AdapteredTableCellDelegate {
+public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSource, AdapteredTableCellDelegate {
     
     // Refresh control
     @IBInspectable var needRefreshControl: Bool = false {
@@ -166,9 +166,9 @@ open class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSourc
     
     private var lastRegIdentifier: String! = "";
     
-    var objects: NSMutableArray = NSMutableArray();
-    var listSizeOld: Int! = -1;
-    var delegate: AdapteredTableDelegate?;
+    public var objects: NSMutableArray = NSMutableArray();
+    public var listSizeOld: Int! = -1;
+    public var delegate: AdapteredTableDelegate?;
     
     // Selection functional
     private(set) var previousIndex: NSIndexPath?;
@@ -489,7 +489,7 @@ open class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSourc
     /**
      Method which provide the registering nib inside the collection view
      */
-    func registerCellsNib() {
+    public func registerCellsNib() {
         for object in self.objects {
             let identifier: String = (object as AnyObject).getReuseIdentifier();
             let nib = UINib.init(nibName: identifier, bundle: Bundle(for: AdapteredTableView.self));
@@ -503,7 +503,7 @@ open class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSourc
      
      - parameter index: index for object
      */
-    private func checkForLazyLoad(index: Int!) {
+    public func checkForLazyLoad(index: Int!) {
         let listItemSize: Int! = self.objects.count;
         if ((index == listItemSize - 1)
             && (listItemSize > self.listSizeOld)) {
@@ -520,7 +520,7 @@ open class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSourc
      - parameter event: event
      - parameter index: index
      */
-    func onEventReceived(eventType event: AdapteredTableView.Event!, index: Int!, additionalObject: NSObject?) {
+    public func onEventReceived(eventType event: AdapteredTableView.Event!, index: Int!, additionalObject: NSObject?) {
         let object = self.getObject(byIndex: index);
         if (object != nil) {
             self.delegate?.onEventReceived(eventType: event, object: object!, index: index, additionalObject: additionalObject);
@@ -532,7 +532,7 @@ open class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSourc
      
      - parameter index: index
      */
-    func update(cellByIndexPath index: NSIndexPath?) {
+    public func update(cellByIndexPath index: NSIndexPath?) {
         if (index != nil) {
             self.tableView.beginUpdates();
             self.tableView.reloadRows(at: [index! as IndexPath], with: .automatic);
@@ -545,7 +545,7 @@ open class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSourc
      
      - parameter index: index
      */
-    func update(cellByIndex index: Int) {
+    public func update(cellByIndex index: Int) {
         
         // Guard statement
         guard (self.objects.count > index) else {
@@ -563,7 +563,7 @@ open class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSourc
     /**
      Method which provide the addin gof the refresh control
      */
-    func onAddRefreshControl() {
+    public func onAddRefreshControl() {
         self.refreshControl = UIRefreshControl();
         self.refreshControl?.addTarget(self, action: #selector(AdapteredTableView.onRefresh), for: .valueChanged);
         self.tableView.addSubview(self.refreshControl!);
@@ -573,21 +573,21 @@ open class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSourc
     /**
      Method which provide the setting up of the refresh control
      */
-    func onSetUpRefreshControl() {
+    public func onSetUpRefreshControl() {
         self.refreshControl?.tintColor = self.refreshColor;
     }
     
     /**
      Method which provide the executing of the refresh funcional
      */
-    func onRefresh() {
+    public func onRefresh() {
         self.delegate?.onRefreshData();
     }
     
     /**
      Method which provide the hiding of the refresh control
      */
-    internal func hideRefreshControl() {
+    public func hideRefreshControl() {
         if (self.refreshControl != nil) {
             if (self.refreshControl?.isRefreshing == true) {
                 DispatchQueue.main.async(execute: {
@@ -600,7 +600,7 @@ open class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSourc
     /**
      Method which provide the hiding of the refresh control
      */
-    internal func showRefreshControl() {
+    public func showRefreshControl() {
         if (self.refreshControl != nil) {
             if (self.refreshControl?.isRefreshing == false) {
                 DispatchQueue.main.async(execute: {
@@ -613,7 +613,7 @@ open class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSourc
     /**
      Method which provide the setting of the selection style
      */
-    private func setSelectionStyle() {
+    public func setSelectionStyle() {
         if (self.allowSelection == true) {
             self.tableView.allowsSelection = self.allowSelection;
             self.tableView.allowsMultipleSelection = self.allowMultipleSelection;
@@ -627,14 +627,14 @@ open class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSourc
     /**
      Method which provide the clearing of the selection index
      */
-    final func clearSelectionIndex() {
+    public final func clearSelectionIndex() {
         self.previousIndex = nil;
     }
     
     /**
      Method which provide the clearing of the selection indexes
      */
-    final func clearSelectionIndexes() {
+    public final func clearSelectionIndexes() {
         self.previousIndexes.removeAll();
     }
     
@@ -643,7 +643,7 @@ open class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSourc
      
      - parameter indexPath: index path
      */
-    final func remove(indexPath: NSIndexPath?) {
+    public final func remove(indexPath: NSIndexPath?) {
         self.previousIndexes.removeObject(object: indexPath);
     }
     

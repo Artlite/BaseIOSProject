@@ -8,14 +8,14 @@
 
 import UIKit
 
-class NotificationsHelper: NSObject {
+public class NotificationsHelper: NSObject {
     /**
      Method which provide the registration for notification
      
      - parameter selector:         selector
      - parameter notificationType: notification type
      */
-    internal static func registerForNotification(owner:NSObject?,
+    public static func registerForNotification(owner:NSObject?,
                                                  selector:Selector?,
                                                  notificationType:NSNotification.Name?){
         if((owner == nil) || (selector == nil) || (notificationType == nil)){
@@ -32,7 +32,7 @@ class NotificationsHelper: NSObject {
      
      - parameter notificationType: notification type
      */
-    internal static func sendNotification(notification notificationType:NSNotification.Name?){
+    public static func sendNotification(notification notificationType:NSNotification.Name?){
         if let notificationType = notificationType {
             NotificationCenter.default.post(name: notificationType, object: nil);
         }
@@ -43,7 +43,7 @@ class NotificationsHelper: NSObject {
      
      - parameter owner: owner object
      */
-    internal static func removeFromNotifications(owner:NSObject?){
+    public static func removeFromNotifications(owner:NSObject?){
         if let owner = owner{
             NotificationCenter.default.removeObserver(owner);
         }

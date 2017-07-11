@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIDatePicker {
+public extension UIDatePicker {
 
 	/**
 	 Method which provide the picker customization
@@ -18,7 +18,7 @@ extension UIDatePicker {
 	 - parameter needSelectionLines: need selection
 	 - parameter textColor:          text color
 	 */
-	final func customize(needSelectionLines: Bool, textColor: UIColor?) {
+	public final func customize(needSelectionLines: Bool, textColor: UIColor?) {
 		if (needSelectionLines == false) {
 			self.disableSelectionLines();
 		}

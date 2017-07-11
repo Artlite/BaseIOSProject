@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ThreadHelper: NSObject {
+public class ThreadHelper: NSObject {
     
     public typealias OnThreadPerformer = () -> Void;
     

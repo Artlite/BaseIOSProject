@@ -35,7 +35,7 @@ public class DatePickerDialog: UIView {
 		fatalError("init(coder:) has not been implemented") 
 	} 
 	
-	func setupView() { 
+	private func setupView() {
 		self.dialogView = createContainerView() 
 		
 		self.dialogView!.layer.shouldRasterize = true
@@ -57,7 +57,7 @@ public class DatePickerDialog: UIView {
 	} 
 	
 	/* Handle device orientation changes */	
-	func deviceOrientationDidChange(notification: NSNotification) { 
+	func deviceOrientationDidChange(notification: NSNotification) {
 		
         //CGRectMake(0, 0, UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
 		self.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height))
