@@ -8,14 +8,14 @@
 
 import UIKit
 
-extension AdapteredTableView {
+public extension AdapteredTableView {
 
 	/**
 	 Method which provide the sorting object by priority
 
 	 - author: Dmitriy Lernatovich
 	 */
-	final func sortByPriority() {
+	public final func sortByPriority() {
         self.objects.sort(comparator: { (obj1, obj2) -> ComparisonResult in
             let tObj1: BaseTableObject! = obj1 as! BaseTableObject;
             let tObj2: BaseTableObject! = obj2 as! BaseTableObject;

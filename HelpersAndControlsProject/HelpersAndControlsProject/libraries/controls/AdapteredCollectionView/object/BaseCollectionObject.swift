@@ -9,11 +9,11 @@
 import UIKit
 
 //MARK: Object
-class BaseCollectionObject: NSObject {
+open class BaseCollectionObject: NSObject {
 
-	internal var heigh: CGFloat = -1;
-	internal var index: NSIndexPath?;
-	internal weak var cell: BaseCollectionCell?;
+	public var heigh: CGFloat = -1;
+	public var index: NSIndexPath?;
+	public weak var cell: BaseCollectionCell?;
 
 	var isFirstInit: Bool = false;
 
@@ -27,16 +27,15 @@ class BaseCollectionObject: NSObject {
 
 	 - returns: cell class (Should be child from BaseCollectionCell)
 	 */
-	internal func getCellClass() -> AnyClass! {
+	open func getCellClass() -> AnyClass! {
 		fatalError(String(format: "internal func getCellClass() -> Should be overriden in %@", NSStringFromClass(self.classForCoder)));
-		return nil;
 	}
 
 	// MARK: Identifier methods
 	/**
 	 Method which provide to getting of the reuse identifier
 	 */
-	internal final func getReuseIdentifier() -> String! {
+	public final func getReuseIdentifier() -> String! {
 		let cellClass: AnyClass! = self.getCellClass();
 		let identifier: String! = NSStringFromClass(cellClass).components(separatedBy: (".")).last;
 		return identifier;

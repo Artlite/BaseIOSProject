@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension BaseViewController {
+public extension BaseViewController {
 
 	/**
 	 Method which provide the navigation by controller name and storyboard
@@ -17,7 +17,7 @@ extension BaseViewController {
 	 - parameter storyboard: storyboard name
 	 - parameter hideBottom: need hide bottom bar
 	 */
-	final func show(controller name: String?, storyboard: String?, hideBottom: Bool) {
+	public final func show(controller name: String?, storyboard: String?, hideBottom: Bool) {
 		if ((name == nil) || (storyboard == nil)) {
 			return;
 		}
@@ -36,7 +36,7 @@ extension BaseViewController {
 	 - parameter storyboard: storyboard name
 	 - parameter hideBottom: need hide bottom bar
 	 */
-	final func show(modallyController name: String?, storyboard: String?, completion: (() -> Void)?) {
+	public final func show(modallyController name: String?, storyboard: String?, completion: (() -> Void)?) {
 		if ((name == nil) || (storyboard == nil)) {
 			return;
 		}

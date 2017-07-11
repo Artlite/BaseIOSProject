@@ -8,7 +8,7 @@
 
 import UIKit
 /// Base view protocol
-@objc protocol BaseViewDelegate: class {
+@objc public protocol BaseViewDelegate: class {
 	/**
 	 Method which provide the getting of the current controller
 
@@ -19,7 +19,7 @@ import UIKit
 	@objc optional func getCurrentController() -> UIViewController?;
 }
 
-class BaseView: UIView {
+public class BaseView: UIView {
 
 	/// Delegate
 	var delegate: BaseViewDelegate? {
@@ -33,7 +33,7 @@ class BaseView: UIView {
 
 	 - parameter frame: frame
 	 */
-	override init(frame: CGRect) {
+	override public init(frame: CGRect) {
 		super.init(frame: frame);
 		self.onViewInitialize();
 		self.onCreateView();
@@ -44,7 +44,7 @@ class BaseView: UIView {
 
 	 - parameter aDecoder: coder
 	 */
-	required init?(coder aDecoder: NSCoder) {
+	required public init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder);
 		self.onViewInitialize();
 		self.onCreateView();
@@ -64,32 +64,32 @@ class BaseView: UIView {
 	/**
 	 Method which provide the actions when View is created
 	 */
-	func onCreateView() {
+	open func onCreateView() {
 		fatalError(String.init(format: "func onCreateView() -> Should be overriden in %@ class", self));
 	}
 
 	/**
 	 Method which provide the action when controller created
 	 */
-	func onCreateController() {
+	open func onCreateController() {
 	}
 
 	/**
 	 Method which provide the action when controller destroyed
 	 */
-	func onDestroyController() {
+	open func onDestroyController() {
 	}
 
 	/**
 	 Method which provide the action when controller resumed
 	 */
-	func onResumeController() {
+	open func onResumeController() {
 	}
 
 	/**
 	 Method which provide the action when controller paused
 	 */
-	func onPauseController() {
+	open func onPauseController() {
 	}
 
 	/**
@@ -97,7 +97,7 @@ class BaseView: UIView {
 
 	 - author: Dmitriy Lernatovich
 	 */
-	func onDelegateSetted() {
+	open func onDelegateSetted() {
 
 	}
 

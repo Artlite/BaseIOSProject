@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class ImageOrNameView: UIView {
+public class ImageOrNameView: UIView {
 
 	private static let K_STRING_TO_REMOVE: String! = "!@#$%^&*()_+=-?></.,~`±}{][\"\'§";
 
@@ -54,7 +54,7 @@ class ImageOrNameView: UIView {
 
 	 - parameter aDecoder: coder
 	 */
-	required init?(coder aDecoder: NSCoder) {
+	required public init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder);
 		self.onViewInitialize();
 		self.onCreateView();
@@ -74,7 +74,7 @@ class ImageOrNameView: UIView {
 	/**
 	 Method which provide the actions when View is created
 	 */
-	func onCreateView() {
+	private func onCreateView() {
 		self.textBackground = ColorHelper.rgb(r: 0, g: 97, b: 152);
 	}
 
@@ -84,7 +84,7 @@ class ImageOrNameView: UIView {
 	 - parameter URL:      url
 	 - parameter userName: user name
 	 */
-	internal func set(imageURL URL: String?, userName: String?) {
+	public func set(imageURL URL: String?, userName: String?) {
 		self.hideAllControls();
         self.set(userName: userName);
 		self.set(imageURL: URL);
@@ -96,7 +96,7 @@ class ImageOrNameView: UIView {
 	 - parameter image:    image
 	 - parameter userName: user name
 	 */
-	internal func set(image: UIImage?, userName: String?) {
+	public func set(image: UIImage?, userName: String?) {
 		self.hideAllControls();
 		if (image == nil) {
             self.set(userName: userName);
@@ -109,7 +109,7 @@ class ImageOrNameView: UIView {
 	/**
 	 Method which provide to hiding of the all controls
 	 */
-	internal func hideAllControls() {
+	public func hideAllControls() {
 		self.setRoundVisibility(visible: false);
 		self.setImageVisibility(visible: false);
 	}

@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension BaseViewController {
+public extension BaseViewController {
 	// MARK: Notifications
 	/**
 	 Method which provide the registration for notification
@@ -16,7 +16,7 @@ extension BaseViewController {
 	 - parameter selector:         selector
 	 - parameter notificationType: notification type
 	 */
-	final func registerNotification(selector: Selector, notificationType: Notification.Name!) {
+	public final func registerNotification(selector: Selector, notificationType: Notification.Name!) {
 		NotificationsHelper.registerForNotification(owner: self, selector: selector, notificationType: notificationType);
 	}
 
@@ -25,14 +25,14 @@ extension BaseViewController {
 
 	 - parameter notificationType: notification type
 	 */
-	final func sendNotification(notification notificationType: Notification.Name!) {
+	public final func sendNotification(notification notificationType: Notification.Name!) {
 		NotificationsHelper.sendNotification(notification: notificationType);
 	}
 
 	/**
 	 Method which provide the removing from notification
 	 */
-	final func removeFromNotifications() {
+	public final func removeFromNotifications() {
 		NotificationsHelper.removeFromNotifications(owner: self);
 	}
 
@@ -40,14 +40,14 @@ extension BaseViewController {
 	 Method which provide the notification registration
 	 (should be overriden in child class)
 	 */
-	func registerForNotifications() {
+	public func registerForNotifications() {
 
 	}
 
 	/**
 	 Method which provide the registering for keyboard notification
 	 */
-	final func registerForKeyboardNotifications() {
+	public final func registerForKeyboardNotifications() {
 		self.registerNotification(selector: #selector(BaseViewController.willShowKeyboard(notification:)), notificationType: NSNotification.Name.UIKeyboardWillShow);
 		self.registerNotification(selector: #selector(BaseViewController.onHideKeyboard), notificationType: NSNotification.Name.UIKeyboardWillHide);
 	}
@@ -57,7 +57,7 @@ extension BaseViewController {
 
 	 - parameter notification: notification
 	 */
-	final func willShowKeyboard(notification: NSNotification) {
+	public final func willShowKeyboard(notification: NSNotification) {
         if let dict = notification.userInfo as NSDictionary? {
             if let nsValue = dict.object(forKey: UIKeyboardFrameBeginUserInfoKey) as? NSValue {
                 let keyboardSize: CGSize = nsValue.cgRectValue.size;
@@ -71,21 +71,21 @@ extension BaseViewController {
 
 	 - parameter size: keyboard size
 	 */
-	func onShowKeyboard(keyboardSize size: CGSize) {
+	open func onShowKeyboard(keyboardSize size: CGSize) {
 
 	}
 
 	/**
 	 Method which provide the hide keyboard
 	 */
-	func onHideKeyboard() {
+	open func onHideKeyboard() {
 
 	}
 
 	/**
 	 Method which provide to closing of the keyboard
 	 */
-	final func closeKeyboard() {
+	public final func closeKeyboard() {
 		self.view.endEditing(true);
 	}
 }

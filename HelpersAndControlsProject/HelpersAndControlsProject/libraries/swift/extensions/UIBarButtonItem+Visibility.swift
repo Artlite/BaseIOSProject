@@ -6,12 +6,12 @@
 //  Copyright © 2016 Magnet. All rights reserved.
 //
 
-extension UIBarButtonItem {
+public extension UIBarButtonItem {
     
     /**
      Method which provide the hiding of the view
      */
-    internal func hide(){
+    public func hide(){
         self.customView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 0, height: 0)));
     }
     

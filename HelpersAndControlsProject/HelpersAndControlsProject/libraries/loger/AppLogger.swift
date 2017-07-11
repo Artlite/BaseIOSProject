@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AppLogger: NSObject {
+public class AppLogger: NSObject {
 
 	private static let K_MARKER: String! = "=====>";
 	private static let K_ERROR_TAG: String! = "ERROR";
@@ -22,7 +22,7 @@ class AppLogger: NSObject {
 	 - parameter messageObject: message object
 	 - parameter additional:    additional description
 	 */
-	internal static func error(owner: NSObject?, messageObject: NSObject?, additional: String?) {
+	public static func error(owner: NSObject?, messageObject: NSObject?, additional: String?) {
 		showMessage(messageType: K_ERROR_TAG, owner: owner, messageObject: messageObject, additional: additional);
 	}
 
@@ -33,7 +33,7 @@ class AppLogger: NSObject {
 	 - parameter messageObject: message object
 	 - parameter additional:    additional description
 	 */
-	internal static func info(owner: NSObject?, messageObject: NSObject?, additional: String?) {
+	public static func info(owner: NSObject?, messageObject: NSObject?, additional: String?) {
 		showMessage(messageType: K_INFO_TAG, owner: owner, messageObject: messageObject, additional: additional);
 	}
 
@@ -67,7 +67,6 @@ class AppLogger: NSObject {
 		}
 
 		NSLog("%@", message);
-
 	}
 
 }

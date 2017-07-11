@@ -6,7 +6,7 @@
 //  Copyright © 2016 magnet. All rights reserved.
 //
 
-class SwiftDiscCacheHelper {
+public class SwiftDiscCacheHelper {
 
 	/**
 	 Method which provide the getting of the directory path
@@ -163,7 +163,7 @@ class SwiftDiscCacheHelper {
 	 - parameter fileType:   file type
 	 */
     @discardableResult
-	static func add<T: NSObject>(object: T?, prefix: String?, fileFormat: String, fileType: String) -> Bool {
+	public static func add<T: NSObject>(object: T?, prefix: String?, fileFormat: String, fileType: String) -> Bool {
 		var result: Bool = false;
 		if let strongObject = object {
 			if let strongPrefix = prefix {
@@ -189,7 +189,7 @@ class SwiftDiscCacheHelper {
 	 - parameter fileType:   file type
 	 */
     @discardableResult
-	static func add<T: NSObject>(objects: [T]?, prefixes: [String]?, fileFormat: String, fileType: String) -> Bool {
+	public static func add<T: NSObject>(objects: [T]?, prefixes: [String]?, fileFormat: String, fileType: String) -> Bool {
 		var result: Bool = false;
 		if let strongObjects = objects {
 			if let strongPrefixes = prefixes {
@@ -219,7 +219,7 @@ class SwiftDiscCacheHelper {
 	 - parameter fileType:   file type
 	 */
     @discardableResult
-	static func remove(object prefix: String?, fileFormat: String, fileType: String) -> Bool {
+	public static func remove(object prefix: String?, fileFormat: String, fileType: String) -> Bool {
 		var result: Bool = false;
 		if let strongPrefix = prefix {
 			let fileName: String = self.get(filePath: strongPrefix, fileFormat: fileFormat, fileType: fileType);
@@ -242,7 +242,7 @@ class SwiftDiscCacheHelper {
 	 - parameter fileType:   file type
 	 */
     @discardableResult
-	static func remove(objects prefixes: [String]?, fileFormat: String, fileType: String) -> Bool {
+	public static func remove(objects prefixes: [String]?, fileFormat: String, fileType: String) -> Bool {
 		var result: Bool = false;
 		if let strongPrefixes = prefixes {
 			for prefix in strongPrefixes {
@@ -263,8 +263,8 @@ class SwiftDiscCacheHelper {
 	 - returns: process result
 	 */
     @discardableResult
-	static func clear(objects fileType: String) -> Bool {
-		if let paths: [String] = self.get(filesByType: fileType) {
+	public static func clear(objects fileType: String) -> Bool {
+		if let paths = self.get(filesByType: fileType) as? [String] {
 			for path in paths {
 				self.remove(file: path);
 			}
@@ -284,7 +284,7 @@ class SwiftDiscCacheHelper {
 	 - parameter fileType:   file type
 	 */
     @discardableResult
-	static func get<T: NSObject>(object prefix: String?, fileFormat: String, fileType: String) -> T? {
+	public static func get<T: NSObject>(object prefix: String?, fileFormat: String, fileType: String) -> T? {
 		if let strongPrefix = prefix {
 			let fileName: String = self.get(filePath: strongPrefix, fileFormat: fileFormat, fileType: fileType);
 			if (self.exist(file: fileName) == true) {
@@ -304,10 +304,10 @@ class SwiftDiscCacheHelper {
 	 - returns: objects array
 	 */
     @discardableResult
-	static func get<T: NSObject>(objects fileType: String) -> [T] {
+	public static func get<T: NSObject>(objects fileType: String) -> [T] {
 		// Creat predefined array
 		var objects: [T] = [];
-		if let paths: [String] = self.get(filesByType: fileType) {
+		if let paths = self.get(filesByType: fileType) as? [String] {
 			for path in paths {
 				if let object = self.get(file: path) as? T {
 					objects.append(object);

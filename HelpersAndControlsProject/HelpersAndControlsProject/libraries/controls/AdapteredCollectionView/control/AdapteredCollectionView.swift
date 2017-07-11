@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AdapteredCollectionDelegate: class {
+public protocol AdapteredCollectionDelegate: class {
     /**
      Method which provide the action when cell send event to the collection view
      
@@ -30,7 +30,7 @@ protocol AdapteredCollectionDelegate: class {
     func onAlmostAtBottom(listSize size: Int);
 }
 
-protocol AdapteredCellDelegate: class {
+public protocol AdapteredCellDelegate: class {
     /**
      Method which provide the action when cell send event to the collection view
      
@@ -48,16 +48,16 @@ protocol AdapteredCellDelegate: class {
 }
 
 //@IBDesignable
-class AdapteredCollectionView: UIView,
+public class AdapteredCollectionView: UIView,
     UICollectionViewDataSource,
     UICollectionViewDelegate,
     UICollectionViewDelegateFlowLayout,
 AdapteredCellDelegate {
     
-    static let K_EVENT_RESULT_NOTIFICATION: Notification.Name! = Notification.Name(rawValue: "K_EVENT_RESULT_NOTIFICATION_ADAPTERED_COLLECTION_CELL");
-    static let K_EVENT_KEY: String! =  "K_EVENT_KEY";
-    static let K_EVENT_OBJECT: String! = "K_EVENT_OBJECT";
-    static let K_EVENT_INDEX_KEY: String! = "K_EVENT_INDEX_KEY";
+    public static let K_EVENT_RESULT_NOTIFICATION: Notification.Name! = Notification.Name(rawValue: "K_EVENT_RESULT_NOTIFICATION_ADAPTERED_COLLECTION_CELL");
+    public static let K_EVENT_KEY: String! =  "K_EVENT_KEY";
+    public static let K_EVENT_OBJECT: String! = "K_EVENT_OBJECT";
+    public static let K_EVENT_INDEX_KEY: String! = "K_EVENT_INDEX_KEY";
     
     private var lastRegIdentifier: String! = "";
     
@@ -135,7 +135,7 @@ AdapteredCellDelegate {
      
      - parameter aDecoder: coder
      */
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder);
         self.onViewInitialize();
         self.onCreateView();
@@ -155,7 +155,7 @@ AdapteredCellDelegate {
     /**
      Method which provide the actions when View is created
      */
-    func onCreateView() {
+    private func onCreateView() {
         self.registerCellsNib();
         self.collectionView.dataSource = self;
         self.collectionView.delegate = self;
@@ -165,7 +165,7 @@ AdapteredCellDelegate {
     /**
      Method which provide the addin gof the refresh control
      */
-    func onAddRefreshControl() {
+    private func onAddRefreshControl() {
         self.refreshControl = UIRefreshControl();
         self.refreshControl?.addTarget(self, action: #selector(AdapteredCollectionView.onRefresh), for: .valueChanged);
         self.collectionView.addSubview(self.refreshControl!);
@@ -175,21 +175,21 @@ AdapteredCellDelegate {
     /**
      Method which provide the setting up of the refresh control
      */
-    func onSetUpRefreshControl() {
+    private func onSetUpRefreshControl() {
         self.refreshControl?.tintColor = self.refreshColor;
     }
     
     /**
      Method which provide the executing of the refresh funcional
      */
-    func onRefresh() {
+    public func onRefresh() {
         self.adapteredDelegate?.onRefreshData();
     }
     
     /**
      Method which provide the hiding of the refresh control
      */
-    internal func hideRefreshControl() {
+    public func hideRefreshControl() {
         if (self.refreshControl != nil) {
             if (self.refreshControl?.isRefreshing == true) {
                 DispatchQueue.main.async(execute: {
@@ -202,7 +202,7 @@ AdapteredCellDelegate {
     /**
      Method which provide the hiding of the refresh control
      */
-    internal func showRefreshControl() {
+    public func showRefreshControl() {
         if (self.refreshControl != nil) {
             if (self.refreshControl?.isRefreshing == false) {
                 DispatchQueue.main.async(execute: {
@@ -218,7 +218,7 @@ AdapteredCellDelegate {
     ///
     /// - Parameter collectionView: {@link UICollectionView} instance
     /// - Returns: count value
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1;
     }
     
@@ -228,7 +228,7 @@ AdapteredCellDelegate {
     ///   - collectionView: {@link UICollectionView} instance
     ///   - section: {@link Int} value of the section index
     /// - Returns: count value
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.objects.count;
     }
     
@@ -238,7 +238,7 @@ AdapteredCellDelegate {
     ///   - collectionView: {@link UICollectionView} instance
     ///   - indexPath: {@link Int} value of the index
     /// - Returns: {@link UICollectionViewCell} instance
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell: BaseCollectionCell! = self.collectionView.dequeueReusableCell(withReuseIdentifier: self.lastRegIdentifier, for: indexPath as IndexPath) as! BaseCollectionCell;
         
         if self.objects.count == 0 {
@@ -281,7 +281,7 @@ AdapteredCellDelegate {
     ///   - collectionViewLayout: {@link UICollectionViewLayout} instance
     ///   - indexPath: {@link Int} value of the index
     /// - Returns: instance of the {@link CGSize}
-    func collectionView(_ sizeForItemAtcollectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    public func collectionView(_ sizeForItemAtcollectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width: CGFloat! = self.collectionView.bounds.width;
         let object: BaseCollectionObject! = self.objects[indexPath.row] as! BaseCollectionObject;
         let cell: BaseCollectionCell? = self.collectionView.dequeueReusableOffScreenCellWithReuseIdentifier(identifier: object.getReuseIdentifier()) as? BaseCollectionCell
@@ -316,7 +316,7 @@ AdapteredCellDelegate {
     /**
      Method which provide the registering nib inside the collection view
      */
-    func registerCellsNib() {
+    public func registerCellsNib() {
         for object in self.objects {
             self.lastRegIdentifier = (object as AnyObject).getReuseIdentifier();
             //			let nib = UINib.init(nibName: self.lastRegIdentifier, bundle: Bundle(forClass: AdapteredCollectionView.self));
@@ -333,7 +333,7 @@ AdapteredCellDelegate {
      - parameter event: event
      - parameter index: index
      */
-    func onEventReceived(eventType event: AdapteredCollectionView.AdapteredEvent!, index: Int!, additionalObject: NSObject?) {
+    public func onEventReceived(eventType event: AdapteredCollectionView.AdapteredEvent!, index: Int!, additionalObject: NSObject?) {
         let object: BaseCollectionObject? = self.objects[index] as? BaseCollectionObject;
         if (object != nil) {
             self.adapteredDelegate?.onEventReceived(eventType: event, object: object!, index: index, additionalObject: additionalObject);
@@ -345,7 +345,7 @@ AdapteredCellDelegate {
      
      - parameter index: index
      */
-    func update(cellByIndexPath index: NSIndexPath?) {
+    public func update(cellByIndexPath index: NSIndexPath?) {
         if (index != nil) {
             self.collectionView.reloadItems(at: [index! as IndexPath]);
         }
@@ -356,7 +356,7 @@ AdapteredCellDelegate {
      
      - parameter index: index
      */
-    func update(cellByIndex index: Int) {
+    public func update(cellByIndex index: Int) {
         let object: BaseCollectionObject? = self.objects.object(at: index) as? BaseCollectionObject;
         let indexPath: NSIndexPath? = object?.index;
         self.update(cellByIndexPath: indexPath);
@@ -379,9 +379,9 @@ AdapteredCellDelegate {
     
     // MARK: Event class
     
-    internal class AdapteredEvent: NSObject {
+    public class AdapteredEvent: NSObject {
         
-        private var eventCode: Int! = nil;
+        public var eventCode: Int! = nil;
         /**
          Constructor which provide the class creating with the event code
          
@@ -399,7 +399,7 @@ AdapteredCellDelegate {
          
          - returns: event code
          */
-        internal func getEventCode() -> Int! {
+        public func getEventCode() -> Int! {
             return self.eventCode;
         }
         
@@ -407,7 +407,7 @@ AdapteredCellDelegate {
         ///
         /// - Parameter object: {@link Any} object of the description
         /// - Returns: equaling result
-        override func isEqual(_ object: Any?) -> Bool {
+        override public func isEqual(_ object: Any?) -> Bool {
             let eventObject: AdapteredEvent? = object as? AdapteredEvent;
             if (eventObject != nil) {
                 if (eventObject?.getEventCode() == self.eventCode) {

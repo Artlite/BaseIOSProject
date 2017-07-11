@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimeZoneHelper: NSObject {
+public class TimeZoneHelper: NSObject {
 
 	/**
 	 Method which provide the getting of the timezone name
@@ -17,7 +17,7 @@ class TimeZoneHelper: NSObject {
 
 	 - returns: time zone name
 	 */
-	static func getTimezoneName() -> String {
+	public static func getTimezoneName() -> String {
 		return NSTimeZone.local.identifier;
 	}
 

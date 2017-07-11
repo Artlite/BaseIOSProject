@@ -10,7 +10,6 @@ import UIKit
 
 class AdapteredTableController: UIViewController, AdapteredTableDelegate {
 
-
 	@IBOutlet weak var adapteredTable: AdapteredTableView!
 
 	override func viewDidLoad() {
@@ -52,5 +51,9 @@ class AdapteredTableController: UIViewController, AdapteredTableDelegate {
     func onRefreshData() {
         self.onInitTabledata();
         self.adapteredTable.hideRefreshControl();
+    }
+    
+    func onPostProcessing(objects: [BaseTableObject]) -> [BaseTableObject] {
+        return objects;
     }
 }

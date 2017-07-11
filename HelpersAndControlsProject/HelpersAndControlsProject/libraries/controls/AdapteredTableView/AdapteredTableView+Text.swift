@@ -8,13 +8,13 @@
 
 import UIKit
 
-extension AdapteredTableView {
+public extension AdapteredTableView {
 	/**
 	 Method which provide the setting of the background text
 
 	 - parameter text: text
 	 */
-	func setBackgroundText(text: String?) {
+	public func setBackgroundText(text: String?) {
 		DispatchQueue.main.async(execute: {
 			self.labelBackgroundText.text = text;
 		});
@@ -23,7 +23,7 @@ extension AdapteredTableView {
 	/**
 	 Method which provide the crearing of the background text
 	 */
-	func clearBackgroundText() {
+	public func clearBackgroundText() {
 		self.setBackgroundText(text: "");
 	}
 }

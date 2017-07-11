@@ -9,13 +9,13 @@
 import UIKit
 
 //MARK: View
-class BaseCollectionCell: UICollectionViewCell {
+open class BaseCollectionCell: UICollectionViewCell {
 
-	var index: Int! = -1;
-	var indexPath: NSIndexPath?;
-	weak var delegate: AdapteredCellDelegate?;
-	weak var object: BaseCollectionObject?;
-	var tap: UITapGestureRecognizer?;
+	public var index: Int! = -1;
+	public var indexPath: NSIndexPath?;
+	public weak var delegate: AdapteredCellDelegate?;
+	public weak var object: BaseCollectionObject?;
+	public var tap: UITapGestureRecognizer?;
 
 	deinit {
 		NSLog("Cell(deinit): %@", NSStringFromClass(self.classForCoder));
@@ -27,7 +27,7 @@ class BaseCollectionCell: UICollectionViewCell {
 
 	 - parameter object: object for setting up
 	 */
-	internal func setInterface(fromObject object: BaseCollectionObject!) {
+	open func setInterface(fromObject object: BaseCollectionObject!) {
 		// fatalError(String(format:"internal func setInterface(fromObject object:BaseCollectionObject!) -> Should be overriden in %@", NSStringFromClass(self.classForCoder)));
 	}
 
@@ -36,7 +36,7 @@ class BaseCollectionCell: UICollectionViewCell {
 
 	 - parameter object: object
 	 */
-	internal func setInterface(firstTime object: BaseCollectionObject!) {
+	open func setInterface(firstTime object: BaseCollectionObject!) {
 		self.setInterface(fromObject: object);
 	}
 
@@ -44,7 +44,7 @@ class BaseCollectionCell: UICollectionViewCell {
 	 Method which provide the give of the additional functional for the cell resizing
 	 (WARNING: SHOULD BE OVERRIDEN IN CHILD CLASSES)
 	 */
-	override func layoutSubviews() {
+	override open func layoutSubviews() {
 		super.layoutSubviews();
 		// IF LABELS HAVE ADDITIONAL PADDING FROM RIGHT AND LEFT, IN THIS CASE preferredMaxLayoutWidth SHOULD BE DEFINED, IN
 		// OTHER CASE UI WON'T BE DISPLAYING AS WELL
@@ -59,7 +59,7 @@ class BaseCollectionCell: UICollectionViewCell {
 	/**
 	 Method which provide the action when cell is created
 	 */
-	func onCreateCell() {
+	open func onCreateCell() {
 
 	}
 
@@ -68,7 +68,7 @@ class BaseCollectionCell: UICollectionViewCell {
 
 	 - parameter event: event object
 	 */
-	final func sendEvent(event: AdapteredCollectionView.AdapteredEvent!) {
+	public final func sendEvent(event: AdapteredCollectionView.AdapteredEvent!) {
 		self.sendEvent(event: event, additionalObject: nil);
 	}
 
@@ -78,21 +78,21 @@ class BaseCollectionCell: UICollectionViewCell {
 	 - parameter event:            event
 	 - parameter additionalObject: additional object
 	 */
-	final func sendEvent(event: AdapteredCollectionView.AdapteredEvent!, additionalObject: NSObject?) {
+	public final func sendEvent(event: AdapteredCollectionView.AdapteredEvent!, additionalObject: NSObject?) {
 		self.delegate?.onEventReceived(eventType: event, index: self.index, additionalObject: additionalObject);
 	}
 
 	/**
 	 Method which provide the updating of the current cell
 	 */
-	final func update() {
+	public final func update() {
 		self.delegate?.update(cellByIndexPath: self.indexPath);
 	}
 
 	/**
 	 Method which provide the functional when cell awake from nib (same as onResume in Android)
 	 */
-	override func awakeFromNib() {
+	override open func awakeFromNib() {
 		super.awakeFromNib();
 		self.subscribeForNotification();
 		self.onAddDefaultClick();
@@ -121,7 +121,7 @@ class BaseCollectionCell: UICollectionViewCell {
 	 Method which provide the default clicking
 	 WARNIG: This method can be overriding
 	 */
-	func onDefaultClick() {
+	public func onDefaultClick() {
 		let defaultEvent: AdapteredCollectionView.AdapteredEvent = AdapteredCollectionView.AdapteredEvent(eventCode: -1);
 		self.sendEvent(event: defaultEvent);
 	}
@@ -131,7 +131,7 @@ class BaseCollectionCell: UICollectionViewCell {
 
 	 - parameter notification: notifications
 	 */
-	final func onRecieveNotification(notification: NSNotification?) {
+	public final func onRecieveNotification(notification: NSNotification?) {
 		if (notification == nil) {
 			return;
 		}
@@ -151,7 +151,7 @@ class BaseCollectionCell: UICollectionViewCell {
 	 - parameter event:  event
 	 - parameter object: object
 	 */
-	func onResultEvent(event: AdapteredCollectionView.AdapteredEvent?, object: NSObject?) {
+	open func onResultEvent(event: AdapteredCollectionView.AdapteredEvent?, object: NSObject?) {
 
 	}
 }

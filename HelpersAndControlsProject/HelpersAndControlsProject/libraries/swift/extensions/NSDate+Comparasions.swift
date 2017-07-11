@@ -6,8 +6,8 @@
 //  Copyright © 2016 Magnet. All rights reserved.
 //
 
-extension NSDate {
-    func isGreaterThanDate(dateToCompare: NSDate) -> Bool {
+public extension NSDate {
+    public func isGreaterThanDate(dateToCompare: NSDate) -> Bool {
         //Declare Variables
         var isGreater = false
         
@@ -20,7 +20,7 @@ extension NSDate {
         return isGreater
     }
     
-    func isLessThanDate(dateToCompare: NSDate) -> Bool {
+    public func isLessThanDate(dateToCompare: NSDate) -> Bool {
         //Declare Variables
         var isLess = false
         
@@ -33,7 +33,7 @@ extension NSDate {
         return isLess
     }
     
-    func equalToDate(dateToCompare: NSDate) -> Bool {
+    public func equalToDate(dateToCompare: NSDate) -> Bool {
         //Declare Variables
         var isEqualTo = false
         
@@ -46,7 +46,7 @@ extension NSDate {
         return isEqualTo
     }
     
-    func addDays(daysToAdd: Int) -> NSDate {
+    public func addDays(daysToAdd: Int) -> NSDate {
         let secondsInDays: TimeInterval = Double(daysToAdd) * 60 * 60 * 24
         let dateWithDaysAdded: NSDate = self.addingTimeInterval(secondsInDays)
         
@@ -54,7 +54,7 @@ extension NSDate {
         return dateWithDaysAdded
     }
     
-    func addHours(hoursToAdd: Int) -> NSDate {
+    public func addHours(hoursToAdd: Int) -> NSDate {
         let secondsInHours: TimeInterval = Double(hoursToAdd) * 60 * 60
         let dateWithHoursAdded: NSDate = self.addingTimeInterval(secondsInHours)
         

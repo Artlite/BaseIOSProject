@@ -8,25 +8,25 @@
 
 import UIKit
 
-enum SearchEvent {
+public enum SearchEvent {
 	case SEARCH, CANCEL;
 }
 
-class BaseViewController: UIViewController, UISearchBarDelegate {
+public class BaseViewController: UIViewController, UISearchBarDelegate {
 
-	var closeTap: UITapGestureRecognizer?;
-	var isNeedUpdate: Bool = false;
+	private(set) var closeTap: UITapGestureRecognizer?;
+	private(set) var isNeedUpdate: Bool = false;
 
 	// MARK: Transferted functional
 	// Object to transfert
 	private var toTransfert: AnyObject?;
 	// Transferted object
-	var transfertedObject: AnyObject?;
+	private(set) var transfertedObject: AnyObject?;
 
 	/**
 	 Method which provide the on create functional
 	 */
-	override func viewDidLoad() {
+	override public func viewDidLoad() {
 		super.viewDidLoad()
 		self.onCreateController();
 		self.removeFromNotifications();
@@ -35,7 +35,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 		self.onInitialUpdate();
 	}
 
-	override func viewWillAppear(_ animated: Bool) {
+	override public func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated);
 		if (self.isNeedUpdate == true) {
 			self.isNeedUpdate = false;
@@ -43,7 +43,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 		}
 	}
 
-	override func viewDidAppear(_ animated: Bool) {
+	override public func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated);
 		if (self.needRemoveNotifications() == true) {
 			self.removeFromNotifications();
@@ -52,7 +52,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 		}
 	}
 
-	override func viewDidDisappear(_ animated: Bool) {
+	override public func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated);
 		if (self.needRemoveNotifications() == true) {
 			self.removeFromNotifications();
@@ -69,7 +69,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	/**
 	 Method which provide the functional when did receive memory warning
 	 */
-	override func didReceiveMemoryWarning() {
+	override public func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 	}
 
@@ -78,7 +78,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 
 	 - returns: nothing to return
 	 */
-	func onCreateController() {
+	open func onCreateController() {
 	}
 
 	/**
@@ -86,7 +86,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 
 	 - returns: need value
 	 */
-	func needRemoveNotifications() -> Bool {
+	public func needRemoveNotifications() -> Bool {
 		return true;
 	}
 
@@ -97,7 +97,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 
 	 - returns: nothing to return
 	 */
-	final func navigate(sequeID: String!) {
+	public final func navigate(sequeID: String!) {
 		self.navigate(sequeID: sequeID, transfertedObject: nil);
 	}
 
@@ -109,7 +109,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	 - parameter sequeID:           sequeID: segue ID
 	 - parameter transfertedObject: transferted object
 	 */
-	final func navigate(sequeID: String!, transfertedObject: AnyObject?) {
+	public final func navigate(sequeID: String!, transfertedObject: AnyObject?) {
 		self.toTransfert = transfertedObject;
 		DispatchQueue.main.async(execute: {
 			AppLogger.info(owner: self, messageObject: sequeID as NSObject?, additional: "func navigate(sequeID: String!)");
@@ -124,7 +124,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 
 	 - returns: nothing to return
 	 */
-	final func navigate(push sequeID: String!) {
+	public final func navigate(push sequeID: String!) {
 		DispatchQueue.main.async(execute: {
 			AppLogger.info(owner: self, messageObject: sequeID as NSObject?, additional: "func navigate(sequeID: String!)");
 			self.navigationController?.performSegue(withIdentifier: sequeID, sender: self);
@@ -138,7 +138,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 
 	 - returns: nothing to return
 	 */
-	final func navigateWithClosing(sequeID: String!) {
+	public final func navigateWithClosing(sequeID: String!) {
 		self.dismiss(animated: false) {
 			DispatchQueue.main.async(execute: {
 				AppLogger.info(owner: self, messageObject: sequeID as NSObject?, additional: "func navigate(sequeID: String!)");
@@ -154,7 +154,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	 - parameter segue:  segue
 	 - parameter sender: sender
 	 */
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationNavigationController: UINavigationController? = segue.destination as? UINavigationController;
         if (destinationNavigationController != nil) {
             let targetController: BaseViewController? = destinationNavigationController?.topViewController as? BaseViewController;
@@ -171,7 +171,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	/**
 	 Method which provide the close of the controller
 	 */
-	final func closeController() {
+	public final func closeController() {
 		if ((self.navigationController) != nil) {
 			self.navigationController?.popViewController(animated: true);
 		}
@@ -181,7 +181,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	/**
 	 Method which provide the back pressed navigation
 	 */
-	final func onBackPressed() {
+	public final func onBackPressed() {
 		if ((self.navigationController) != nil) {
 			self.navigationController?.popViewController(animated: true);
 		}
@@ -190,7 +190,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	/**
 	 Method which provide the closing of the pop controller
 	 */
-	final func closePopController() {
+	public final func closePopController() {
 		self.dismiss(animated: true, completion: nil);
 	}
 
@@ -202,7 +202,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 
 	 - parameter object: object fro post processing
 	 */
-	final func onBackPressedWithProcessing(object: AnyObject?, event: ControllerResultEvent) {
+	public final func onBackPressedWithProcessing(object: AnyObject?, event: ControllerResultEvent) {
 		let controllers: [UIViewController]? = self.navigationController?.viewControllers;
 		if (controllers != nil) {
 			let size: Int = controllers!.count;
@@ -221,7 +221,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 
 	 - author: Dmitriy Lernatovich
 	 */
-	final func onBackPressedFromPrevious() {
+	public final func onBackPressedFromPrevious() {
 		var controllerToClose: BaseViewController? = nil;
 		let controllers: [UIViewController]? = self.navigationController?.viewControllers;
 		if (controllers != nil) {
@@ -245,7 +245,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 
 	 - parameter object: object for result
 	 */
-	func onControllerResult(object: AnyObject?, event: ControllerResultEvent) {
+	open func onControllerResult(object: AnyObject?, event: ControllerResultEvent) {
 
 	}
 
@@ -253,7 +253,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	/**
 	 Method which provide the keyboard hiding
 	 */
-	final func hideKeyboard() {
+	public final func hideKeyboard() {
 		self.view.endEditing(true);
 	}
 
@@ -264,7 +264,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	 - parameter event: event type
 	 - parameter text:  text to search
 	 */
-	func onSearchEvent(event event: SearchEvent, text: String?) {
+	open func onSearchEvent(event: SearchEvent, text: String?) {
 
 	}
 
@@ -272,7 +272,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	/**
 	 Method which provide the setting of the need update
 	 */
-	final func setNeedUpdate() {
+	public final func setNeedUpdate() {
 		self.isNeedUpdate = true;
 		if ((self.isVisibleController() == true)
 			&& (self.needImidiatellyUpdate() == true)) {
@@ -283,7 +283,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	/**
 	 Method which provide the initial updating
 	 */
-	func onInitialUpdate() {
+	public func onInitialUpdate() {
 
 	}
 
@@ -292,7 +292,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 
 	 - returns: controller visibility
 	 */
-	final func isVisibleController() -> Bool {
+	public final func isVisibleController() -> Bool {
 		if ((self.isViewLoaded == true) && (self.view.window != nil)) {
 			return true;
 		}
@@ -304,14 +304,14 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 
 	 - returns: required value
 	 */
-	func needImidiatellyUpdate() -> Bool {
+	public func needImidiatellyUpdate() -> Bool {
 		return false;
 	}
 
 	/**
 	 Method which provide to add of the taping to hide keyboard
 	 */
-	func addTapHideKeyboard() {
+	private func addTapHideKeyboard() {
 		GetsureHelper.addClick(target: self, view: self.view, selector: #selector(BaseViewController.hideKeyboard));
 		GetsureHelper.addSwipe(target: self, view: self.view, direction: UISwipeGestureRecognizerDirection.down, selector: #selector(BaseViewController.hideKeyboard));
 	}
@@ -319,8 +319,8 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 	// MARK: Classes
 
 	/// Class for oncontroller result event
-	class ControllerResultEvent: NSObject {
-		private var code: Int = -1;
+	public class ControllerResultEvent: NSObject {
+		private(set) var code: Int = -1;
 		/**
 		 Contructor
 
@@ -343,7 +343,7 @@ class BaseViewController: UIViewController, UISearchBarDelegate {
 
 		 - returns: compaing value
 		 */
-        override func isEqual(_ object: Any?) -> Bool {
+        override public func isEqual(_ object: Any?) -> Bool {
             if let compare = object as? ControllerResultEvent {
                 if (self.code == compare.code) {
                     return true;

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImageOrNameView" customModule="MIO_Family" customModuleProvider="target">
+            <connections>
+                <outlet property="imageAvatar" destination="2RM-Gi-R6V" id="Bxx-Z7-CUl"/>
+                <outlet property="labelText" destination="pwf-k1-kVd" id="cTE-mQ-8Aj"/>
+                <outlet property="viewRound" destination="uOM-h5-IeA" id="k3n-Db-ilR"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOM-h5-IeA" customClass="RoundView" customModule="MIO_Family" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pwf-k1-kVd">
+                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="pwf-k1-kVd" firstAttribute="top" secondItem="uOM-h5-IeA" secondAttribute="top" id="B1z-Sr-5e1"/>
+                        <constraint firstItem="pwf-k1-kVd" firstAttribute="leading" secondItem="uOM-h5-IeA" secondAttribute="leading" id="J6G-GV-Trj"/>
+                        <constraint firstAttribute="bottom" secondItem="pwf-k1-kVd" secondAttribute="bottom" id="c6o-o5-p2z"/>
+                        <constraint firstAttribute="trailing" secondItem="pwf-k1-kVd" secondAttribute="trailing" id="jhv-y9-1VU"/>
+                    </constraints>
+                </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2RM-Gi-R6V" customClass="RoundImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="2RM-Gi-R6V" secondAttribute="bottom" id="Dkr-rI-Pmb"/>
+                <constraint firstItem="2RM-Gi-R6V" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="GGr-gF-0hO"/>
+                <constraint firstItem="uOM-h5-IeA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="GbJ-Y7-q3x"/>
+                <constraint firstAttribute="trailing" secondItem="2RM-Gi-R6V" secondAttribute="trailing" id="Jae-u9-pG1"/>
+                <constraint firstAttribute="trailing" secondItem="uOM-h5-IeA" secondAttribute="trailing" id="eoy-lw-tOi"/>
+                <constraint firstAttribute="bottom" secondItem="uOM-h5-IeA" secondAttribute="bottom" id="gnm-Oa-ZD5"/>
+                <constraint firstItem="uOM-h5-IeA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="jwj-hW-XzL"/>
+                <constraint firstItem="2RM-Gi-R6V" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="y2z-C4-k94"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+</document>

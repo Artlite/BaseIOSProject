@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseTableObject: NSObject {
+public class BaseTableObject: NSObject {
 
 	/**
 	 Object priority enumerator
@@ -19,19 +19,19 @@ class BaseTableObject: NSObject {
 	 - MID:  mid priority
 	 - HIGH: high priority
 	 */
-	enum ObjectPriority: Int {
+	public enum ObjectPriority: Int {
 		case LOW = 0, MID = 1, HIGH = 2;
 	}
 
 	// Object priority
-	var priority: ObjectPriority = .MID;
+	public var priority: ObjectPriority = .MID;
 
 	// Object additional fields
-	internal var heigh: CGFloat = -1;
-	internal var index: NSIndexPath?;
-	internal weak var cell: BaseTableViewCell?;
-	var isFirstInit: Bool = false;
-	var isSelected: Bool = false;
+	public var heigh: CGFloat = -1;
+	public var index: NSIndexPath?;
+	public weak var cell: BaseTableViewCell?;
+	public var isFirstInit: Bool = false;
+	public var isSelected: Bool = false;
 
 	// Extras field
 	private var extras: [String: AnyObject] = [:];
@@ -51,9 +51,8 @@ class BaseTableObject: NSObject {
 
 	 - returns: cell class (Should be child from BaseCollectionCell)
 	 */
-	internal func getCellClass() -> AnyClass! {
+	open func getCellClass() -> AnyClass! {
 		fatalError(String(format: "internal func getCellClass() -> Should be overriden in %@", NSStringFromClass(self.classForCoder)));
-		return nil;
 	}
 
 	/**
@@ -61,7 +60,7 @@ class BaseTableObject: NSObject {
 
 	 - returns: header text
 	 */
-	internal func getHeaderText() -> String? {
+	open func getHeaderText() -> String? {
 		return "";
 	}
 
@@ -70,7 +69,7 @@ class BaseTableObject: NSObject {
 
 	 - returns: header heigh
 	 */
-	internal func getHeaderHeigh() -> CGFloat {
+	open func getHeaderHeigh() -> CGFloat {
 		return -1;
 	}
 
@@ -79,7 +78,7 @@ class BaseTableObject: NSObject {
 
 	 - returns: current header view
 	 */
-	internal func getHeaderView(heigh: CGFloat) -> UIView? {
+	open func getHeaderView(heigh: CGFloat) -> UIView? {
 		return nil;
 	}
 
@@ -90,8 +89,7 @@ class BaseTableObject: NSObject {
 
 	 - returns: generated view
 	 */
-	final func generate(emptyView heigh: CGFloat) -> UIView {
-//		let view: UIView = UIView(frame: CGRectMake(0, 0, 6000, heigh));
+	public final func generate(emptyView heigh: CGFloat) -> UIView {
         let view: UIView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 6000, height: heigh)));
 		view.backgroundColor = UIColor.clear;
 		return view;
@@ -101,7 +99,7 @@ class BaseTableObject: NSObject {
 	/**
 	 Method which provide to getting of the reuse identifier
 	 */
-	internal final func getReuseIdentifier() -> String! {
+	public final func getReuseIdentifier() -> String! {
 		let cellClass: AnyClass! = self.getCellClass();
 		let identifier: String! = NSStringFromClass(cellClass).components(separatedBy: ".").last;
 		return identifier;
@@ -120,7 +118,7 @@ class BaseTableObject: NSObject {
 
 	 - returns: is added
 	 */
-	final func addExtra(key: String?, value: AnyObject?) -> Bool {
+	public final func addExtra(key: String?, value: AnyObject?) -> Bool {
 		if ((key != nil) && (value != nil)) {
 			self.extras[key!] = value!;
 			return true;
@@ -137,7 +135,7 @@ class BaseTableObject: NSObject {
 
 	 - returns: object for key
 	 */
-	final func getExtra(key: String?) -> AnyObject? {
+	public final func getExtra(key: String?) -> AnyObject? {
 		if (key != nil) {
 			return self.extras[key!];
 		}

@@ -63,12 +63,6 @@
 		0192A7FD1F0FEAB100994CD7 /* SmileDotView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0192A7301F0FEAB100994CD7 /* SmileDotView.xib */; };
 		0192A7FE1F0FEAB100994CD7 /* SmileRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192A7321F0FEAB100994CD7 /* SmileRatingView.m */; };
 		0192A7FF1F0FEAB100994CD7 /* SmileRatingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0192A7331F0FEAB100994CD7 /* SmileRatingView.xib */; };
-		0192A8001F0FEAB100994CD7 /* BaseChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192A7361F0FEAB100994CD7 /* BaseChatViewController.m */; };
-		0192A8011F0FEAB100994CD7 /* BaseJSQController+Avatars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0192A7371F0FEAB100994CD7 /* BaseJSQController+Avatars.swift */; };
-		0192A8021F0FEAB100994CD7 /* BaseJSQController+Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0192A7381F0FEAB100994CD7 /* BaseJSQController+Messages.swift */; };
-		0192A8031F0FEAB100994CD7 /* BaseJSQController+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0192A7391F0FEAB100994CD7 /* BaseJSQController+Optional.swift */; };
-		0192A8041F0FEAB100994CD7 /* BaseJSQController+Required.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0192A73A1F0FEAB100994CD7 /* BaseJSQController+Required.swift */; };
-		0192A8051F0FEAB100994CD7 /* BaseJSQController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0192A73B1F0FEAB100994CD7 /* BaseJSQController.swift */; };
 		0192A8061F0FEAB100994CD7 /* BaseTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192A73F1F0FEAB100994CD7 /* BaseTextField.m */; };
 		0192A8071F0FEAB100994CD7 /* BaseTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192A7411F0FEAB100994CD7 /* BaseTextView.m */; };
 		0192A8081F0FEAB100994CD7 /* CLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192A7431F0FEAB100994CD7 /* CLabel.m */; };
@@ -226,13 +220,6 @@
 		0192A7311F0FEAB100994CD7 /* SmileRatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmileRatingView.h; sourceTree = "<group>"; };
 		0192A7321F0FEAB100994CD7 /* SmileRatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmileRatingView.m; sourceTree = "<group>"; };
 		0192A7331F0FEAB100994CD7 /* SmileRatingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmileRatingView.xib; sourceTree = "<group>"; };
-		0192A7351F0FEAB100994CD7 /* BaseChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseChatViewController.h; sourceTree = "<group>"; };
-		0192A7361F0FEAB100994CD7 /* BaseChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseChatViewController.m; sourceTree = "<group>"; };
-		0192A7371F0FEAB100994CD7 /* BaseJSQController+Avatars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BaseJSQController+Avatars.swift"; sourceTree = "<group>"; };
-		0192A7381F0FEAB100994CD7 /* BaseJSQController+Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BaseJSQController+Messages.swift"; sourceTree = "<group>"; };
-		0192A7391F0FEAB100994CD7 /* BaseJSQController+Optional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BaseJSQController+Optional.swift"; sourceTree = "<group>"; };
-		0192A73A1F0FEAB100994CD7 /* BaseJSQController+Required.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BaseJSQController+Required.swift"; sourceTree = "<group>"; };
-		0192A73B1F0FEAB100994CD7 /* BaseJSQController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseJSQController.swift; sourceTree = "<group>"; };
 		0192A73E1F0FEAB100994CD7 /* BaseTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTextField.h; sourceTree = "<group>"; };
 		0192A73F1F0FEAB100994CD7 /* BaseTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTextField.m; sourceTree = "<group>"; };
 		0192A7401F0FEAB100994CD7 /* BaseTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTextView.h; sourceTree = "<group>"; };
@@ -413,7 +400,6 @@
 				0192A7201F0FEAB100994CD7 /* ImageOrName */,
 				0192A7241F0FEAB100994CD7 /* Pickers */,
 				0192A7271F0FEAB100994CD7 /* SmileView */,
-				0192A7341F0FEAB100994CD7 /* SQMessageController */,
 				0192A73C1F0FEAB100994CD7 /* TextControls */,
 				0192A7471F0FEAB100994CD7 /* TextFieldValidator */,
 				0192A74D1F0FEAB100994CD7 /* Unsorted */,
@@ -593,20 +579,6 @@
 				0192A7331F0FEAB100994CD7 /* SmileRatingView.xib */,
 			);
 			path = SmileView;
-			sourceTree = "<group>";
-		};
-		0192A7341F0FEAB100994CD7 /* SQMessageController */ = {
-			isa = PBXGroup;
-			children = (
-				0192A7351F0FEAB100994CD7 /* BaseChatViewController.h */,
-				0192A7361F0FEAB100994CD7 /* BaseChatViewController.m */,
-				0192A7371F0FEAB100994CD7 /* BaseJSQController+Avatars.swift */,
-				0192A7381F0FEAB100994CD7 /* BaseJSQController+Messages.swift */,
-				0192A7391F0FEAB100994CD7 /* BaseJSQController+Optional.swift */,
-				0192A73A1F0FEAB100994CD7 /* BaseJSQController+Required.swift */,
-				0192A73B1F0FEAB100994CD7 /* BaseJSQController.swift */,
-			);
-			path = SQMessageController;
 			sourceTree = "<group>";
 		};
 		0192A73C1F0FEAB100994CD7 /* TextControls */ = {
@@ -1078,7 +1050,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0192A8021F0FEAB100994CD7 /* BaseJSQController+Messages.swift in Sources */,
 				0192A7F21F0FEAB100994CD7 /* ImageOrNameView.swift in Sources */,
 				0192A7DA1F0FEAB100994CD7 /* AdapteredTableView+Text.swift in Sources */,
 				0192A82E1F0FEAB100994CD7 /* SDWebImagePrefetcher.m in Sources */,
@@ -1104,11 +1075,9 @@
 				0192A7FE1F0FEAB100994CD7 /* SmileRatingView.m in Sources */,
 				0192A7E41F0FEAB100994CD7 /* BaseViewController+Search.swift in Sources */,
 				0192A8411F0FEAB100994CD7 /* String+Additional.swift in Sources */,
-				0192A8051F0FEAB100994CD7 /* BaseJSQController.swift in Sources */,
 				0192A7E51F0FEAB100994CD7 /* BaseViewController.swift in Sources */,
 				0192A8401F0FEAB100994CD7 /* NSDate+Comparasions.swift in Sources */,
 				0192A8121F0FEAB100994CD7 /* WebViewIgnoreSSL.m in Sources */,
-				0192A8031F0FEAB100994CD7 /* BaseJSQController+Optional.swift in Sources */,
 				0192A7E61F0FEAB100994CD7 /* CheckBoxView.m in Sources */,
 				0192A81C1F0FEAB100994CD7 /* UserDefaultsHelper.m in Sources */,
 				0192A7D01F0FEAB100994CD7 /* AdapteredCollectionView.swift in Sources */,
@@ -1128,7 +1097,6 @@
 				0192A8261F0FEAB100994CD7 /* README.md in Sources */,
 				0192A7EC1F0FEAB100994CD7 /* ImageViewInsets.m in Sources */,
 				0192A8211F0FEAB100994CD7 /* DTTimePeriodChain.m in Sources */,
-				0192A8001F0FEAB100994CD7 /* BaseChatViewController.m in Sources */,
 				0192A8071F0FEAB100994CD7 /* BaseTextView.m in Sources */,
 				0192A8381F0FEAB100994CD7 /* SVProgressHUD.m in Sources */,
 				0192A80F1F0FEAB100994CD7 /* CorneredView.m in Sources */,
@@ -1141,7 +1109,6 @@
 				01DE26001CF46B0D0066C317 /* ViewController.swift in Sources */,
 				01DE26351CF478F80066C317 /* DefaultCell.swift in Sources */,
 				0192A7DB1F0FEAB100994CD7 /* AdapteredTableView.swift in Sources */,
-				0192A8041F0FEAB100994CD7 /* BaseJSQController+Required.swift in Sources */,
 				0192A7F11F0FEAB100994CD7 /* WebImageView.m in Sources */,
 				0192A7D31F0FEAB100994CD7 /* BaseCollectionCell.swift in Sources */,
 				0192A7D81F0FEAB100994CD7 /* AdapteredTableView+Navigations.swift in Sources */,
@@ -1194,7 +1161,6 @@
 				0192A7EA1F0FEAB100994CD7 /* DatePickerDialog.swift in Sources */,
 				0157D13C1CFDDE6F00C4E6EB /* AdapteredTableController.swift in Sources */,
 				0192A8091F0FEAB100994CD7 /* CTextField.m in Sources */,
-				0192A8011F0FEAB100994CD7 /* BaseJSQController+Avatars.swift in Sources */,
 				0192A8331F0FEAB100994CD7 /* UIImageView+WebCache.m in Sources */,
 				0192A7CE1F0FEAB100994CD7 /* AdapteredCollectionView+Navigations.swift in Sources */,
 				0192A8441F0FEAB100994CD7 /* UIDatePicker+Customize.swift in Sources */,

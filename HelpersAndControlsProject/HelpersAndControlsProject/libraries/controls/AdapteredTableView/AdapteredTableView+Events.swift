@@ -8,11 +8,11 @@
 
 import UIKit
 
-extension AdapteredTableView {
+public extension AdapteredTableView {
 
 	// MARK: Event class
-	internal class Event: NSObject {
-		private var eventCode: Int! = nil;
+	public class Event: NSObject {
+		public var eventCode: Int! = nil;
 		/**
 		 Constructor which provide the class creating with the event code
 
@@ -30,11 +30,15 @@ extension AdapteredTableView {
 
 		 - returns: event code
 		 */
-		internal func getEventCode() -> Int! {
+		public func getEventCode() -> Int! {
 			return self.eventCode;
 		}
         
-        override func isEqual(_ object: Any?) -> Bool {
+        /// Method which provide the equaling of the object
+        ///
+        /// - Parameter object: {@link Any} object
+        /// - Returns: equaling result
+        override public func isEqual(_ object: Any?) -> Bool {
             let eventObject: Event? = object as? Event;
             if (eventObject != nil) {
                 if (eventObject?.getEventCode() == self.eventCode) {
@@ -51,7 +55,7 @@ extension AdapteredTableView {
 	 - parameter event:  event object
 	 - parameter object: result object
 	 */
-	internal final func sendEventResults(event: Event?, object: NSObject?, intdex: Int) {
+	public final func sendEventResults(event: Event?, object: NSObject?, intdex: Int) {
 		var dict: Dictionary<String, AnyObject> = [:];
 
 		dict[AdapteredTableView.K_EVENT_INDEX_KEY] = intdex as AnyObject;
