@@ -153,8 +153,8 @@
  *
  *  Method which provide the NSString triming
  *
- *  @param originalText {@link NSString} value of the original text
- *  @param index {@link Integer} value of the index to trim
+ *  @param originalText
+ *  @param index
  *
  *  @return trimed string
  */

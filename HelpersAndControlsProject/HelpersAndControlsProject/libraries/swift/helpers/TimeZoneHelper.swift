@@ -17,7 +17,7 @@ public class TimeZoneHelper: NSObject {
 
 	 - returns: time zone name
 	 */
-	static func getTimezoneName() -> String {
+	public static func getTimezoneName() -> String {
 		return NSTimeZone.local.identifier;
 	}
 

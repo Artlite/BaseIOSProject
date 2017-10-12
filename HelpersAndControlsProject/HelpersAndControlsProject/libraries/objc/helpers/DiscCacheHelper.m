@@ -34,7 +34,7 @@ static NSString *const K_CACHE_EXTENSION = @".CACHE";
  *
  *  Method which provide to checking if channel is already cached
  *
- *  @param name channel name
+ *  @param channelName channel name
  *
  *  @return checking result
  */

@@ -8,14 +8,14 @@
 
 import UIKit
 
-class EmptyTableCell: UITableViewCell {
+public class EmptyTableCell: UITableViewCell {
 
-	override func awakeFromNib() {
+	override public func awakeFromNib() {
 		super.awakeFromNib()
 		self.selectionStyle = .none;
 	}
 
-	override func setSelected(_ selected: Bool, animated: Bool) {
+	override public func setSelected(_ selected: Bool, animated: Bool) {
 		self.selectionStyle = .none;
 		super.setSelected(selected, animated: animated)
 	}

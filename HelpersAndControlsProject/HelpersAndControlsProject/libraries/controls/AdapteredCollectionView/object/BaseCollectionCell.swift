@@ -9,22 +9,14 @@
 import UIKit
 
 //MARK: View
-
-/// Class which provide the collection cell functional
 open class BaseCollectionCell: UICollectionViewCell {
 
-    /// {@link Int} value of the index
 	public var index: Int! = -1;
-    /// Instance of the {@link NSIndexPath}
 	public var indexPath: NSIndexPath?;
-    /// Instance of the {@link AdapteredCellDelegate}
 	public weak var delegate: AdapteredCellDelegate?;
-    /// Instance of the {@link BaseCollectionObject}
 	public weak var object: BaseCollectionObject?;
-    /// Instance of the {@link UITapGestureRecognizer}
 	public var tap: UITapGestureRecognizer?;
 
-    /// Method which provide the deinit functional
 	deinit {
 		NSLog("Cell(deinit): %@", NSStringFromClass(self.classForCoder));
 		NotificationCenter.default.removeObserver(self);
@@ -52,7 +44,7 @@ open class BaseCollectionCell: UICollectionViewCell {
 	 Method which provide the give of the additional functional for the cell resizing
 	 (WARNING: SHOULD BE OVERRIDEN IN CHILD CLASSES)
 	 */
-	override func layoutSubviews() {
+	override open func layoutSubviews() {
 		super.layoutSubviews();
 		// IF LABELS HAVE ADDITIONAL PADDING FROM RIGHT AND LEFT, IN THIS CASE preferredMaxLayoutWidth SHOULD BE DEFINED, IN
 		// OTHER CASE UI WON'T BE DISPLAYING AS WELL
@@ -100,7 +92,7 @@ open class BaseCollectionCell: UICollectionViewCell {
 	/**
 	 Method which provide the functional when cell awake from nib (same as onResume in Android)
 	 */
-	override func awakeFromNib() {
+	override open func awakeFromNib() {
 		super.awakeFromNib();
 		self.subscribeForNotification();
 		self.onAddDefaultClick();
@@ -139,7 +131,7 @@ open class BaseCollectionCell: UICollectionViewCell {
 
 	 - parameter notification: notifications
 	 */
-	final func onRecieveNotification(notification: NSNotification?) {
+	public final func onRecieveNotification(notification: NSNotification?) {
 		if (notification == nil) {
 			return;
 		}

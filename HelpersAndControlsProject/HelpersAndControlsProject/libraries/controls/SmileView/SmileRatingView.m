@@ -202,7 +202,7 @@ static const int K_DOT_RADIUS = 110;
  *
  *  Method whihc provide the setting of th smile image by rating
  *
- *  @param rating rating
+ *  @param imageIndex rating
  */
 - (void)setSmileImageByRating:(int)rating {
     UIColor *tintColor = self.imageSmile.tintColor;
@@ -249,7 +249,7 @@ static const int K_DOT_RADIUS = 110;
  *
  *  Method which provide to setting of the rating
  *
- *  @param rating integer value of the rating
+ *  @param rating
  */
 - (void)setInitialRating:(int)rating {
     self.rating = @(rating);

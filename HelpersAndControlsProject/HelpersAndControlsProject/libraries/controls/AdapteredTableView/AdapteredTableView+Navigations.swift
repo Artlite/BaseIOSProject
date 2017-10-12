@@ -8,7 +8,6 @@
 
 import UIKit
 
-// MARK: - Extension which provide the navigation functional
 public extension AdapteredTableView {
 
 	/**

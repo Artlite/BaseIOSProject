@@ -33,7 +33,7 @@ public class BaseView: UIView {
 
 	 - parameter frame: frame
 	 */
-	override init(frame: CGRect) {
+	override public init(frame: CGRect) {
 		super.init(frame: frame);
 		self.onViewInitialize();
 		self.onCreateView();
@@ -44,7 +44,7 @@ public class BaseView: UIView {
 
 	 - parameter aDecoder: coder
 	 */
-	required init?(coder aDecoder: NSCoder) {
+	required public init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder);
 		self.onViewInitialize();
 		self.onCreateView();
@@ -54,8 +54,7 @@ public class BaseView: UIView {
 	 Method which provide the view initializations
 	 */
 	private final func onViewInitialize() {
-        let className = ClassHelper.get(classNameFromClass: self.classForCoder);
-		let view: UIView! = Bundle.main.loadNibNamed(className,
+		let view: UIView! = Bundle.main.loadNibNamed(ClassHelper.get(classNameFromClass: self.classForCoder),
 			owner: self,
 			options: nil)![0] as! UIView;
 		view.frame = self.bounds;

@@ -10,7 +10,7 @@ import Foundation
 // Swift 2 Array Extension
 public extension Array where Element: Equatable {
     
-    public mutating func removeObject(object: Element?) {
+    mutating public func removeObject(object: Element?) {
         if(object == nil){
             return;
         }
@@ -20,7 +20,7 @@ public extension Array where Element: Equatable {
         }
     }
     
-    public mutating func removeObjectsInArray(array: [Element]?) {
+    mutating public func removeObjectsInArray(array: [Element]?) {
         if(array == nil){
             return;
         }

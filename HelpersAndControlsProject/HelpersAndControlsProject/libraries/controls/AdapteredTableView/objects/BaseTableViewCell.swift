@@ -8,35 +8,23 @@
 
 import UIKit
 
-/// Class which provide the Base Table Cell functional
-open class BaseTableViewCell: UITableViewCell {
+public class BaseTableViewCell: UITableViewCell {
 
-    /// {@link Int} value of the index
 	public var index: Int! = -1;
-    /// Instance of the {@link NSIndexPath}
 	public var indexPath: NSIndexPath?;
-    /// Instance of the {@link BaseTableObject}
 	public weak var object: BaseTableObject?;
-    /// Instance of the {@Link AdapteredTableCellDelegate}
 	public weak var delegate: AdapteredTableCellDelegate?;
 
-    /// Method which provide the functional when cell awake from nib
-	override func awakeFromNib() {
+	override public func awakeFromNib() {
 		super.awakeFromNib();
 		self.subscribeForNotification();
 		self.onCreateCell();
 	}
 
-    /// Method which provide the action when cell was selected
-    ///
-    /// - Parameters:
-    ///   - selected: {@link Bool} value if it selected
-    ///   - animated: {@link Bool} value if it animated
-	override func setSelected(_ selected: Bool, animated: Bool) {
+	override open func setSelected(_ selected: Bool, animated: Bool) {
 		super.setSelected(selected, animated: animated)
 	}
 
-    /// Method which provide the deinit functional
 	deinit {
 		NSLog("Cell(deinit): %@", NSStringFromClass(self.classForCoder));
 		NotificationCenter.default.removeObserver(self);
@@ -64,7 +52,7 @@ open class BaseTableViewCell: UITableViewCell {
 	 Method which provide the give of the additional functional for the cell resizing
 	 (WARNING: SHOULD BE OVERRIDEN IN CHILD CLASSES)
 	 */
-	override func layoutSubviews() {
+	override open func layoutSubviews() {
 		super.layoutSubviews();
 		// IF LABELS HAVE ADDITIONAL PADDING FROM RIGHT AND LEFT, IN THIS CASE preferredMaxLayoutWidth SHOULD BE DEFINED, IN
 		// OTHER CASE UI WON'T BE DISPLAYING AS WELL
@@ -79,7 +67,7 @@ open class BaseTableViewCell: UITableViewCell {
 	/**
 	 Method which provide the action when cell is created
 	 */
-	open func onCreateCell() {
+	func onCreateCell() {
 
 	}
 
@@ -124,7 +112,7 @@ open class BaseTableViewCell: UITableViewCell {
 	/**
 	 Method which provide the subscribe for notifications
 	 */
-	private func subscribeForNotification() {
+	public final func subscribeForNotification() {
 		NotificationCenter.default.addObserver(self, selector: #selector(BaseTableViewCell.onRecieveNotification(notification:)), name: AdapteredTableView.K_EVENT_RESULT_NOTIFICATION, object: nil);
 	}
 
@@ -173,7 +161,7 @@ open class BaseTableViewCell: UITableViewCell {
 
 	 - returns: allowing/not allowing
 	 */
-	open func canEditCell(object: BaseTableObject?) -> Bool {
+	internal func canEditCell(object: BaseTableObject?) -> Bool {
 		return false;
 	}
 
@@ -197,7 +185,7 @@ open class BaseTableViewCell: UITableViewCell {
 	 - author: Dmitriy Lernatovich
 	 */
 	@available( *, deprecated : 1.0, message : "Use method final func customize(needSelection: Bool, needUnderline: Bool) instead")
-	public final func disableUnderline() {
+    public final func disableUnderline() {
 		self.separatorInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, self.bounds.size.width);
 	}
 

@@ -8,7 +8,6 @@
 
 import UIKit
 
-// MARK: - Extension which provide the sort functional
 public extension AdapteredTableView {
 
 	/**

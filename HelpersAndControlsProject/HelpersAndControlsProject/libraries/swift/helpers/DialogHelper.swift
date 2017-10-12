@@ -25,6 +25,7 @@ public class DialogHelper: NSObject {
 		} else {
 			alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil));
 		}
+
 		return alert;
 	}
 

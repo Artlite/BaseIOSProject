@@ -11,7 +11,6 @@
 @implementation ImageChatView
 
 - (void)awakeFromNib {
-    [super awakeFromNib];
   UIEdgeInsets edgeInsets = UIEdgeInsetsMake(30, 40, 30, 40);
 
   UIImage *backgroundButtonImage =

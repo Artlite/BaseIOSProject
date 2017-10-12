@@ -6,8 +6,6 @@
 //  Copyright © 2016 Magnet. All rights reserved.
 //
 import UIKit
-
-// MARK: - Extension which provide the Navigation functional for Adaptered Collection View
 public extension AdapteredCollectionView {
 
 	/**
@@ -32,6 +30,10 @@ public extension AdapteredCollectionView {
         ThreadHelper.runOnMain(afterDelay: 0.1) { 
             self.collectionView.scrollToItem(at: index as IndexPath, at: .bottom, animated: animated);
         }
+//		let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC)))
+//		dispatch_after(delayTime, dispatch_get_main_queue(), {
+//			self.collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .Bottom, animated: animated);
+//		});
 	}
 
 	/**
