@@ -94,8 +94,6 @@
 		0192A8221F0FEAB100994CD7 /* DTTimePeriodCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192A7781F0FEAB100994CD7 /* DTTimePeriodCollection.m */; };
 		0192A8231F0FEAB100994CD7 /* DTTimePeriodGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192A77A1F0FEAB100994CD7 /* DTTimePeriodGroup.m */; };
 		0192A8241F0FEAB100994CD7 /* NSDate+DateTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192A77C1F0FEAB100994CD7 /* NSDate+DateTools.m */; };
-		0192A8251F0FEAB100994CD7 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 0192A77E1F0FEAB100994CD7 /* LICENSE */; };
-		0192A8261F0FEAB100994CD7 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0192A77F1F0FEAB100994CD7 /* README.md */; };
 		0192A8271F0FEAB100994CD7 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192A7821F0FEAB100994CD7 /* NSData+ImageContentType.m */; };
 		0192A8281F0FEAB100994CD7 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192A7841F0FEAB100994CD7 /* SDImageCache.m */; };
 		0192A8291F0FEAB100994CD7 /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192A7861F0FEAB100994CD7 /* SDWebImageCompat.m */; };
@@ -115,8 +113,6 @@
 		0192A8371F0FEAB100994CD7 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0192A7A41F0FEAB100994CD7 /* SVProgressHUD.bundle */; };
 		0192A8381F0FEAB100994CD7 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192A7A61F0FEAB100994CD7 /* SVProgressHUD.m */; };
 		0192A8391F0FEAB100994CD7 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192A7A81F0FEAB100994CD7 /* SVRadialGradientLayer.m */; };
-		0192A83A1F0FEAB100994CD7 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 0192A7AA1F0FEAB100994CD7 /* LICENSE */; };
-		0192A83B1F0FEAB100994CD7 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0192A7AB1F0FEAB100994CD7 /* README.md */; };
 		0192A83C1F0FEAB100994CD7 /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192A7AE1F0FEAB100994CD7 /* UITextView+Placeholder.m */; };
 		0192A83D1F0FEAB100994CD7 /* ImagePickerComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0192A7B11F0FEAB100994CD7 /* ImagePickerComposer.swift */; };
 		0192A83E1F0FEAB100994CD7 /* MessageComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0192A7B21F0FEAB100994CD7 /* MessageComposer.swift */; };
@@ -280,8 +276,6 @@
 		0192A77A1F0FEAB100994CD7 /* DTTimePeriodGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTimePeriodGroup.m; sourceTree = "<group>"; };
 		0192A77B1F0FEAB100994CD7 /* NSDate+DateTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateTools.h"; sourceTree = "<group>"; };
 		0192A77C1F0FEAB100994CD7 /* NSDate+DateTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateTools.m"; sourceTree = "<group>"; };
-		0192A77E1F0FEAB100994CD7 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		0192A77F1F0FEAB100994CD7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0192A7811F0FEAB100994CD7 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
 		0192A7821F0FEAB100994CD7 /* NSData+ImageContentType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ImageContentType.m"; sourceTree = "<group>"; };
 		0192A7831F0FEAB100994CD7 /* SDImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCache.h; sourceTree = "<group>"; };
@@ -321,8 +315,6 @@
 		0192A7A61F0FEAB100994CD7 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		0192A7A71F0FEAB100994CD7 /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
 		0192A7A81F0FEAB100994CD7 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
-		0192A7AA1F0FEAB100994CD7 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		0192A7AB1F0FEAB100994CD7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0192A7AD1F0FEAB100994CD7 /* UITextView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Placeholder.h"; sourceTree = "<group>"; };
 		0192A7AE1F0FEAB100994CD7 /* UITextView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Placeholder.m"; sourceTree = "<group>"; };
 		0192A7B11F0FEAB100994CD7 /* ImagePickerComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerComposer.swift; sourceTree = "<group>"; };
@@ -726,8 +718,6 @@
 		0192A77D1F0FEAB100994CD7 /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
-				0192A77E1F0FEAB100994CD7 /* LICENSE */,
-				0192A77F1F0FEAB100994CD7 /* README.md */,
 				0192A7801F0FEAB100994CD7 /* SDWebImage */,
 			);
 			path = SDWebImage;
@@ -789,8 +779,6 @@
 		0192A7A91F0FEAB100994CD7 /* UITextView+Placeholder */ = {
 			isa = PBXGroup;
 			children = (
-				0192A7AA1F0FEAB100994CD7 /* LICENSE */,
-				0192A7AB1F0FEAB100994CD7 /* README.md */,
 				0192A7AC1F0FEAB100994CD7 /* Sources */,
 			);
 			path = "UITextView+Placeholder";
@@ -1030,7 +1018,6 @@
 				0192A7FD1F0FEAB100994CD7 /* SmileDotView.xib in Resources */,
 				0192A7E91F0FEAB100994CD7 /* login_checkbox_on.png in Resources */,
 				0192A7F41F0FEAB100994CD7 /* red_back_circle.png in Resources */,
-				0192A83A1F0FEAB100994CD7 /* LICENSE in Resources */,
 				01DE26081CF46B0D0066C317 /* LaunchScreen.storyboard in Resources */,
 				0192A7E81F0FEAB100994CD7 /* login_checkbox_off.png in Resources */,
 				0192A7FF1F0FEAB100994CD7 /* SmileRatingView.xib in Resources */,
@@ -1043,7 +1030,6 @@
 				0192A7E01F0FEAB100994CD7 /* EmptyTableCell.xib in Resources */,
 				01DE263A1CF490120066C317 /* HeaderCell.xib in Resources */,
 				0192A7D11F0FEAB100994CD7 /* AdapteredCollectionView.xib in Resources */,
-				0192A8251F0FEAB100994CD7 /* LICENSE in Resources */,
 				0192A7F61F0FEAB100994CD7 /* face_level_0.png in Resources */,
 				0192A80C1F0FEAB100994CD7 /* error@2x.png in Resources */,
 				0192A7F71F0FEAB100994CD7 /* face_level_1.png in Resources */,
@@ -1111,7 +1097,6 @@
 				0192A8431F0FEAB100994CD7 /* UIColor+Additional.swift in Sources */,
 				0192A80E1F0FEAB100994CD7 /* TextFieldValidator.m in Sources */,
 				0192A7CD1F0FEAB100994CD7 /* AdapteredCollectionView+Management.swift in Sources */,
-				0192A8261F0FEAB100994CD7 /* README.md in Sources */,
 				01C0BB1B1F9002CC004AE85D /* UIApplication+Additional.swift in Sources */,
 				0192A7EC1F0FEAB100994CD7 /* ImageViewInsets.m in Sources */,
 				0192A8211F0FEAB100994CD7 /* DTTimePeriodChain.m in Sources */,
@@ -1142,7 +1127,6 @@
 				01DE25FE1CF46B0D0066C317 /* AppDelegate.swift in Sources */,
 				0192A7EB1F0FEAB100994CD7 /* ImageChatView.m in Sources */,
 				0157D13F1CFDDEB700C4E6EB /* BaseTableCell.swift in Sources */,
-				0192A83B1F0FEAB100994CD7 /* README.md in Sources */,
 				0192A8491F0FEAB100994CD7 /* ColorHelper.swift in Sources */,
 				0192A7E21F0FEAB100994CD7 /* BaseViewController+Navigations.swift in Sources */,
 				0192A7DE1F0FEAB100994CD7 /* BaseTableViewCell.swift in Sources */,

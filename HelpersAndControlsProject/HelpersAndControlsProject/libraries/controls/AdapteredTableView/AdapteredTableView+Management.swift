@@ -193,7 +193,7 @@ public extension AdapteredTableView {
 	public final func notifyDataSetChanged() {
 		self.sortByPriority();
 		// Post processing functional before table update
-		if let typedObjects = self.objects as? NSArray as? [BaseTableObject] {
+		if let typedObjects = self.objects as NSArray as? [BaseTableObject] {
 			if let postProcessedObjects = self.delegate?.onPostProcessing?(objects: typedObjects) {
 				let array: NSMutableArray = NSMutableArray(array: postProcessedObjects);
 				self.objects = array;
