@@ -54,7 +54,7 @@ public class ImageOrNameView: UIView {
 
 	 - parameter aDecoder: coder
 	 */
-	required public init?(coder aDecoder: NSCoder) {
+	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder);
 		self.onViewInitialize();
 		self.onCreateView();
@@ -74,7 +74,7 @@ public class ImageOrNameView: UIView {
 	/**
 	 Method which provide the actions when View is created
 	 */
-	private func onCreateView() {
+	func onCreateView() {
 		self.textBackground = ColorHelper.rgb(r: 0, g: 97, b: 152);
 	}
 

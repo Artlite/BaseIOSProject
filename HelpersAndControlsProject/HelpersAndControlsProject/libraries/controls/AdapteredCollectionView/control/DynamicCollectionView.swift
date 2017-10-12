@@ -10,16 +10,30 @@ import UIKit
 public class DynamicCollectionView: UICollectionView {
 	// A dictionary of offscreen cells that are used within the sizeForItemAtIndexPath method to handle the size calculations. These are never drawn onscreen. The dictionary is in the format:
 	// { NSString *reuseIdentifier : UICollectionViewCell *offscreenCell, ... }
-	private var offscreenCells = Dictionary<String, UICollectionViewCell>()
-	private var registeredCellNibs = Dictionary<String, UINib>()
-	private var registeredCellClasses = Dictionary<String, UICollectionViewCell.Type>()
+    
+    /// Instance of the {@link Dictionary}
+    private var offscreenCells = Dictionary<String, UICollectionViewCell>();
+    /// Instance of the {@link Dictionary}
+    private var registeredCellNibs = Dictionary<String, UINib>();
+    /// Instance of the {@link Dictionary}
+    private var registeredCellClasses = Dictionary<String, UICollectionViewCell.Type>();
 
-	override public func register(_ cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String) {
+    /// Method which provide the registering of the cell
+    ///
+    /// - Parameters:
+    ///   - cellClass: {@link AnyClass} value of the cell class
+    ///   - identifier: {@link String} value of the cell reuse identifier
+	override func register(_ cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String) {
 		super.register(cellClass, forCellWithReuseIdentifier: identifier)
 		registeredCellClasses[identifier] = cellClass as! UICollectionViewCell.Type!
 	}
 
-	override public func register(_ nib: UINib?, forCellWithReuseIdentifier identifier: String) {
+    /// Method which provide the registering of the cell
+    ///
+    /// - Parameters:
+    ///   - nib: {@link UINib} value of the cell class
+    ///   - identifier: {@link String} value of the cell reuse identifier
+	override func register(_ nib: UINib?, forCellWithReuseIdentifier identifier: String) {
 		super.register(nib, forCellWithReuseIdentifier: identifier)
 		registeredCellNibs[identifier] = nib
 	}
@@ -31,7 +45,7 @@ public class DynamicCollectionView: UICollectionView {
 
 	 - returns: UICollectionViewCell?
 	 */
-	public func dequeueReusableOffScreenCellWithReuseIdentifier(identifier: String) -> UICollectionViewCell? {
+	func dequeueReusableOffScreenCellWithReuseIdentifier(identifier: String) -> UICollectionViewCell? {
 		var cell: UICollectionViewCell? = offscreenCells[identifier]
 		if cell == nil {
 			if registeredCellNibs.index(forKey: identifier) != nil {

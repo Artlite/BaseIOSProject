@@ -16,33 +16,35 @@ IB_DESIGNABLE
 @implementation CTextField
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-  self = [super initWithCoder:aDecoder];
-  if (self) {
-  }
-  return self;
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+    }
+    return self;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
-  self = [super initWithFrame:frame];
-  if (self) {
-  }
-  return self;
+    self = [super initWithFrame:frame];
+    if (self) {
+    }
+    return self;
 }
 
 - (void)awakeFromNib {
-  [super awakeFromNib];
-  [self updatePlaceHolder];
+    [super awakeFromNib];
+    [self updatePlaceHolder];
 }
 
 - (void)updatePlaceHolder {
-  if (self.placeholderColor == nil) {
-    self.placeholderColor = [UIColor darkGrayColor];
-  }
-  NSString *placeholderText = self.placeholder;
-  NSAttributedString *attributedText = [[NSAttributedString alloc]
-      initWithString:placeholderText
-          attributes:@{NSForegroundColorAttributeName : self.placeholderColor}];
-  self.attributedPlaceholder = attributedText;
+    if (self.placeholderColor == nil) {
+        self.placeholderColor = [UIColor darkGrayColor];
+    }
+    if(self.placeholder != nil){
+        NSString *placeholderText = self.placeholder;
+        NSAttributedString *attributedText = [[NSAttributedString alloc]
+                                              initWithString:placeholderText
+                                              attributes:@{NSForegroundColorAttributeName : self.placeholderColor}];
+        self.attributedPlaceholder = attributedText;
+    }
 }
 
 @end

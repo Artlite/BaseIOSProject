@@ -11,17 +11,22 @@ import UIKit
 //MARK: Object
 open class BaseCollectionObject: NSObject {
 
+    /// {@link CGFloat} value of the height
 	public var heigh: CGFloat = -1;
+    /// Instance of the {@link NSIndexPath}
 	public var index: NSIndexPath?;
+    /// Instance of the {@link BaseCollectionCell}
 	public weak var cell: BaseCollectionCell?;
-
+    /// {@link Bool} value if it first init
 	var isFirstInit: Bool = false;
 
+    /// Method which provide the deinit functional
 	deinit {
 		NSLog("Cell object(deinit): %@", NSStringFromClass(self.classForCoder));
 	}
 
 	// MARK: Methods for override
+    
 	/**
 	 Method which provide the getting of the class for cell
 
@@ -32,6 +37,7 @@ open class BaseCollectionObject: NSObject {
 	}
 
 	// MARK: Identifier methods
+    
 	/**
 	 Method which provide to getting of the reuse identifier
 	 */

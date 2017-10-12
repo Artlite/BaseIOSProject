@@ -44,7 +44,7 @@ public class PlaceholderedTextView: BaseTextView {
 
 	private var swipe: UISwipeGestureRecognizer?;
 
-	override public func awakeFromNib() {
+	override func awakeFromNib() {
 		super.awakeFromNib();
 		super.isNeedNewLineToClose = self.newLineKeyboardHiding;
 		if (self.swipeDownKeyboard == true) {
@@ -61,7 +61,7 @@ public class PlaceholderedTextView: BaseTextView {
 	/**
 	 Method which provide the keyboard closing
 	 */
-	final func closeKeyboard() {
+	public final func closeKeyboard() {
 		self.endEditing(true);
 	}
 

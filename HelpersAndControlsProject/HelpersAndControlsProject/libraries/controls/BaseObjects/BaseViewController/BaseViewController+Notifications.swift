@@ -40,7 +40,7 @@ public extension BaseViewController {
 	 Method which provide the notification registration
 	 (should be overriden in child class)
 	 */
-	public func registerForNotifications() {
+	open func registerForNotifications() {
 
 	}
 

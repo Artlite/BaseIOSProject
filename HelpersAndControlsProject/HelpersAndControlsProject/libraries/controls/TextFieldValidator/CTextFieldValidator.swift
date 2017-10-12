@@ -11,7 +11,7 @@ import UIKit
 public class CTextFieldValidator: TextFieldValidator {
 
 	/// Custom text field delegate
-	class CTextFieldValidatorDelegate: NSObject, UITextFieldDelegate {
+	public class CTextFieldValidatorDelegate: NSObject, UITextFieldDelegate {
 		/**
 		 Method which provide the managing action when user press return button
 		 (USE FOR HIDE AUTOMATIC HIDING OF THE KEYBOARD)
@@ -22,7 +22,7 @@ public class CTextFieldValidator: TextFieldValidator {
 
 		 - returns: result
 		 */
-		func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		func textFieldShouldReturn(textField: UITextField) -> Bool {
 			if let cTextField = textField as? CTextFieldValidator {
 				if (cTextField.needHideKeyboard == true) {
 					textField.resignFirstResponder();
@@ -80,7 +80,7 @@ public class CTextFieldValidator: TextFieldValidator {
 
 	 - returns: object
 	 */
-	required public init?(coder aDecoder: NSCoder) {
+	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder);
 		self.onCreate();
 	}

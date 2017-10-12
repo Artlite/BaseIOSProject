@@ -8,11 +8,15 @@
 
 import UIKit
 
+// MARK: - Extension which provide the event functional
 public extension AdapteredTableView {
 
 	// MARK: Event class
 	public class Event: NSObject {
-		public var eventCode: Int! = nil;
+        
+        /// {@link Int} value of the event code
+		private var eventCode: Int! = nil;
+        
 		/**
 		 Constructor which provide the class creating with the event code
 
@@ -34,11 +38,11 @@ public extension AdapteredTableView {
 			return self.eventCode;
 		}
         
-        /// Method which provide the equaling of the object
+        /// Method which provide the equaling functional
         ///
-        /// - Parameter object: {@link Any} object
-        /// - Returns: equaling result
-        override public func isEqual(_ object: Any?) -> Bool {
+        /// - Parameter object: instance of the {@link Any} object
+        /// - Returns: {@link Bool} value of the equaling
+        override func isEqual(_ object: Any?) -> Bool {
             let eventObject: Event? = object as? Event;
             if (eventObject != nil) {
                 if (eventObject?.getEventCode() == self.eventCode) {
@@ -57,17 +61,13 @@ public extension AdapteredTableView {
 	 */
 	public final func sendEventResults(event: Event?, object: NSObject?, intdex: Int) {
 		var dict: Dictionary<String, AnyObject> = [:];
-
 		dict[AdapteredTableView.K_EVENT_INDEX_KEY] = intdex as AnyObject;
-
 		if (event != nil) {
 			dict[AdapteredTableView.K_EVENT_KEY] = event!;
 		}
-
 		if (object != nil) {
 			dict[AdapteredTableView.K_EVENT_OBJECT] = object!;
 		}
-        
         NotificationCenter.default.post(name: AdapteredTableView.K_EVENT_RESULT_NOTIFICATION, object: nil, userInfo: dict);
 	}
 }

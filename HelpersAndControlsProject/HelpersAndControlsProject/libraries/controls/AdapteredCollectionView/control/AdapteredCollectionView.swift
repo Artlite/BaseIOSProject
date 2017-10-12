@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Protocol which provide the delegate for the collection view
 public protocol AdapteredCollectionDelegate: class {
     /**
      Method which provide the action when cell send event to the collection view
@@ -30,6 +31,7 @@ public protocol AdapteredCollectionDelegate: class {
     func onAlmostAtBottom(listSize size: Int);
 }
 
+/// Delegate which provide the functional for the collection view cell
 public protocol AdapteredCellDelegate: class {
     /**
      Method which provide the action when cell send event to the collection view
@@ -47,40 +49,55 @@ public protocol AdapteredCellDelegate: class {
     func update(cellByIndexPath index: NSIndexPath?);
 }
 
-//@IBDesignable
+
+/// Class which provide the predefined functional for the collection view
 public class AdapteredCollectionView: UIView,
     UICollectionViewDataSource,
     UICollectionViewDelegate,
     UICollectionViewDelegateFlowLayout,
-AdapteredCellDelegate {
+    AdapteredCellDelegate {
     
+    /// Instance of the {@link Notification.Name}
     public static let K_EVENT_RESULT_NOTIFICATION: Notification.Name! = Notification.Name(rawValue: "K_EVENT_RESULT_NOTIFICATION_ADAPTERED_COLLECTION_CELL");
+    /// {@link String} value of the event key
     public static let K_EVENT_KEY: String! =  "K_EVENT_KEY";
+    /// {@link String} value of the event object
     public static let K_EVENT_OBJECT: String! = "K_EVENT_OBJECT";
+    /// {@link String} value of the event index
     public static let K_EVENT_INDEX_KEY: String! = "K_EVENT_INDEX_KEY";
     
+    /// {@link String} value of last reg identifier
     private var lastRegIdentifier: String! = "";
     
-    @IBOutlet weak var collectionView: DynamicCollectionView!
-    @IBOutlet weak var labelBackgroundText: UILabel!
+    /// Instance of the {@link DynamicCollectionView}
+    @IBOutlet private weak var collectionView: DynamicCollectionView!
+    /// Instance of the {@link UILabel}
+    @IBOutlet private weak var labelBackgroundText: UILabel!
     
     // MARK: Inspectable
+    
+    /// {@link Bool} value if it need bounces
     @IBInspectable var bounces: Bool = true {
         didSet {
             self.collectionView.bounces = self.bounces;
         }
     }
+    
+    /// {@link Bool} value if it need vertical bounces
     @IBInspectable var alwaysBounceVertical: Bool = true {
         didSet {
             self.collectionView.alwaysBounceVertical = self.alwaysBounceVertical;
         }
     }
+    
+    /// {@link Bool} value if it need vertical indicator
     @IBInspectable var showsVerticalScrollIndicator: Bool = true {
         didSet {
             self.collectionView.showsVerticalScrollIndicator = showsVerticalScrollIndicator;
         }
     }
-    // Refresh control
+    
+    /// {@link Bool} value if it need refresh control
     @IBInspectable var needRefreshControl: Bool = false {
         didSet {
             if (self.needRefreshControl == true) {
@@ -89,34 +106,42 @@ AdapteredCellDelegate {
         }
     }
     
+    /// {@link UIColor} value of the refresh control
     @IBInspectable var refreshColor: UIColor = UIColor.black {
         didSet {
             self.onSetUpRefreshControl();
         }
     }
     
+    /// {@link CGFloat} value of the vertical space
     @IBInspectable var verticalSpace: CGFloat = 0.0 {
         didSet {
             
         }
     }
     
+    /// {@link CGFloat} value of the background text font
     @IBInspectable var backgroundTextFont: CGFloat = 17 {
         didSet {
             self.labelBackgroundText.font = UIFont.systemFont(ofSize: backgroundTextFont);
         }
     }
     
+    /// {@link UIColor} value of the background text color
     @IBInspectable var backgroundTextColor: UIColor = UIColor.white {
         didSet {
             self.labelBackgroundText.textColor = self.backgroundTextColor;
         }
     }
     
+    /// Instance of the {@link NSMutableArray}
     var objects: NSMutableArray = NSMutableArray();
-    internal weak var adapteredDelegate: AdapteredCollectionDelegate?;
-    var listSizeOld: Int! = -1;
+    /// Instance of the {@link AdapteredCollectionDelegate}
+    public weak var adapteredDelegate: AdapteredCollectionDelegate?;
+    /// {@link Int} value of the size list old
+    public var listSizeOld: Int! = -1;
     // MARK: Refresh functional
+    /// Instance of the {@link UIRefreshControl}
     private var refreshControl: UIRefreshControl?;
     
     /**
@@ -135,7 +160,7 @@ AdapteredCellDelegate {
      
      - parameter aDecoder: coder
      */
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder);
         self.onViewInitialize();
         self.onCreateView();
@@ -155,17 +180,18 @@ AdapteredCellDelegate {
     /**
      Method which provide the actions when View is created
      */
-    private func onCreateView() {
+    func onCreateView() {
         self.registerCellsNib();
         self.collectionView.dataSource = self;
         self.collectionView.delegate = self;
     }
     
     // MARK: Refresh control
+    
     /**
      Method which provide the addin gof the refresh control
      */
-    private func onAddRefreshControl() {
+    func onAddRefreshControl() {
         self.refreshControl = UIRefreshControl();
         self.refreshControl?.addTarget(self, action: #selector(AdapteredCollectionView.onRefresh), for: .valueChanged);
         self.collectionView.addSubview(self.refreshControl!);
@@ -175,14 +201,14 @@ AdapteredCellDelegate {
     /**
      Method which provide the setting up of the refresh control
      */
-    private func onSetUpRefreshControl() {
+    func onSetUpRefreshControl() {
         self.refreshControl?.tintColor = self.refreshColor;
     }
     
     /**
      Method which provide the executing of the refresh funcional
      */
-    public func onRefresh() {
+    func onRefresh() {
         self.adapteredDelegate?.onRefreshData();
     }
     
@@ -218,7 +244,7 @@ AdapteredCellDelegate {
     ///
     /// - Parameter collectionView: {@link UICollectionView} instance
     /// - Returns: count value
-    public func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1;
     }
     
@@ -228,7 +254,7 @@ AdapteredCellDelegate {
     ///   - collectionView: {@link UICollectionView} instance
     ///   - section: {@link Int} value of the section index
     /// - Returns: count value
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.objects.count;
     }
     
@@ -238,7 +264,7 @@ AdapteredCellDelegate {
     ///   - collectionView: {@link UICollectionView} instance
     ///   - indexPath: {@link Int} value of the index
     /// - Returns: {@link UICollectionViewCell} instance
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell: BaseCollectionCell! = self.collectionView.dequeueReusableCell(withReuseIdentifier: self.lastRegIdentifier, for: indexPath as IndexPath) as! BaseCollectionCell;
         
         if self.objects.count == 0 {
@@ -281,7 +307,7 @@ AdapteredCellDelegate {
     ///   - collectionViewLayout: {@link UICollectionViewLayout} instance
     ///   - indexPath: {@link Int} value of the index
     /// - Returns: instance of the {@link CGSize}
-    public func collectionView(_ sizeForItemAtcollectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ sizeForItemAtcollectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width: CGFloat! = self.collectionView.bounds.width;
         let object: BaseCollectionObject! = self.objects[indexPath.row] as! BaseCollectionObject;
         let cell: BaseCollectionCell? = self.collectionView.dequeueReusableOffScreenCellWithReuseIdentifier(identifier: object.getReuseIdentifier()) as? BaseCollectionCell
@@ -316,12 +342,10 @@ AdapteredCellDelegate {
     /**
      Method which provide the registering nib inside the collection view
      */
-    public func registerCellsNib() {
+    func registerCellsNib() {
         for object in self.objects {
             self.lastRegIdentifier = (object as AnyObject).getReuseIdentifier();
-            //			let nib = UINib.init(nibName: self.lastRegIdentifier, bundle: Bundle(forClass: AdapteredCollectionView.self));
             let nib = UINib.init(nibName: self.lastRegIdentifier, bundle: Bundle(for: AdapteredCollectionView.self));
-//            self.collectionView.register(nib: nib, forCellWithReuseIdentifier: self.lastRegIdentifier);
             self.collectionView.register(nib, forCellWithReuseIdentifier: self.lastRegIdentifier);
         }
     }
@@ -333,7 +357,7 @@ AdapteredCellDelegate {
      - parameter event: event
      - parameter index: index
      */
-    public func onEventReceived(eventType event: AdapteredCollectionView.AdapteredEvent!, index: Int!, additionalObject: NSObject?) {
+    func onEventReceived(eventType event: AdapteredCollectionView.AdapteredEvent!, index: Int!, additionalObject: NSObject?) {
         let object: BaseCollectionObject? = self.objects[index] as? BaseCollectionObject;
         if (object != nil) {
             self.adapteredDelegate?.onEventReceived(eventType: event, object: object!, index: index, additionalObject: additionalObject);
@@ -381,7 +405,9 @@ AdapteredCellDelegate {
     
     public class AdapteredEvent: NSObject {
         
-        public var eventCode: Int! = nil;
+        /// {@link Int} value of the event code
+        private var eventCode: Int! = nil;
+        
         /**
          Constructor which provide the class creating with the event code
          
@@ -407,7 +433,7 @@ AdapteredCellDelegate {
         ///
         /// - Parameter object: {@link Any} object of the description
         /// - Returns: equaling result
-        override public func isEqual(_ object: Any?) -> Bool {
+        override func isEqual(_ object: Any?) -> Bool {
             let eventObject: AdapteredEvent? = object as? AdapteredEvent;
             if (eventObject != nil) {
                 if (eventObject?.getEventCode() == self.eventCode) {

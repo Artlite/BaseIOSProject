@@ -28,11 +28,6 @@ public extension BaseViewController {
         self.onSearchEvent(event: SearchEvent.SEARCH, text:  searchBar.text);
     }
 
-    /// Method which provide the search bar
-    ///
-    /// - Parameters:
-    ///   - searchBar: {@link UISearchBar} instance
-    ///   - searchText: {@link String} value of the search
     public func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == "" {
             self.onSearchEvent(event: SearchEvent.CANCEL, text:  searchBar.text);

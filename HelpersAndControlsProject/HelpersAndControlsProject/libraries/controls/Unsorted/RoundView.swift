@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class RoundView: UIView {
+class RoundView: UIView {
     
-    override public func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews();
         self.layer.cornerRadius = self.frame.size.width / 2.0;
         self.clipsToBounds = true;

@@ -19,28 +19,30 @@ public class BaseTableObject: NSObject {
 	 - MID:  mid priority
 	 - HIGH: high priority
 	 */
-	public enum ObjectPriority: Int {
+	enum ObjectPriority: Int {
 		case LOW = 0, MID = 1, HIGH = 2;
 	}
 
 	// Object priority
-	public var priority: ObjectPriority = .MID;
+	var priority: ObjectPriority = .MID;
 
 	// Object additional fields
 	public var heigh: CGFloat = -1;
 	public var index: NSIndexPath?;
 	public weak var cell: BaseTableViewCell?;
-	public var isFirstInit: Bool = false;
-	public var isSelected: Bool = false;
+	var isFirstInit: Bool = false;
+	var isSelected: Bool = false;
 
 	// Extras field
 	private var extras: [String: AnyObject] = [:];
 
+    /// Default constructor
 	override init() {
 		super.init();
 		self.priority = .MID;
 	}
 
+    /// Deinit method
 	deinit {
 		NSLog("Cell object(deinit): %@", NSStringFromClass(self.classForCoder));
 	}

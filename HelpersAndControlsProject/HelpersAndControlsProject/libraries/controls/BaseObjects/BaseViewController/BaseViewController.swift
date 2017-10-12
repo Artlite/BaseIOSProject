@@ -8,25 +8,25 @@
 
 import UIKit
 
-public enum SearchEvent {
+enum SearchEvent {
 	case SEARCH, CANCEL;
 }
 
 public class BaseViewController: UIViewController, UISearchBarDelegate {
 
-	private(set) var closeTap: UITapGestureRecognizer?;
-	private(set) var isNeedUpdate: Bool = false;
+	public var closeTap: UITapGestureRecognizer?;
+	public var isNeedUpdate: Bool = false;
 
 	// MARK: Transferted functional
 	// Object to transfert
 	private var toTransfert: AnyObject?;
 	// Transferted object
-	private(set) var transfertedObject: AnyObject?;
+	public var transfertedObject: AnyObject?;
 
 	/**
 	 Method which provide the on create functional
 	 */
-	override public func viewDidLoad() {
+	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.onCreateController();
 		self.removeFromNotifications();
@@ -35,7 +35,7 @@ public class BaseViewController: UIViewController, UISearchBarDelegate {
 		self.onInitialUpdate();
 	}
 
-	override public func viewWillAppear(_ animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated);
 		if (self.isNeedUpdate == true) {
 			self.isNeedUpdate = false;
@@ -43,7 +43,7 @@ public class BaseViewController: UIViewController, UISearchBarDelegate {
 		}
 	}
 
-	override public func viewDidAppear(_ animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated);
 		if (self.needRemoveNotifications() == true) {
 			self.removeFromNotifications();
@@ -52,7 +52,7 @@ public class BaseViewController: UIViewController, UISearchBarDelegate {
 		}
 	}
 
-	override public func viewDidDisappear(_ animated: Bool) {
+	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated);
 		if (self.needRemoveNotifications() == true) {
 			self.removeFromNotifications();
@@ -69,7 +69,7 @@ public class BaseViewController: UIViewController, UISearchBarDelegate {
 	/**
 	 Method which provide the functional when did receive memory warning
 	 */
-	override public func didReceiveMemoryWarning() {
+	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 	}
 
@@ -86,7 +86,7 @@ public class BaseViewController: UIViewController, UISearchBarDelegate {
 
 	 - returns: need value
 	 */
-	public func needRemoveNotifications() -> Bool {
+	open func needRemoveNotifications() -> Bool {
 		return true;
 	}
 
@@ -154,7 +154,7 @@ public class BaseViewController: UIViewController, UISearchBarDelegate {
 	 - parameter segue:  segue
 	 - parameter sender: sender
 	 */
-    override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationNavigationController: UINavigationController? = segue.destination as? UINavigationController;
         if (destinationNavigationController != nil) {
             let targetController: BaseViewController? = destinationNavigationController?.topViewController as? BaseViewController;
@@ -283,7 +283,7 @@ public class BaseViewController: UIViewController, UISearchBarDelegate {
 	/**
 	 Method which provide the initial updating
 	 */
-	public func onInitialUpdate() {
+	open func onInitialUpdate() {
 
 	}
 
@@ -304,14 +304,14 @@ public class BaseViewController: UIViewController, UISearchBarDelegate {
 
 	 - returns: required value
 	 */
-	public func needImidiatellyUpdate() -> Bool {
+	open func needImidiatellyUpdate() -> Bool {
 		return false;
 	}
 
 	/**
 	 Method which provide to add of the taping to hide keyboard
 	 */
-	private func addTapHideKeyboard() {
+	public func addTapHideKeyboard() {
 		GetsureHelper.addClick(target: self, view: self.view, selector: #selector(BaseViewController.hideKeyboard));
 		GetsureHelper.addSwipe(target: self, view: self.view, direction: UISwipeGestureRecognizerDirection.down, selector: #selector(BaseViewController.hideKeyboard));
 	}
@@ -320,7 +320,7 @@ public class BaseViewController: UIViewController, UISearchBarDelegate {
 
 	/// Class for oncontroller result event
 	public class ControllerResultEvent: NSObject {
-		private(set) var code: Int = -1;
+		private var code: Int = -1;
 		/**
 		 Contructor
 
@@ -343,7 +343,7 @@ public class BaseViewController: UIViewController, UISearchBarDelegate {
 
 		 - returns: compaing value
 		 */
-        override public func isEqual(_ object: Any?) -> Bool {
+        override func isEqual(_ object: Any?) -> Bool {
             if let compare = object as? ControllerResultEvent {
                 if (self.code == compare.code) {
                     return true;

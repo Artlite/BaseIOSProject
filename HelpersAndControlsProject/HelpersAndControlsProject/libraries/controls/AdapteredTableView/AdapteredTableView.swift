@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Protocol which provide the delegate for the adaptered table view
 @objc public protocol AdapteredTableDelegate: class {
     
     /**
@@ -61,6 +62,7 @@ import UIKit
     @objc optional func onPostProcessing(objects: [BaseTableObject]) -> [BaseTableObject];
 }
 
+/// Protocol which provide the delegation to the adaptered table cell
 public protocol AdapteredTableCellDelegate: class {
     /**
      Method which provide the action when cell send event to the collection view
@@ -78,9 +80,15 @@ public protocol AdapteredTableCellDelegate: class {
     func update(cellByIndexPath index: NSIndexPath?);
 }
 
-public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSource, AdapteredTableCellDelegate {
+/// Class which provide the predefined functional for the table view
+public class AdapteredTableView: UIView,
+    UITableViewDelegate,
+    UITableViewDataSource,
+AdapteredTableCellDelegate {
     
     // Refresh control
+    
+    /// {@link Bool} value if need refresh control
     @IBInspectable var needRefreshControl: Bool = false {
         didSet {
             if (self.needRefreshControl == true) {
@@ -88,49 +96,52 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
             }
         }
     }
-    
+    /// {@link UIColor} value of the refresh control color
     @IBInspectable var refreshColor: UIColor = UIColor.black {
         didSet {
             self.onSetUpRefreshControl();
         }
     }
     
+    /// {@link Bool} value if need vertical scroll indicator
     @IBInspectable var needVerticalScrollIndicator: Bool = true {
         didSet {
             self.tableView.showsVerticalScrollIndicator = needVerticalScrollIndicator;
         }
     }
-    
+    /// {@link Bool} value if need vertical bounce
     @IBInspectable var needVerticalBounce: Bool = true {
         didSet {
             self.tableView.alwaysBounceVertical = needVerticalBounce;
         }
     }
     
+    /// {@link CGFloat} value of the background text font
     @IBInspectable var backgroundTextFont: CGFloat = 17 {
         didSet {
             self.labelBackgroundText.font = UIFont.systemFont(ofSize: backgroundTextFont);
         }
     }
-    
+    /// {@link UIColor} value of the background text color
     @IBInspectable var backgroundTextColor: UIColor = UIColor.white {
         didSet {
             self.labelBackgroundText.textColor = self.backgroundTextColor;
         }
     }
     
+    /// {@link Bool} value if need allowing of the selection
     @IBInspectable var allowSelection: Bool = true {
         didSet {
             self.setSelectionStyle();
         }
     }
-    
+    /// {@link Bool} value if need allowing of the multiply selection
     @IBInspectable var allowMultipleSelection: Bool = false {
         didSet {
             self.setSelectionStyle();
         }
     }
-    
+    /// {@link Bool} value if need empty cell lines
     @IBInspectable var needEmptyCellLines: Bool = true {
         didSet {
             if (self.needEmptyCellLines == false) {
@@ -138,7 +149,7 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
             }
         }
     }
-    
+    /// {@link Bool} value if need the line separator
     @IBInspectable var needSeparator: Bool = true {
         didSet {
             if (self.needSeparator == false) {
@@ -148,33 +159,58 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
             }
         }
     }
+    /// {@link Bool} value if need the line dividers
+    @IBInspectable var needDividers: Bool = true {
+        didSet {
+            if (self.needDividers == false) {
+                self.tableView.separatorStyle = .none;
+            }else{
+                self.tableView.separatorStyle = .singleLine;
+            }
+        }
+    }
     
+    /// {@link UIColor} value of the selection color
     @IBInspectable var selectionColor: UIColor = UIColor.clear;
-    
+    /// {@link CGFloat} value of the cell padding
     @IBInspectable var cellsPadding: CGFloat = 0;
     
+    /// Instance of the {@link Notification.Name}
     public static let K_EVENT_RESULT_NOTIFICATION: Notification.Name! = Notification.Name(rawValue: "K_EVENT_RESULT_NOTIFICATION_ADAPTERED_TABLE_CELL");
+    /// {@link String} value of the event key
     public static let K_EVENT_KEY: String! = "K_EVENT_KEY";
+    /// {@link String} value of the event index key
     public static let K_EVENT_INDEX_KEY: String! = "K_EVENT_INDEX_KEY";
+    /// {@link String} value of the object
     public static let K_EVENT_OBJECT: String! = "K_EVENT_OBJECT";
+    /// Instance of the {@link Event}
     public static let K_CELL_PRESSED_EVENT: Event! = Event(eventCode: -100);
-    
+    /// {@link String} value of the key empty cell
     static let K_EMPTY_CELL: String! = "EmptyTableCell";
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var labelBackgroundText: UILabel!
+    /// Instance of the {@link UITableView}
+    @IBOutlet private weak var tableView: UITableView!
+    /// Instance of the {@link UILabel}
+    @IBOutlet private weak var labelBackgroundText: UILabel!
     
+    /// {@link String} value of the last register identifier
     private var lastRegIdentifier: String! = "";
     
+    /// Instance of the {@link NSMutableArray}
     var objects: NSMutableArray = NSMutableArray();
+    /// {@link Int} value of the old list size
     var listSizeOld: Int! = -1;
-    var delegate: AdapteredTableDelegate?;
+    /// Instance of the {@link AdapteredTableDelegate}
+    public var delegate: AdapteredTableDelegate?;
     
     // Selection functional
+    /// Instance of the {@link NSIndexPath}
     private(set) var previousIndex: NSIndexPath?;
+    /// Array with the instances of the {@link NSIndexPath}
     private(set) var previousIndexes: [NSIndexPath] = [];
     
     // MARK: Refresh functional
+    /// Instance of the {@link UIRefreshControl}
     private var refreshControl: UIRefreshControl?;
     
     /**
@@ -193,7 +229,7 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
      
      - parameter aDecoder: coder
      */
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder);
         self.onViewInitialize();
         self.onCreateView();
@@ -231,7 +267,7 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
      
      - returns: sections value
      */
-    public func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return objects.count;
     }
     
@@ -243,7 +279,7 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
      
      - returns: count value
      */
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1;
     }
     
@@ -255,7 +291,7 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
      
      - returns: cell
      */
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let emptyCell: UITableViewCell = self.get(emptyCell: tableView, cellForRowAtIndexPath: indexPath as NSIndexPath);
         // Check indexes
@@ -322,7 +358,7 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
      
      - returns: heigh
      */
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension;
     }
     
@@ -334,7 +370,7 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
      
      - returns: heigh
      */
-    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         var padding: CGFloat = self.cellsPadding;
         
         // Guard statement
@@ -358,7 +394,7 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
      
      - returns: text value
      */
-    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         var title: String? = nil;
         
         // Guard statement
@@ -382,7 +418,7 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
      
      - returns: header view
      */
-    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var header: UIView? = nil;
         
         // Guard statement
@@ -410,7 +446,7 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
      - parameter tableView: table view
      - parameter indexPath: index
      */
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let object: BaseTableObject? = self.getObject(byIndex: indexPath.section);
         if (object != nil) {
             object?.isSelected = true;
@@ -427,7 +463,7 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
         
     }
     
-    public func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         return indexPath;
     }
     
@@ -437,7 +473,7 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
      - parameter tableView: table view
      - parameter indexPath: index path
      */
-    public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         self.previousIndexes.removeObject(object: indexPath as NSIndexPath);
     }
     
@@ -451,7 +487,7 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
      
      - returns: actions
      */
-    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let object: BaseTableObject? = self.getObject(byIndex: indexPath.section);
         if (object != nil) {
             let cell: BaseTableViewCell? = self.tableView.dequeueReusableCell(withIdentifier: object!.getReuseIdentifier(), for: indexPath as IndexPath) as? BaseTableViewCell;
@@ -472,7 +508,7 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
      
      - returns: definition
      */
-    public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         let object: BaseTableObject? = self.getObject(byIndex: indexPath.section);
         if (object != nil) {
             let cell: BaseTableViewCell? = self.tableView.dequeueReusableCell(withIdentifier: object!.getReuseIdentifier(), for: indexPath as IndexPath) as? BaseTableViewCell;
@@ -489,7 +525,7 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
     /**
      Method which provide the registering nib inside the collection view
      */
-    public func registerCellsNib() {
+    func registerCellsNib() {
         for object in self.objects {
             let identifier: String = (object as AnyObject).getReuseIdentifier();
             let nib = UINib.init(nibName: identifier, bundle: Bundle(for: AdapteredTableView.self));
@@ -503,7 +539,7 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
      
      - parameter index: index for object
      */
-    public func checkForLazyLoad(index: Int!) {
+    private func checkForLazyLoad(index: Int!) {
         let listItemSize: Int! = self.objects.count;
         if ((index == listItemSize - 1)
             && (listItemSize > self.listSizeOld)) {
@@ -520,7 +556,7 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
      - parameter event: event
      - parameter index: index
      */
-    public func onEventReceived(eventType event: AdapteredTableView.Event!, index: Int!, additionalObject: NSObject?) {
+    func onEventReceived(eventType event: AdapteredTableView.Event!, index: Int!, additionalObject: NSObject?) {
         let object = self.getObject(byIndex: index);
         if (object != nil) {
             self.delegate?.onEventReceived(eventType: event, object: object!, index: index, additionalObject: additionalObject);
@@ -563,7 +599,7 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
     /**
      Method which provide the addin gof the refresh control
      */
-    public func onAddRefreshControl() {
+    func onAddRefreshControl() {
         self.refreshControl = UIRefreshControl();
         self.refreshControl?.addTarget(self, action: #selector(AdapteredTableView.onRefresh), for: .valueChanged);
         self.tableView.addSubview(self.refreshControl!);
@@ -573,14 +609,14 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
     /**
      Method which provide the setting up of the refresh control
      */
-    public func onSetUpRefreshControl() {
+    func onSetUpRefreshControl() {
         self.refreshControl?.tintColor = self.refreshColor;
     }
     
     /**
      Method which provide the executing of the refresh funcional
      */
-    public func onRefresh() {
+    func onRefresh() {
         self.delegate?.onRefreshData();
     }
     
@@ -613,7 +649,7 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
     /**
      Method which provide the setting of the selection style
      */
-    public func setSelectionStyle() {
+    private func setSelectionStyle() {
         if (self.allowSelection == true) {
             self.tableView.allowsSelection = self.allowSelection;
             self.tableView.allowsMultipleSelection = self.allowMultipleSelection;
@@ -627,14 +663,14 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
     /**
      Method which provide the clearing of the selection index
      */
-    public final func clearSelectionIndex() {
+    final func clearSelectionIndex() {
         self.previousIndex = nil;
     }
     
     /**
      Method which provide the clearing of the selection indexes
      */
-    public final func clearSelectionIndexes() {
+    final func clearSelectionIndexes() {
         self.previousIndexes.removeAll();
     }
     
@@ -643,7 +679,7 @@ public class AdapteredTableView: UIView, UITableViewDelegate, UITableViewDataSou
      
      - parameter indexPath: index path
      */
-    public final func remove(indexPath: NSIndexPath?) {
+    final func remove(indexPath: NSIndexPath?) {
         self.previousIndexes.removeObject(object: indexPath);
     }
     

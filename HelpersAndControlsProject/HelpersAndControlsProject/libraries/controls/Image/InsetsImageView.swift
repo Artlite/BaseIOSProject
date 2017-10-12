@@ -40,7 +40,7 @@ public class InsetsImageView: UIImageView {
         }
     }
     
-    private final func setImageInsets(){
+    final func setImageInsets(){
         let originalImage:UIImage? = self.image;
         let tintedImage:UIImage? = originalImage?.withRenderingMode(.alwaysTemplate);
         let resizedImage:UIImage? = tintedImage?.resizableImage(withCapInsets: UIEdgeInsetsMake(self.insetTop, self.insetLeft, self.insetBottom, self.insetRight));

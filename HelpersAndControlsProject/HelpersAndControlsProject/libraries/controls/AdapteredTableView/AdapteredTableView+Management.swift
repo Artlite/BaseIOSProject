@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MARK: - Extension which provide the management functional
 public extension AdapteredTableView {
 
 	/**
@@ -234,6 +235,7 @@ public extension AdapteredTableView {
 	}
 
 	// MARK: management with animations
+    
 	/**
 	 Method which provide the object removing with remove animation
 

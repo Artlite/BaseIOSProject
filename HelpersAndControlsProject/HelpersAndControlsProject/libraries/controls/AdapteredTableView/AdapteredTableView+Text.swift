@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MARK: - Extension which provide the text functional
 public extension AdapteredTableView {
 	/**
 	 Method which provide the setting of the background text
